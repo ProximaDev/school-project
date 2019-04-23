@@ -1,0 +1,121 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title" style="text-align: center">قائمة الطلاب</h4>
+                        <p class="card-category" style="text-align: center">اضافة طالب جديد</p>
+                    </div>
+                    <div class="card-body">
+                        <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
+                            <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <input matInput placeholder="الاسم الكامل" name="fullName"
+                                            [(ngModel)]="service.formData.fullName" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <mat-label>الجنس</mat-label>
+                                        <mat-select required name="gender" [(ngModel)]="service.formData.gender">
+                                            <mat-option value="ذكر">ذكر</mat-option>
+                                            <mat-option value="انثى">انثى</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput placeholder="العنوان" name="address"
+                                            [(ngModel)]="service.formData.address" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput placeholder="رقم الهاتف" name="mobile"
+                                            [(ngModel)]="service.formData.mobile" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="picker" placeholder="تاريخ الميلاد"
+                                            name="birthdate" [(ngModel)]="service.formData.birthdate" required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <input matInput placeholder="البريد الالكتروني" name="email"
+                                            [(ngModel)]="service.formData.email" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <input matInput placeholder="كلمة المرور" name="password"
+                                            [(ngModel)]="service.formData.password" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" [disabled]="!f.valid"
+                                class="btn btn-danger pull-right"><i class="material-icons">check</i> اضافة</button>
+                            <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                                    class="material-icons">cancel</i> الغاء</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-12" style="direction: rtl">
+                    <div class="card">
+                        <div class="card-header card-header-danger" style="text-align: center">
+                            <h4 class="card-title ">المعلومات</h4>
+                            <p class="card-category">معلومات الطلاب</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="text-danger">
+                                        <th>الاسم الكامل</th>
+                                        <th>الجنس</th>
+                                        <th>تاريخ الميلاد</th>
+                                        <th>العنوان</th>
+                                        <th>الهاتف</th>
+                                        <th>البريد الالكتروني</th>
+                                        <th>رمز المرور</th>
+                                        <th>الاجرائات</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let student of studentList">
+                                            <td>{{student.fullName}}</td>
+                                            <td>{{student.gender}}</td>
+                                            <td>{{student.birthdate.toDate() | date: 'mediumDate'}}</td>
+                                            <td>{{student.address}}</td>
+                                            <td>{{student.mobile}}</td>
+                                            <td>{{student.email}}</td>
+                                            <td>{{student.password}}</td>
+                                            <td><a class="btn btn-white btn-round btn-just-icon"
+                                                    (click)="onDelete(student.id)">
+                                                    <i class="material-icons">delete</i>
+                                                </a>
+                                                <a class="btn btn-white btn-round btn-just-icon"
+                                                    (click)="onEdit(student)">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

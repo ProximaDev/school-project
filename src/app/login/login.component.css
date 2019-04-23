@@ -1,0 +1,25 @@
+.mcard {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.signin-content {
+  padding-top: 150px;
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.form-check .form-check-input:checked+.form-check-sign .check {
+  background: var(--main-bg-color);
+}
+
+.login-main {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+  background-color: white;
+}

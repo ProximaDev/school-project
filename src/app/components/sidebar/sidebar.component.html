@@ -1,0 +1,25 @@
+<div class="logo">
+    <a class="simple-text">
+        <div class="logo-img">
+            <img style="border-radius: 10px;" src="assets/img/school-logo.png" />
+        </div>
+        مدرستي
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <ul class="nav">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+            <a class="nav-link hvr-grow" [routerLink]="[menuItem.path]">
+                <i class="material-icons">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link hvr-grow" (click)="logout()">
+                <i class="material-icons">exit_to_app</i>
+                <p>تسجيل الخروج</p>
+            </a>
+        </li>
+        
+    </ul>
+</div>

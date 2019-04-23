@@ -1,0 +1,141 @@
+:root {
+    --main-bg-color: #ff5e00;
+    --main-se-color: #e45a1b;
+    --white-color: #fff;
+}
+
+.default-color {
+    color: var(--main-bg-color);
+}
+
+.default-bg-color {
+    background-color: var(--main-bg-color);
+}
+
+.btn.btn-danger {
+    color: var(--white-color);
+    background-color: var(--main-bg-color);
+    border-color: var(--main-bg-color);
+    box-shadow: unset;
+}
+
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+span {
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: var(--white-color);
+}
+
+.card .card-header-danger .card-icon,
+.card .card-header-danger .card-text,
+.card .card-header-danger:not(.card-header-icon):not(.card-header-text),
+.card.bg-danger,
+.card.card-rotate.bg-danger .front,
+.card.card-rotate.bg-danger .back {
+    background: var(--main-bg-color) !important;
+    box-shadow: unset !important;
+}
+
+.mat-button.btn.btn-danger:focus,
+.mat-button.btn.btn-danger.focus,
+.mat-button.btn.btn-danger:hover,
+.mat-raised-button.btn.btn-danger:focus,
+.mat-raised-button.btn.btn-danger.focus,
+.mat-raised-button.btn.btn-danger:hover,
+.mat-raised-button.btn:not([class*=mat-elevation-z]).btn-danger:focus,
+.mat-raised-button.btn:not([class*=mat-elevation-z]).btn-danger.focus,
+.mat-raised-button.btn:not([class*=mat-elevation-z]).btn-danger:hover,
+.btn.btn-danger:focus,
+.btn.btn-danger.focus,
+.btn.btn-danger:hover {
+    background: var(--main-se-color) !important;
+    box-shadow: unset !important;
+}
+
+.mat-button.btn.btn-danger,
+.mat-raised-button.btn.btn-danger,
+.mat-raised-button.btn:not([class*=mat-elevation-z]).btn-danger,
+.btn.btn-danger {
+    background: var(--main-se-color) !important;
+    box-shadow: unset !important;
+}
+
+::-webkit-input-placeholder {
+    text-align: right;
+}
+
+input:-moz-placeholder {
+    text-align: right;
+}
+
+.mat-form-field {
+    text-align: right !important;
+}
+
+.navbar.navbar-transparent {
+    direction: rtl;
+}
+
+#no-items-ava {
+    display: none;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 60px;
+    margin-top: 50px;
+    width: 140px;
+    height: 140px;
+    font-size: 20px;
+}
+
+.card-block {
+    direction: rtl;
+}
+
+.card-title {
+    font-weight: bold;
+    color: var(--main-bg-color);
+}
+
+#map {
+    height: 300px;
+}
+
+.la-square-spin.la-2x {
+    color: var(--main-bg-color) !important;
+}
+
+.form-control:invalid,
+.form-control,
+.is-focused .form-control {
+    background-image: linear-gradient(to top, var(--main-bg-color) 2px, rgba(244, 67, 54, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
+}
+
+.sidebar[data-color="danger"] li.active>a {
+    background-color: var(--main-bg-color);
+    box-shadow: unset;
+    cursor: pointer;
+}
+
+#toast-container>div {
+    background: var(--main-bg-color);
+    opacity: 1;
+}
+
+.mat-dialog-container {
+    width: auto !important;
+    height: auto !important;
+}
