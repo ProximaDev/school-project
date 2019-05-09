@@ -12,37 +12,41 @@ const STORAGE_KEY = 'local_user';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
-show: boolean = false;
+  show: boolean = false;
 
-password() {
-  this.show = !this.show;
-}
+  password() {
+    this.show = !this.show;
+  }
 
-constructor(private afAuth: AngularFireAuth,
-  private FirebaseService: FirebaseService, private router: Router,
-  @Inject(SESSION_STORAGE) private storage: StorageService,
-  private toastr: ToastrService,
-  private spinnerService: NgxSpinnerService) {}
+  constructor(private afAuth: AngularFireAuth,
+    private FirebaseService: FirebaseService, private router: Router,
+    @Inject(SESSION_STORAGE) private storage: StorageService,
+    private toastr: ToastrService,
+    private spinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
     this.spinnerService.show();
- 
+
     setTimeout(() => {
-        this.spinnerService.hide();
+      this.spinnerService.hide();
     }, 2000);
   }
 
-    
-signIn(f) {
-  this.spinnerService.show();
-  this.FirebaseService.login(f.value.email, f.value.password).then((user) => {
-  this.storage.set(STORAGE_KEY, this.afAuth.auth.currentUser);
-  this.router.navigate(['dashboard']);
-}, (err) => {
-	this.spinnerService.hide();
-    this.toastr.error('البريد الالكتروني او كلمة المرور غير صحيحة','خطأ');
-    });
+
+  signIn(f) {
+    if (f.value.email != "admin@admin.com") {
+      this.toastr.error('ليس لديك صلاحية الدخول ', 'خطأ');
+    } else {
+      this.spinnerService.show();
+      this.FirebaseService.login(f.value.email, f.value.password).then((user) => {
+        this.storage.set(STORAGE_KEY, this.afAuth.auth.currentUser);
+        this.router.navigate(['dashboard']);
+      }, (err) => {
+        this.spinnerService.hide();
+        this.toastr.error('البريد الالكتروني او كلمة المرور غير صحيحة', 'خطأ');
+      });
+    }
   }
 }

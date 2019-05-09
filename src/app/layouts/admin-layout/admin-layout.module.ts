@@ -7,6 +7,13 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { StudentComponent } from '../../student/student.component';
+import { VideosComponent } from '../../videos/videos.component';
+import { WeeklyComponent } from '../../weekly/weekly.component';
+import { AddWeeklyComponent } from '../../add-weekly/add-weekly.component';
+import { AddVideoComponent } from '../../add-video/add-video.component';
+import { EditVideoComponent } from '../../edit-video/edit-video.component';
+import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.component';
+import { HomeworkComponent } from '../../homework/homework.component'
 
 import {
   MatButtonModule,
@@ -38,10 +45,17 @@ import {
     NgxSpinnerModule
   ],
   declarations: [
+    ConfirmDeleteComponent,
     DashboardComponent,
-    StudentComponent
+    StudentComponent,
+    VideosComponent,
+    WeeklyComponent,
+    AddWeeklyComponent,
+    AddVideoComponent,
+    EditVideoComponent,
+    HomeworkComponent
   ],
-  entryComponents: []
+  entryComponents: [ConfirmDeleteComponent]
 })
 
 export class AdminLayoutModule { }

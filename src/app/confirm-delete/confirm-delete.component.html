@@ -1,0 +1,10 @@
+<div style="direction: rtl; text-align: right">
+    <h1 mat-dialog-title>تاكيد الحذف</h1>
+    <div mat-dialog-content>
+    <p>هل انت متاكد من الحذف؟ لا يمكن التراجع بعد الحذف!</p>
+    </div>
+    <div mat-dialog-actions>
+    <button class="btn btn-danger" mat-button (click)="doit('true')">نعم</button>
+    <button mat-button (click)="doit('false')">كلا</button>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title" style="text-align: center">لوحة الفيديوهات الرئيسية</h4>
+                <p class="card-category" style="text-align: center">قائمة الفيديوهات المضافة الى المنصة</p>
+                <button mat-raised-button class="btn btn-danger btn-round pull-right" routerLink="/add-video"><i
+                        class="material-icons">control_point</i> اضافة فيديو جديد</button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div id="no-items-ava">
+                        <img src="assets/img/youtube.svg" style="width: 100px;height: 100px;">
+                        <p style="font-weight: bold; margin:10px">لا توجد فيديوهات</p>
+                    </div>
+                    <div id="SHOW">
+                        <div class="row">
+                            <div class="col-md-6" *ngFor="let item of videosData">
+                                <youtube-player style="padding:5px" [videoId]="youtube_parser(item.link)">
+                                </youtube-player>
+                                <hr>
+                                <p class="card-category text-gray">{{item.title}}</p>
+                                <button class="btn btn-danger btn-round btn-sm" (click)="updateVideo(item)"><i
+                                        style="margin: 0 auto" class="material-icons">edit</i></button>
+                                <button class="btn btn-danger btn-round btn-sm" (click)="openDialog(item.id)"><i
+                                        style="margin: 0 auto" class="material-icons">delete</i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

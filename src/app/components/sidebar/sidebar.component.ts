@@ -13,8 +13,10 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'اللوحة الرئيسية', icon: 'dashboard', class: '' },
-  { path: '/student', title: 'اضافة طالب', icon: 'person_add', class: '' }
-
+  { path: '/videos', title: 'لوحة الفيديوهات', icon: 'movie', class: '' },
+  { path: '/student', title: 'اضافة طالب', icon: 'person_add', class: '' },
+  { path: '/homework', title: 'اضافة واجب', icon: 'note_add', class: '' },
+  { path: '/weekly', title: 'الجدول الاسبوعي', icon: 'today', class: '' },
 ];
 
 @Component({

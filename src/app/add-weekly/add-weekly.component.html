@@ -1,0 +1,64 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title" style="text-align: center">اضافة الجدول</h4>
+            <p class="card-category" style="text-align: center">اضافة جدول جديد الى الجدول الاسبوعي</p>
+          </div>
+          <div class="card-body">
+            <div>
+              <form #f="ngForm" (ngSubmit)="saveFormData(f)">
+                <div class="row" style="direction: rtl">
+                  <div class="col-md-6">
+                    <h4 style="text-align: right">المرحلة</h4>
+                    <mat-form-field>
+                      <mat-label>اختر المرحلة</mat-label>
+                      <mat-select name="stage" [(ngModel)]="stage">
+                        <mat-option value="الاولى">الاولى</mat-option>
+                        <mat-option value="الثانية">الثانية</mat-option>
+                        <mat-option value="الثالثة">الثالثة</mat-option>
+                        <mat-option value="الرابعة">الرابعة</mat-option>
+                        <mat-option value="الخامسة">الخامسة</mat-option>
+                        <mat-option value="السادسة">السادسة</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <h4 style="text-align: right">الشعبة</h4>
+                    <mat-form-field>
+                      <mat-label>اختر الشعبة</mat-label>
+                      <mat-select name="selection" [(ngModel)]="selection">
+                        <mat-option value="ا">ا</mat-option>
+                        <mat-option value="ب">ب</mat-option>
+                        <mat-option value="ت">ت</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-12" style="text-align: right; direction: rtl">
+                    <h4 style="text-align: right; font-weight: bold">الجدول الاسبوعي</h4>
+                    <input type="file" name="file" id="file" class="inputfile" (change)="onSelectedFile($event)"
+                      accept=".png,.jpg" required />
+                    <label class="btn btn-danger" for="file"><i style="margin: 0 auto"
+                        class="material-icons">cloud_upload</i></label>
+                    <div class="progress">
+                      <div class="progress-bar default-bg-color" role="progressbar"
+                        [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
+                    class="material-icons">check</i> اضافة</button>
+                <button mat-raised-button class="btn btn-danger pull-right" routerLink="/weekly"><i
+                    class="material-icons">cancel</i> الغاء</button>
+                <div class="clearfix"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

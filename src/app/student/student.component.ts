@@ -1,27 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { StudentService } from '../services/students/student.service'
 import { Student } from '../services/students/student.model';
-import { DatePipe } from '@angular/common';
+import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
+import { NgxSpinnerService } from 'ngx-spinner';
+import { MatDialog } from "@angular/material";
 
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.scss']
 })
-export class StudentComponent implements OnInit {
+export class StudentComponent implements OnInit, AfterViewInit {
 
   studentList: Student[];
   isEdit: boolean;
+  btnTXT = 'اضافة'
 
-  constructor(private service: StudentService,
+  constructor(public service: StudentService,
     private firestore: AngularFirestore,
     private toastr: ToastrService,
-    private datePipe: DatePipe) { }
+    private spinnerService: NgxSpinnerService,
+    private afAuth: AngularFireAuth,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.spinnerService.show();
     this.resetForm();
 
     this.service.getStudent().subscribe(actionArray => {
@@ -33,6 +40,11 @@ export class StudentComponent implements OnInit {
       })
     });
   }
+
+  ngAfterViewInit() {
+    this.spinnerService.hide();
+  }
+
   resetForm(form?: NgForm) {
     if (form != null)
       form.resetForm();
@@ -40,6 +52,8 @@ export class StudentComponent implements OnInit {
       id: null,
       fullName: '',
       gender: '',
+      stage: '',
+      selection: '',
       birthdate: '',
       address: '',
       mobile: '',
@@ -49,28 +63,33 @@ export class StudentComponent implements OnInit {
   }
 
   saveFormData(form: NgForm) {
+    this.btnTXT = 'اضافة';
     let data = Object.assign({}, form.value);
-    delete data.id;
-    if (form.value.id == null)
-      this.firestore.collection('Students').add(data);
-    else
-      this.firestore.doc('Students/' + form.value.id).update(data);
+    let email = data.email;
+    if (form.value.id == null) {
+      this.firestore.doc(`Students/${email}`).set(data);
+      this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password);
+    }
+    else {
+      this.firestore.doc('Students/' + form.value.email).update(data);
+    }
+
     this.resetForm(form);
-    this.toastr.success('تمت الاضافة بنجاح', 'اضافة');
+    this.toastr.success('تمت العملية بنجاح', 'العملية');
   }
 
   onEdit(stu: Student) {
     this.service.formData = Object.assign({}, stu);
+    this.btnTXT = "تحديث";
   }
 
-  onDelete(id: string) {
-    if (confirm("هل انت متاكد من الحذف؟ لا يمكن التراجع")) {
-      this.firestore.doc('Students/' + id).delete();
-      this.toastr.warning('تم الحذف بنجاح', 'حذف');
-    }
-  }
-
-  test() {
-    console.log("work");
+  onDelete(email: string): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'true') {
+        this.firestore.doc('Students/' + email).delete();
+        this.toastr.warning('تم الحذف بنجاح', 'حذف');
+      }
+    });
   }
 }
