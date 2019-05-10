@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { YoutubePlayerModule } from 'ngx-youtube-player';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
+import { NotifyComponent } from './notify/notify.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,7 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    LoginComponent
+    LoginComponent,
   ],
   providers: [DatePipe, FirebaseService, AuthGuard, { provide: APP_BASE_HREF, useValue: '' }, { provide: FirestoreSettingsToken, useValue: {} }],
   bootstrap: [AppComponent]

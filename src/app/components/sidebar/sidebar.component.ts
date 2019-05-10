@@ -16,6 +16,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/videos', title: 'لوحة الفيديوهات', icon: 'movie', class: '' },
   { path: '/student', title: 'اضافة طالب', icon: 'person_add', class: '' },
   { path: '/homework', title: 'اضافة واجب', icon: 'note_add', class: '' },
+  { path: '/notify', title: 'ارسال اشعار', icon: 'notification_important', class: '' },
   { path: '/weekly', title: 'الجدول الاسبوعي', icon: 'today', class: '' },
 ];
 
