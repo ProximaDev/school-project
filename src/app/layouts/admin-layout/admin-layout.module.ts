@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { YoutubePlayerModule } from 'ngx-youtube-player';
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
@@ -15,6 +15,7 @@ import { EditVideoComponent } from '../../edit-video/edit-video.component';
 import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.component';
 import { HomeworkComponent } from '../../homework/homework.component'
 import { NotifyComponent } from '../../notify/notify.component';
+import {CoursesComponent} from '../../courses/courses.component'
 
 import {
   MatButtonModule,
@@ -42,7 +43,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-    YoutubePlayerModule,
+    NgxYoutubePlayerModule.forRoot(),
     NgxSpinnerModule
   ],
   declarations: [
@@ -55,7 +56,8 @@ import {
     AddVideoComponent,
     EditVideoComponent,
     HomeworkComponent,
-    NotifyComponent
+    NotifyComponent,
+    CoursesComponent,
   ],
   entryComponents: [ConfirmDeleteComponent]
 })

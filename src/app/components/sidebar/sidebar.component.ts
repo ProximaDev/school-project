@@ -18,6 +18,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/homework', title: 'اضافة واجب', icon: 'note_add', class: '' },
   { path: '/notify', title: 'ارسال اشعار', icon: 'notification_important', class: '' },
   { path: '/weekly', title: 'الجدول الاسبوعي', icon: 'today', class: '' },
+  { path: '/courses', title: 'المواد', icon: 'book', class: '' },
 ];
 
 @Component({

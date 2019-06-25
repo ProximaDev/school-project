@@ -18,10 +18,9 @@ import { AuthGuard } from './core/auth.guard';
 import { APP_BASE_HREF } from '@angular/common';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
-import { YoutubePlayerModule } from 'ngx-youtube-player';
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
-import { NotifyComponent } from './notify/notify.component';
 
 @NgModule({
   imports: [
@@ -36,7 +35,7 @@ import { NotifyComponent } from './notify/notify.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    YoutubePlayerModule,
+    NgxYoutubePlayerModule.forRoot(),
     NgxSpinnerModule,
     ToastrModule.forRoot({
       closeButton: true,
