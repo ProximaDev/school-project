@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { Course } from '../services/courses/course.model'
 import { CourseService } from '../services/courses/course.service';
-import { DatePipe } from '@angular/common';
 import { MatDialog } from "@angular/material";
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
 
@@ -15,20 +14,18 @@ import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.compone
 })
 export class CoursesComponent implements OnInit {
 
- courseList: Course[];
+  stage: any;
+  courseList: Course[];
   isEdit: boolean;
-
+  btnTXT = 'اضافة'
 
   constructor(private service: CourseService,
     private firestore: AngularFirestore,
     private toastr: ToastrService,
-    private datePipe: DatePipe,
     private dialog: MatDialog) { }
-
 
   ngOnInit() {
     this.resetForm();
-
     this.service.getCourse().subscribe(actionArray => {
       this.courseList = actionArray.map(item => {
         return {
@@ -55,37 +52,34 @@ export class CoursesComponent implements OnInit {
       course8: '',
       course9: '',
       course10: '',
-      
-    
     }
   }
   saveFormData(form: NgForm) {
+    this.btnTXT = 'اضافة';
     let data = Object.assign({}, form.value);
     delete data.id;
     if (form.value.id == null)
-      this.firestore.collection('Courses').add(data);
-    else
-      this.firestore.doc('Courses/' + form.value.id).update(data);
+      this.firestore.doc(`Courses/${data.stage}`).set(data);
+    else {
+      this.firestore.doc('Courses/' + form.value.stage).update(data);
+    }
     this.resetForm(form);
-    this.toastr.success('تمت الاضافة بنجاح', 'اضافة');
-  }
-  onEdit(stu: Course) {
-    this.service.formData = Object.assign({}, stu);
+    this.toastr.success('تمت العملية بنجاح', 'العملية');
   }
 
-  onDelete(id: string): void {
+  onEdit(stu: Course) {
+    this.service.formData = Object.assign({}, stu);
+    this.stage = stu.stage;
+    this.btnTXT = "تحديث";
+  }
+
+  onDelete(stage: string): void {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        this.firestore.doc('Courses/' + id).delete();
+        this.firestore.doc('Courses/' + stage).delete();
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
     });
   }
-
-  test() {
-    console.log("work");
-  }
-
-
 }
