@@ -1,173 +1,159 @@
 <div class="main-content">
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title" style="text-align: center">المواد</h4>
-                      <p class="card-category" style="text-align: center">تعيين المواد للمراحل</p>
-                  </div>
-                  <div class="card-body">
-                      <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
-                          <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
-                          <div class="row">
-                              <div class="col-md-12">
-                                  <mat-form-field>
-
-                                      <mat-label>اختر المرحلة</mat-label>
-                                      <mat-select name="stage" [(ngModel)]="stage">
-                                          <mat-option value="الاولى">الاولى</mat-option>
-                                          <mat-option value="الثانية">الثانية</mat-option>
-                                          <mat-option value="الثالثة">الثالثة</mat-option>
-                                          <mat-option value="الرابعة">الرابعة</mat-option>
-                                          <mat-option value="الخامسة">الخامسة</mat-option>
-                                          <mat-option value="السادسة">السادسة</mat-option>
-                                      </mat-select>
-                                  </mat-form-field>
-
-                              </div>
-                             
-                             
-                          </div>
-                          <div class="row">
-                                <div class="col-md-4">
-                                        <mat-form-field>
-                                            <input matInput placeholder="  المادةالاولى" name="course1"
-                                                [(ngModel)]="service.formData.course1" required>
-                                        </mat-form-field>
-                                    </div>
-                              <div class="col-md-4">
-                                  <mat-form-field>
-                                      <input matInput placeholder=" المادةالثانية" name="course2"
-                                          [(ngModel)]="service.formData.course2" required>
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title" style="text-align: center">المواد</h4>
+                        <p class="card-category" style="text-align: center">تعيين المواد للمراحل</p>
+                    </div>
+                    <div class="card-body">
+                        <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
+                            <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
+                            <div class="row">
+                                <div class="col-md-12">
                                     <mat-form-field>
-                                        <input matInput placeholder=" المادةالثالثة" name="course3"
+                                        <mat-label>اختر المرحلة</mat-label>
+                                        <mat-select name="stage" [(ngModel)]="stage">
+                                            <mat-option value="الاولى">الاولى</mat-option>
+                                            <mat-option value="الثانية">الثانية</mat-option>
+                                            <mat-option value="الثالثة">الثالثة</mat-option>
+                                            <mat-option value="الرابعة">الرابعة</mat-option>
+                                            <mat-option value="الخامسة">الخامسة</mat-option>
+                                            <mat-option value="السادسة">السادسة</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput placeholder="المادة الاولى" name="course1"
+                                            [(ngModel)]="service.formData.course1" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput placeholder="المادة الثانية" name="course2"
+                                            [(ngModel)]="service.formData.course2" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput placeholder="المادة الثالثة" name="course3"
                                             [(ngModel)]="service.formData.course3" required>
                                     </mat-form-field>
                                 </div>
-
-                          </div>
-                          
-                          <div class="row">
+                            </div>
+                            <div class="row">
                                 <div class="col-md-4">
-                                        <mat-form-field>
-                                            <input matInput placeholder="  المادةالرابعة" name="course4"
-                                                [(ngModel)]="service.formData.course4" required>
-                                        </mat-form-field>
-                                    </div>
-                              <div class="col-md-4">
-                                  <mat-form-field>
-                                      <input matInput placeholder=" المادةالخامسة" name="course5"
-                                          [(ngModel)]="service.formData.course5" >
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
                                     <mat-form-field>
-                                        <input matInput placeholder=" المادةالسادسة" name="course6"
-                                            [(ngModel)]="service.formData.course6" >
+                                        <input matInput placeholder="المادة الرابعة" name="course4"
+                                            [(ngModel)]="service.formData.course4" required>
                                     </mat-form-field>
                                 </div>
-
-                          </div>
-
-                          <div class="row">
                                 <div class="col-md-4">
-                                        <mat-form-field>
-                                            <input matInput placeholder="المادةالسابعة" name="course7"
-                                                [(ngModel)]="service.formData.course7" >
-                                        </mat-form-field>
-                                    </div>
-                              <div class="col-md-4">
-                                  <mat-form-field>
-                                      <input matInput placeholder=" المادةالثامنة" name="course8"
-                                          [(ngModel)]="service.formData.course8" >
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
                                     <mat-form-field>
-                                        <input matInput placeholder=" المادةالتاسعة" name="course9"
-                                            [(ngModel)]="service.formData.course9" >
+                                        <input matInput placeholder="المادة الخامسة" name="course5"
+                                            [(ngModel)]="service.formData.course5">
                                     </mat-form-field>
                                 </div>
-
-                          </div>
-
-                          <div class="row">
                                 <div class="col-md-4">
-                                        <mat-form-field>
-                                            <input matInput placeholder="  المادةالعاشرة" name="course10"
-                                                [(ngModel)]="service.formData.course10" >
-                                        </mat-form-field>
-                                    </div>
-                                   
-                              
-                                  
-                          </div>
-                          <button mat-raised-button type="submit" [disabled]="!f.valid"
-                          class="btn btn-danger pull-right"><i class="material-icons">check</i> اضافة</button>
-                      <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
-                              class="material-icons">cancel</i> الغاء</button>
-                      <div class="clearfix"></div>
-
-                         
-                      </form>
-                  </div>
-              </div>
-              <div class="col-md-12" style="direction: rtl">
-                  <div class="card">
-                      <div class="card-header card-header-danger" style="text-align: center">
-                          <h4 class="card-title ">قائمة المواد</h4>
-                          <p class="card-category">معلومات المواد</p>
-                      </div>
-                      <div class="card-body">
-                          <div class="table-responsive">
-                              <table class="table">
-                                  <thead class="text-danger">
-                                      <th>المرحلة</th>
-                                      <th>المادة الاولى</th>
-                                      <th> المادةالثانية </th>
-                                      <th>المادةالثالثة</th>
-                                      <th>المادةالرابعة</th>
-                                      <th>المادةالخامسة</th>
-                                      <th>المادةالسادسة</th>
-                                      <th>المادةالسابعة</th>
-                                      <th>المادةالثامنة</th>
-                                      <th>المادةالتاسعة</th>
-                                      <th>المادةالعاشرة</th>
-                                  </thead>
-                                  <tbody>
-                                      <tr *ngFor="let course of courseList">
-                                          <td>{{course.stage}}</td>
-                                          <td>{{course.course1}}</td>
-                                          <td>{{course.course2}}</td>
-                                          <td>{{course.course3}}</td>
-                                          <td>{{course.course4}}</td>
-                                          <td>{{course.course5}}</td>
-                                          <td>{{course.course6}}</td>
-                                          <td>{{course.course7}}</td>
-                                          <td>{{course.course8}}</td>
-                                          <td>{{course.course9}}</td>
-                                          <td>{{course.course10}}</td>
-                                          <td><a class="btn btn-white btn-round btn-just-icon"
-                                                  (click)="onDelete(course.id)">
-                                                  <i class="material-icons">delete</i>
-                                              </a>
-                                              <a class="btn btn-white btn-round btn-just-icon"
-                                                  (click)="onEdit(course)">
-                                                  <i class="material-icons">edit</i>
-                                              </a>
-                                          </td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+                                    <mat-form-field>
+                                        <input matInput placeholder="المادة السادسة" name="course6"
+                                            [(ngModel)]="service.formData.course6">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput placeholder="المادة السابعة" name="course7"
+                                            [(ngModel)]="service.formData.course7">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput placeholder="المادة الثامنة" name="course8"
+                                            [(ngModel)]="service.formData.course8">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput placeholder="المادة التاسعة" name="course9"
+                                            [(ngModel)]="service.formData.course9">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput placeholder="المادة العاشرة" name="course10"
+                                            [(ngModel)]="service.formData.course10">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" [disabled]="!f.valid"
+                                class="btn btn-danger pull-right"><i class="material-icons">check</i>
+                                {{btnTXT}}</button>
+                            <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                                    class="material-icons">cancel</i> الغاء</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-12" style="direction: rtl">
+                    <div class="card">
+                        <div class="card-header card-header-danger" style="text-align: center">
+                            <h4 class="card-title ">قائمة المواد</h4>
+                            <p class="card-category">معلومات المواد</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="text-danger">
+                                        <th>المرحلة</th>
+                                        <th>المادة الاولى</th>
+                                        <th>المادة الثانية </th>
+                                        <th>المادة الثالثة</th>
+                                        <th>المادة الرابعة</th>
+                                        <th>المادة الخامسة</th>
+                                        <th>المادة السادسة</th>
+                                        <th>المادة السابعة</th>
+                                        <th>المادة الثامنة</th>
+                                        <th>المادة التاسعة</th>
+                                        <th>المادة العاشرة</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let course of courseList">
+                                            <td>{{course.stage}}</td>
+                                            <td>{{course.course1}}</td>
+                                            <td>{{course.course2}}</td>
+                                            <td>{{course.course3}}</td>
+                                            <td>{{course.course4}}</td>
+                                            <td>{{course.course5}}</td>
+                                            <td>{{course.course6}}</td>
+                                            <td>{{course.course7}}</td>
+                                            <td>{{course.course8}}</td>
+                                            <td>{{course.course9}}</td>
+                                            <td>{{course.course10}}</td>
+                                            <td><a class="btn btn-white btn-round btn-just-icon"
+                                                    (click)="onDelete(course.stage)">
+                                                    <i class="material-icons">delete</i>
+                                                </a>
+                                                <a class="btn btn-white btn-round btn-just-icon"
+                                                    (click)="onEdit(course)">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
