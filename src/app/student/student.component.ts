@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -8,6 +8,9 @@ import { Student } from '../services/students/student.model';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from "@angular/material";
+import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
+import { Router } from '@angular/router';
+const STORAGE_KEY = 'local_user';
 
 @Component({
   selector: 'app-student',
@@ -21,24 +24,29 @@ export class StudentComponent implements OnInit, AfterViewInit {
   btnTXT = 'اضافة'
 
   constructor(public service: StudentService,
+    @Inject(SESSION_STORAGE) private storage: StorageService,
     private firestore: AngularFirestore,
     private toastr: ToastrService,
     private spinnerService: NgxSpinnerService,
     private afAuth: AngularFireAuth,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit() {
     this.spinnerService.show();
     this.resetForm();
-
-    this.service.getStudent().subscribe(actionArray => {
-      this.studentList = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id,
-          ...item.payload.doc.data()
-        } as Student;
-      })
-    });
+    if (this.storage.get(STORAGE_KEY) == null) {
+      this.router.navigate(['login']);
+    } else {
+      this.service.getStudent().subscribe(actionArray => {
+        this.studentList = actionArray.map(item => {
+          return {
+            id: item.payload.doc.id,
+            ...item.payload.doc.data()
+          } as Student;
+        })
+      });
+    }
   }
 
   ngAfterViewInit() {

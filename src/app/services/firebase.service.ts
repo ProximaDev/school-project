@@ -11,6 +11,34 @@ export class FirebaseService {
 
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
+
+  addAbsent(name, selection, stage, subject, adate) {
+    const id = this.firestore.createId();
+    this.firestore.doc(`Absents/${id}`).set({
+      id,
+      name,
+      selection,
+      stage,
+      subject,
+      adate
+    });
+  }
+
+  updateAbsent(id, name, selection, stage, subject, adate) {
+    this.firestore.doc(`Absents/${id}`).set({
+      id,
+      name,
+      selection,
+      stage,
+      subject,
+      adate
+    });
+  }
+  getAbsent() {
+    return this.firestore.collection('Absents').valueChanges();
+  }
+
+
   addVideos(title, link) {
     const id = this.firestore.createId();
     this.firestore.doc(`videosList/${id}`).set({
@@ -59,7 +87,11 @@ export class FirebaseService {
   }
 
   getStudents() {
-    return this.firestore.collection('Students').snapshotChanges();
+    return this.firestore.collection('Students').valueChanges();
+  }
+
+  getCourse(stage: string) {
+    return this.firestore.doc(`Courses/${stage}`).valueChanges();
   }
 
   async login(email, password) {
