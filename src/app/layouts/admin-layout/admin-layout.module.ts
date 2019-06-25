@@ -15,6 +15,7 @@ import { EditVideoComponent } from '../../edit-video/edit-video.component';
 import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.component';
 import { HomeworkComponent } from '../../homework/homework.component'
 import { NotifyComponent } from '../../notify/notify.component';
+import {CoursesComponent} from '../../courses/courses.component'
 
 import {
   MatButtonModule,
@@ -55,7 +56,8 @@ import {
     AddVideoComponent,
     EditVideoComponent,
     HomeworkComponent,
-    NotifyComponent
+    NotifyComponent,
+    CoursesComponent,
   ],
   entryComponents: [ConfirmDeleteComponent]
 })

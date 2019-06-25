@@ -9,6 +9,7 @@ import { AddVideoComponent } from '../../add-video/add-video.component';
 import { EditVideoComponent } from '../../edit-video/edit-video.component';
 import { HomeworkComponent } from '../../homework/homework.component'
 import { NotifyComponent } from '../../notify/notify.component';
+import {CoursesComponent} from '../../courses/courses.component'
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -20,5 +21,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'weekly', component: WeeklyComponent, canActivate: [AuthGuard] },
     { path: 'notify', component: NotifyComponent, canActivate: [AuthGuard] },
     { path: 'add-weekly', component: AddWeeklyComponent, canActivate: [AuthGuard] },
+    { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/dashboard' }
 ];

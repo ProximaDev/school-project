@@ -21,7 +21,6 @@ import { LoginComponent } from './login/login.component';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
-import { NotifyComponent } from './notify/notify.component';
 
 @NgModule({
   imports: [
