@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { YoutubePlayerModule } from 'ngx-youtube-player';
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
@@ -42,7 +42,7 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-    YoutubePlayerModule,
+    NgxYoutubePlayerModule.forRoot(),
     NgxSpinnerModule
   ],
   declarations: [
