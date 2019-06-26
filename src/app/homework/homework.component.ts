@@ -4,11 +4,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { HomeworkService } from '../services/homework/homework.service'
 import { Homework } from '../services/homework/homework.model';
-import { Course } from '../services/courses/course.model';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from "@angular/material";
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
-import { CourseService } from '../services/courses/course.service';
+import { FirebaseService } from '../services/firebase.service';
 
 
 @Component({
@@ -17,12 +16,27 @@ import { CourseService } from '../services/courses/course.service';
   styleUrls: ['./homework.component.scss']
 })
 export class HomeworkComponent implements OnInit {
-  courseList: Course[];
   homeworkList: Homework[];
   isEdit: boolean;
+  stage:any;
+  course1: any;
+  course2: any;
+  course3: any;
+  course4: any;
+  course5: any;
+  course6: any;
+  course7: any;
+  course8: any;
+  course9: any;
+  course10: any;
 
-  constructor(private service: HomeworkService,
-    private service2: CourseService,
+  SubList: any;
+  SubData: any
+
+  subArray = [];
+
+  constructor(private firestoreService: FirebaseService,
+    private service: HomeworkService,
     private firestore: AngularFirestore,
     private toastr: ToastrService,
     private datePipe: DatePipe,
@@ -30,17 +44,9 @@ export class HomeworkComponent implements OnInit {
 
   ngOnInit() {
       this.resetForm();
-      this.resetForm2();
 
 
-      this.service2.getCourse().subscribe(actionArray => {
-        this.courseList = actionArray.map(item => {
-          return {
-            id: item.payload.doc.id,
-            ...item.payload.doc.data()
-          } as Course;
-        })
-      });
+     
 
     this.service.getHomework().subscribe(actionArray => {
       this.homeworkList = actionArray.map(item => {
@@ -51,6 +57,28 @@ export class HomeworkComponent implements OnInit {
       })
     });
   }
+
+  stageSelect() {
+    this.subArray = [];
+    this.SubList = this.firestoreService.getCourse(this.stage);
+    this.SubList.subscribe(data => {
+      if (data.length != 0 && data != undefined && data != null) {
+        this.SubData = data;
+        this.subArray.push(this.SubData.course1);
+        this.subArray.push(this.SubData.course2);
+        this.subArray.push(this.SubData.course3);
+        this.subArray.push(this.SubData.course4);
+        this.subArray.push(this.SubData.course5);
+        this.subArray.push(this.SubData.course6);
+        this.subArray.push(this.SubData.course7);
+        this.subArray.push(this.SubData.course8);
+        this.subArray.push(this.SubData.course9);
+        this.subArray.push(this.SubData.course10);
+      }
+
+    });
+  }
+
   resetForm(form?: NgForm) {
     if (form != null)
       form.resetForm();
@@ -64,26 +92,8 @@ export class HomeworkComponent implements OnInit {
       date: '',
     }
   }
-  resetForm2(form?: NgForm) {
-    if (form != null)
-      form.resetForm();
-    this.service2.formData = {
-      id: null,
-      stage: '',
-      course1: '',
-      course2: '',
-      course3: '',
-      course4: '',
-      course5: '',
-      course6: '',
-      course7: '',
-      course8: '',
-      course9: '',
-      course10: '',
-      
-    
-    }
-  }
+  
+  
   saveFormData(form: NgForm) {
     let data = Object.assign({}, form.value);
     delete data.id;
@@ -108,7 +118,5 @@ export class HomeworkComponent implements OnInit {
     });
   }
 
-  test() {
-    console.log("work");
-  }
+  
 }

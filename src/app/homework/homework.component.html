@@ -15,7 +15,7 @@
                                     <mat-form-field>
 
                                         <mat-label>اختر المرحلة</mat-label>
-                                        <mat-select name="stage" [(ngModel)]="stage">
+                                        <mat-select (selectionChange)="stageSelect($event.value)"  name="stage" [(ngModel)]="stage">
                                             <mat-option value="الاولى">الاولى</mat-option>
                                             <mat-option value="الثانية">الثانية</mat-option>
                                             <mat-option value="الثالثة">الثالثة</mat-option>
@@ -40,10 +40,12 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field>
-                                        <input matInput placeholder="المادة" name="course"
-                                            [(ngModel)]="service.formData.course" required>
+                                      <mat-label>اختر المادة</mat-label>
+                                      <mat-select name="course" [(ngModel)]="course">
+                                        <mat-option *ngFor="let data of subArray" [value]="data">{{data}}</mat-option>
+                                      </mat-select>
                                     </mat-form-field>
-                                </div>
+                                  </div>
 
                                 <div class="col-md-4">
                                     <mat-form-field>
