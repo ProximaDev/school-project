@@ -17,6 +17,7 @@ import { HomeworkComponent } from '../../homework/homework.component'
 import { NotifyComponent } from '../../notify/notify.component';
 import { CoursesComponent } from '../../courses/courses.component'
 import { AbsentComponent } from '../../absent/absent.component';
+import {DegreeComponent} from '../../degree/degree.component'
 
 import {
   MatButtonModule,
@@ -29,6 +30,7 @@ import {
   MatNativeDateModule,
   MatDialogModule
 } from '@angular/material';
+import { from } from 'rxjs';
 
 @NgModule({
   imports: [
@@ -59,7 +61,8 @@ import {
     HomeworkComponent,
     NotifyComponent,
     CoursesComponent,
-    AbsentComponent
+    AbsentComponent,
+    DegreeComponent
   ],
   entryComponents: [ConfirmDeleteComponent]
 })
