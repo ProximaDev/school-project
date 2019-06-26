@@ -11,6 +11,34 @@ export class FirebaseService {
 
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
+  addDegree(name, selection, stage, subject, type,degrees) {
+    const id = this.firestore.createId();
+    this.firestore.doc(`Degree/${id}`).set({
+      id,
+      name,
+      selection,
+      stage,
+      subject,
+      type,
+      degrees,
+    });
+  }
+
+  updateDegree(id, name, selection, stage, subject, type,degrees) {
+    this.firestore.doc(`Degree/${id}`).set({
+      id,
+      name,
+      selection,
+      stage,
+      subject,
+      type,
+      degrees,
+    });
+  }
+  getDegree() {
+    return this.firestore.collection('Degree').valueChanges();
+  }
+
 
   addAbsent(name, selection, stage, subject, adate) {
     const id = this.firestore.createId();

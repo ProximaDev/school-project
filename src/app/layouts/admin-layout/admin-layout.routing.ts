@@ -11,7 +11,7 @@ import { HomeworkComponent } from '../../homework/homework.component'
 import { NotifyComponent } from '../../notify/notify.component';
 import { CoursesComponent } from '../../courses/courses.component'
 import { AbsentComponent } from '../../absent/absent.component';
-
+import {DegreeComponent} from '../../degree/degree.component'
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -25,5 +25,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'add-weekly', component: AddWeeklyComponent, canActivate: [AuthGuard] },
     { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
     { path: 'absent', component: AbsentComponent, canActivate: [AuthGuard] },
+    { path: 'degree', component: DegreeComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/dashboard' }
 ];
