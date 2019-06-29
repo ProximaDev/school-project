@@ -18,6 +18,7 @@ import { NotifyComponent } from '../../notify/notify.component';
 import { CoursesComponent } from '../../courses/courses.component'
 import { AbsentComponent } from '../../absent/absent.component';
 import {DegreeComponent} from '../../degree/degree.component'
+import {ClassesComponent} from '../../classes/classes.component'
 
 import {
   MatButtonModule,
@@ -62,7 +63,8 @@ import { from } from 'rxjs';
     NotifyComponent,
     CoursesComponent,
     AbsentComponent,
-    DegreeComponent
+    DegreeComponent,
+    ClassesComponent
   ],
   entryComponents: [ConfirmDeleteComponent]
 })

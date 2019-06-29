@@ -19,6 +19,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/notify', title: 'ارسال اشعار', icon: 'notification_important', class: '' },
   { path: '/weekly', title: 'الجدول الاسبوعي', icon: 'today', class: '' },
   { path: '/courses', title: 'المواد', icon: 'book', class: '' },
+  { path: '/classes', title: 'الصفوف', icon: 'meeting_room', class: '' },
   { path: '/absent', title: 'الغيابات', icon: 'schedule', class: '' },
   { path: '/degree', title: 'الدرجات', icon: 'assignment', class: '' },
 ];
