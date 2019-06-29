@@ -30,10 +30,23 @@ export class HomeworkComponent implements OnInit {
   course9: any;
   course10: any;
 
+  class1:any;
+  class2:any;
+  class3:any;
+  class4:any;
+  class5:any;
+  class6:any;
+
+
+
   SubList: any;
   SubData: any
 
+  classList: any;
+  classData: any;
+
   subArray = [];
+  classArray = [];
 
   constructor(private firestoreService: FirebaseService,
     private service: HomeworkService,
@@ -59,8 +72,11 @@ export class HomeworkComponent implements OnInit {
   }
 
   stageSelect() {
+    this.classArray= [];
     this.subArray = [];
     this.SubList = this.firestoreService.getCourse(this.stage);
+    this.classList = this.firestoreService.getClass(this.stage);
+
     this.SubList.subscribe(data => {
       if (data.length != 0 && data != undefined && data != null) {
         this.SubData = data;
@@ -76,6 +92,18 @@ export class HomeworkComponent implements OnInit {
         this.subArray.push(this.SubData.course10);
       }
 
+    });
+
+    this.classList.subscribe(data => {
+      if (data.length != 0 && data != undefined && data != null) {
+        this.classData = data;
+        this.classArray.push(this.classData.class1);
+        this.classArray.push(this.classData.class2);
+        this.classArray.push(this.classData.class3);
+        this.classArray.push(this.classData.class4);
+        this.classArray.push(this.classData.class5);
+        this.classArray.push(this.classData.class6);
+      }
     });
   }
 

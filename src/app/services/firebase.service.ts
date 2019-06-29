@@ -122,6 +122,10 @@ export class FirebaseService {
     return this.firestore.doc(`Courses/${stage}`).valueChanges();
   }
 
+  getClass(stage: string) {
+    return this.firestore.doc(`Classes/${stage}`).valueChanges();
+  }
+
   async login(email, password) {
     return await this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }

@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { StudentService } from '../services/students/student.service'
 import { Student } from '../services/students/student.model';
+import { FirebaseService } from '../services/firebase.service';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MatDialog } from "@angular/material";
@@ -23,7 +24,23 @@ export class StudentComponent implements OnInit, AfterViewInit {
   isEdit: boolean;
   btnTXT = 'اضافة'
 
-  constructor(public service: StudentService,
+  stage:any;
+  class1:any;
+  class2:any;
+  class3:any;
+  class4:any;
+  class5:any;
+  class6:any;
+
+
+  classList: any;
+  classData: any;
+
+  classArray = [];
+
+
+  constructor(private service: StudentService,
+    private firestoreService: FirebaseService,
     @Inject(SESSION_STORAGE) private storage: StorageService,
     private firestore: AngularFirestore,
     private toastr: ToastrService,
@@ -68,6 +85,23 @@ export class StudentComponent implements OnInit, AfterViewInit {
       email: '',
       password: ''
     }
+  }
+
+  stageSelect() {
+    this.classArray= [];  
+    this.classList = this.firestoreService.getClass(this.stage);
+ 
+    this.classList.subscribe(data => {
+      if (data.length != 0 && data != undefined && data != null) {
+        this.classData = data;
+        this.classArray.push(this.classData.class1);
+        this.classArray.push(this.classData.class2);
+        this.classArray.push(this.classData.class3);
+        this.classArray.push(this.classData.class4);
+        this.classArray.push(this.classData.class5);
+        this.classArray.push(this.classData.class6);
+      }
+    });
   }
 
   saveFormData(form: NgForm) {

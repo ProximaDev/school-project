@@ -28,9 +28,8 @@
                 <mat-form-field>
                   <mat-label>اختر الشعبة</mat-label>
                   <mat-select name="selection" [(ngModel)]="selection">
-                    <mat-option value="ا">ا</mat-option>
-                    <mat-option value="ب">ب</mat-option>
-                    <mat-option value="ت">ت</mat-option>
+                    <mat-option *ngFor="let data of classArray" [value]="data">{{data}}</mat-option>                                           
+
                   </mat-select>
                 </mat-form-field>
               </div>

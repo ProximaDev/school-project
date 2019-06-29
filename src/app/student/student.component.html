@@ -20,7 +20,7 @@
                                 <div class="col-md-3">
                                     <mat-form-field>
                                         <mat-label>اختر المرحلة</mat-label>
-                                        <mat-select name="stage" [(ngModel)]="stage">
+                                        <mat-select  (selectionChange)="stageSelect($event.value)" name="stage" [(ngModel)]="stage">
                                             <mat-option value="الاولى">الاولى</mat-option>
                                             <mat-option value="الثانية">الثانية</mat-option>
                                             <mat-option value="الثالثة">الثالثة</mat-option>
@@ -34,9 +34,7 @@
                                     <mat-form-field>
                                         <mat-label>اختر الشعبة</mat-label>
                                         <mat-select name="selection" [(ngModel)]="selection">
-                                            <mat-option value="ا">ا</mat-option>
-                                            <mat-option value="ب">ب</mat-option>
-                                            <mat-option value="ت">ت</mat-option>
+                                            <mat-option *ngFor="let data of classArray" [value]="data">{{data}}</mat-option>                                           
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
