@@ -26,6 +26,19 @@ export class WeeklyComponent implements OnInit, AfterViewInit {
   weeklyData: any;
   filterData: any;
 
+  class1:any;
+  class2:any;
+  class3:any;
+  class4:any;
+  class5:any;
+  class6:any;
+
+
+  classList: any;
+  classData: any;
+
+  classArray = [];
+
   /// Active filter rules
   filters = {}
 
@@ -58,6 +71,23 @@ export class WeeklyComponent implements OnInit, AfterViewInit {
       this.weeklyData = data;
       this.applyFilters();
       this.spinnerService.hide();
+    });
+  }
+
+  stageSelect() {
+    this.classArray= [];  
+    this.classList = this.firestoreService.getClass(this.stage);
+ 
+    this.classList.subscribe(data => {
+      if (data.length != 0 && data != undefined && data != null) {
+        this.classData = data;
+        this.classArray.push(this.classData.class1);
+        this.classArray.push(this.classData.class2);
+        this.classArray.push(this.classData.class3);
+        this.classArray.push(this.classData.class4);
+        this.classArray.push(this.classData.class5);
+        this.classArray.push(this.classData.class6);
+      }
     });
   }
 

@@ -22,6 +22,19 @@ export class AddWeeklyComponent implements OnInit, AfterViewInit {
   image: any;
   img_name: any;
 
+  class1:any;
+  class2:any;
+  class3:any;
+  class4:any;
+  class5:any;
+  class6:any;
+
+
+  classList: any;
+  classData: any;
+
+  classArray = [];
+
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
   uploadState: Observable<string>;
@@ -45,6 +58,24 @@ export class AddWeeklyComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.spinnerService.hide();
   }
+
+  stageSelect() {
+    this.classArray= [];  
+    this.classList = this.firestoreService.getClass(this.stage);
+ 
+    this.classList.subscribe(data => {
+      if (data.length != 0 && data != undefined && data != null) {
+        this.classData = data;
+        this.classArray.push(this.classData.class1);
+        this.classArray.push(this.classData.class2);
+        this.classArray.push(this.classData.class3);
+        this.classArray.push(this.classData.class4);
+        this.classArray.push(this.classData.class5);
+        this.classArray.push(this.classData.class6);
+      }
+    });
+  }
+
 
   saveFormData(form) {
     if (this.image) {
