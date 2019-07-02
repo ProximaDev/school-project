@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { formatDate } from '@angular/common';
 import * as firebase from 'firebase/app'
@@ -11,7 +11,50 @@ export class FirebaseService {
 
   constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
-  addDegree(name, selection, stage, subject, type,degrees) {
+  getFirestoreData(colName: string) {
+    return this.firestore.collection(colName).valueChanges();
+  }
+
+  addFirestoreData(colName: string, dataObject: any) {
+    const id = this.firestore.createId();
+    dataObject.id = id;
+    this.firestore.doc(`${colName}/${id}`).set(Object.assign({}, dataObject));
+  }
+
+  updateFirestoreData(colName: string, id: string, dataObject: any) {
+    this.firestore.doc(`${colName}/${id}`).set(dataObject);
+  }
+
+  deleteFirestoreData(colName: string, id: string) {
+    this.firestore.doc(`${colName}/${id}`).delete();
+  }
+
+  deleteStorageFile(folder: string, filename: string) {
+    const storageRef = firebase.storage().ref();
+    storageRef.child(`${folder}/${filename}`).delete();
+  }
+
+  addEvent(title, content) {
+    let today = new Date();
+    let date = formatDate(today, 'medium', 'en-US');
+    const id = this.firestore.createId();
+    this.firestore.doc(`eventList/${id}`).set({
+      id,
+      title,
+      content,
+      date
+    });
+  }
+
+  getEvents() {
+    return this.firestore.collection('eventList').valueChanges();
+  }
+
+  deleteEvent(id) {
+    this.firestore.doc(`eventList/${id}`).delete();
+  }
+
+  addDegree(name, selection, stage, subject, type, degrees) {
     const id = this.firestore.createId();
     this.firestore.doc(`Degree/${id}`).set({
       id,
@@ -24,7 +67,7 @@ export class FirebaseService {
     });
   }
 
-  updateDegree(id, name, selection, stage, subject, type,degrees) {
+  updateDegree(id, name, selection, stage, subject, type, degrees) {
     this.firestore.doc(`Degree/${id}`).set({
       id,
       name,

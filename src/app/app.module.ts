@@ -13,6 +13,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FirestoreSettingsToken } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FirebaseService } from './services/firebase.service';
 import { AuthGuard } from './core/auth.guard';
 import { APP_BASE_HREF } from '@angular/common';
@@ -35,6 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+	AngularFireDatabaseModule,
     NgxYoutubePlayerModule.forRoot(),
     NgxSpinnerModule,
     ToastrModule.forRoot({
@@ -47,8 +49,7 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    LoginComponent,
-    
+    LoginComponent
   ],
   providers: [DatePipe, FirebaseService, AuthGuard, { provide: APP_BASE_HREF, useValue: '' }, { provide: FirestoreSettingsToken, useValue: {} }],
   bootstrap: [AppComponent]

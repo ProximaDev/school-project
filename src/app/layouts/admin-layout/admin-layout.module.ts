@@ -15,10 +15,16 @@ import { EditVideoComponent } from '../../edit-video/edit-video.component';
 import { ConfirmDeleteComponent } from '../../confirm-delete/confirm-delete.component';
 import { HomeworkComponent } from '../../homework/homework.component'
 import { NotifyComponent } from '../../notify/notify.component';
+import { AllNotifyComponent } from '../../all-notify/all-notify.component';
 import { CoursesComponent } from '../../courses/courses.component'
 import { AbsentComponent } from '../../absent/absent.component';
-import {DegreeComponent} from '../../degree/degree.component'
-import {ClassesComponent} from '../../classes/classes.component'
+import { DegreeComponent } from '../../degree/degree.component';
+import { ClassesComponent } from '../../classes/classes.component';
+import { ArticlesComponent } from '../../articles/articles.component';
+import { AddArticleComponent } from '../../add-article/add-article.component';
+import { EditArticleComponent } from '../../edit-article/edit-article.component';
+import { ArticleViewComponent } from '../../article-view/article-view.component';
+import { NgxTrumbowygModule } from 'ngx-trumbowyg';
 
 import {
   MatButtonModule,
@@ -31,7 +37,6 @@ import {
   MatNativeDateModule,
   MatDialogModule
 } from '@angular/material';
-import { from } from 'rxjs';
 
 @NgModule({
   imports: [
@@ -48,7 +53,26 @@ import { from } from 'rxjs';
     MatNativeDateModule,
     MatDialogModule,
     NgxYoutubePlayerModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxTrumbowygModule.withConfig({
+      lang: 'ar',
+      svgPath: '/assets/icons.svg',
+      removeformatPasted: true,
+      autogrow: true,
+      btns: [
+        ['formatting'],
+        ['strong', 'em', 'del'],
+        ['superscript', 'subscript'],
+        ['link'],
+        ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+        ['unorderedList', 'orderedList'],
+        ['horizontalRule'],
+        ['removeformat'],
+        ['fullscreen'],
+        ['insertImage']
+      ],
+      events: {}
+    }),
   ],
   declarations: [
     ConfirmDeleteComponent,
@@ -61,12 +85,17 @@ import { from } from 'rxjs';
     EditVideoComponent,
     HomeworkComponent,
     NotifyComponent,
+    AllNotifyComponent,
     CoursesComponent,
     AbsentComponent,
     DegreeComponent,
-    ClassesComponent
+    ClassesComponent,
+    ArticleViewComponent,
+    ArticlesComponent,
+    AddArticleComponent,
+    EditArticleComponent
   ],
-  entryComponents: [ConfirmDeleteComponent]
+  entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })
 
 export class AdminLayoutModule { }
