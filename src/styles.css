@@ -139,3 +139,19 @@ input:-moz-placeholder {
     width: auto !important;
     height: auto !important;
 }
+
+.sidebar .nav li a {
+    margin: unset;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.sidebar .nav li:first-child > a {
+    margin: unset;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.sidebar .nav p{
+    line-height: 25px;
+}
