@@ -34,12 +34,12 @@ export class AbsentComponent implements OnInit, AfterViewInit {
   course9: any;
   course10: any;
 
-  class1:any;
-  class2:any;
-  class3:any;
-  class4:any;
-  class5:any;
-  class6:any;
+  class1: any;
+  class2: any;
+  class3: any;
+  class4: any;
+  class5: any;
+  class6: any;
 
 
 
@@ -55,7 +55,7 @@ export class AbsentComponent implements OnInit, AfterViewInit {
   stuList: Observable<any[]>;
   stuData: any;
 
-  
+
 
   absent: Observable<any[]>;
   absentData: any;
@@ -89,7 +89,7 @@ export class AbsentComponent implements OnInit, AfterViewInit {
   }
 
   stageSelect() {
-    this.classArray= [];
+    this.classArray = [];
     this.subArray = [];
     this.SubList = this.firestoreService.getCourse(this.stage);
     this.classList = this.firestoreService.getClass(this.stage);
@@ -123,8 +123,6 @@ export class AbsentComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
-  //onEdit(id, name, selection, stage, subject, adate) {}
 
   onDelete(id: string): void {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);

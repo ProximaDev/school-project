@@ -7,129 +7,113 @@
       </div>
       <div class="card-body">
         <div class="card-body">
-          <div>
-            <div class="row" style="direction: rtl">
-              <div class="col-md-4">
-                <h4 style="text-align: right">المرحلة</h4>
-                <mat-form-field>
-                  <mat-label>اختر المرحلة</mat-label>
-                  <mat-select (selectionChange)="stageSelect($event.value)" name="stage" [(ngModel)]="stage">
-                    <mat-option value="الاولى">الاولى</mat-option>
-                    <mat-option value="الثانية">الثانية</mat-option>
-                    <mat-option value="الثالثة">الثالثة</mat-option>
-                    <mat-option value="الرابعة">الرابعة</mat-option>
-                    <mat-option value="الخامسة">الخامسة</mat-option>
-                    <mat-option value="السادسة">السادسة</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-md-4">
-                <h4 style="text-align: right">الشعبة</h4>
-                <mat-form-field>
-                  <mat-label>اختر الشعبة</mat-label>
-                  <mat-select name="selection" [(ngModel)]="selection">
-                    <mat-option *ngFor="let data of classArray" [value]="data">{{data}}</mat-option>                                           
-
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-md-4">
-                <h4 style="text-align: right">اسم الطالب</h4>
-                <mat-form-field>
-                  <mat-label>اختر الاسم</mat-label>
-                  <mat-select name="name" [(ngModel)]="name">
-                    <mat-option *ngFor="let stu of stuData" [value]="stu.fullName">
-                      {{stu.fullName}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
+          <div class="row" style="direction: rtl">
+            <div class="col-md-4">
+              <h4 style="text-align: right">المرحلة</h4>
+              <mat-form-field>
+                <mat-label>اختر المرحلة</mat-label>
+                <mat-select (selectionChange)="stageSelect($event.value)" name="stage" [(ngModel)]="stage">
+                  <mat-option value="الاولى">الاولى</mat-option>
+                  <mat-option value="الثانية">الثانية</mat-option>
+                  <mat-option value="الثالثة">الثالثة</mat-option>
+                  <mat-option value="الرابعة">الرابعة</mat-option>
+                  <mat-option value="الخامسة">الخامسة</mat-option>
+                  <mat-option value="السادسة">السادسة</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-            <div class="row" style="direction: rtl">
-              <div class="col-md-4">
-                <mat-form-field>
-                  <mat-label>اختر المادة</mat-label>
-                  <mat-select name="subject" [(ngModel)]="subject">
-                    <mat-option *ngFor="let data of subArray" [value]="data">{{data}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
+            <div class="col-md-4">
+              <h4 style="text-align: right">الشعبة</h4>
+              <mat-form-field>
+                <mat-label>اختر الشعبة</mat-label>
+                <mat-select name="selection" [(ngModel)]="selection">
+                  <mat-option *ngFor="let data of classArray" [value]="data">{{data}}</mat-option>
 
-              <div class="col-md-4">
-                  <mat-form-field>
-                      <mat-label> نوع الامتحان</mat-label>
-                      <mat-select name="type" [(ngModel)]="type">
-                        <mat-option value="يومي">يومي</mat-option>
-                        <mat-option value="شهري">شهري</mat-option>
-                        <mat-option value="نصف سنة">نصف سنة</mat-option>
-                        <mat-option value="نهاية سنة">نهاية سنة</mat-option>
-
-                      </mat-select>
-                    </mat-form-field>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <h4 style="text-align: right">اسم الطالب</h4>
+              <mat-form-field>
+                <mat-label>اختر الاسم</mat-label>
+                <mat-select name="name" [(ngModel)]="name">
+                  <mat-option *ngFor="let stu of stuData" [value]="stu.fullName">
+                    {{stu.fullName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row" style="direction: rtl">
+            <div class="col-md-4">
+              <mat-form-field>
+                <mat-label>اختر المادة</mat-label>
+                <mat-select name="subject" [(ngModel)]="subject">
+                  <mat-option *ngFor="let data of subArray" [value]="data">{{data}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <mat-label> نوع الامتحان</mat-label>
+                <mat-select name="type" [(ngModel)]="type">
+                  <mat-option value="يومي">يومي</mat-option>
+                  <mat-option value="شهري">شهري</mat-option>
+                  <mat-option value="نصف سنة">نصف سنة</mat-option>
+                  <mat-option value="نهاية سنة">نهاية سنة</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <input matInput placeholder="الدرجة" name="degrees" [(ngModel)]="degrees" required>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row" style="margin-right: 25px" style="direction:rtl">
+            <button mat-raised-button class="btn btn-danger pull-right" (click)="addDegree()"><i
+                class="material-icons">check</i>
+              اضافة</button>
+            <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                class="material-icons">cancel</i>
+              الغاء</button>
+            <div class="clearfix"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" style="direction: rtl">
+              <div class="card">
+                <div class="card-header card-header-danger" style="text-align: center">
+                  <h4 class="card-title ">قائمة الدرجات</h4>
+                  <p class="card-category">معلومات الدرجات</p>
                 </div>
-
-
-                  <div class="col-md-4">
-                      <mat-form-field>
-                          <input matInput placeholder="الدرجة" name="degrees"
-                              [(ngModel)]="degrees" required>
-                      </mat-form-field>
-                  </div>
-
-            
-            
-
-
-            
-            </div>
-              <div class="row" style="margin-right: 25px">
-                <button mat-raised-button class="btn btn-danger pull-right" (click)="addDegree()"><i
-                    class="material-icons">check</i>
-                  اضافة</button>
-                <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
-                    class="material-icons">cancel</i>
-                  الغاء</button>
-                <div class="clearfix"></div>
-              </div>
-            
-            <div class="row">
-              <div class="col-md-12" style="direction: rtl">
-                <div class="card">
-                  <div class="card-header card-header-danger" style="text-align: center">
-                    <h4 class="card-title ">قائمة الدرجات</h4>
-                    <p class="card-category">معلومات الدرجات</p>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead class="text-danger">
-                          <th>الاسم</th>
-                          <th>المرحلة</th>
-                          <th>الشعبة</th>
-                          <th>المادة </th>
-                          <th>نوع الامتحان</th>
-                          <th>الدرجة</th>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let degree of degreeData">
-                            <td>{{degree.name}}</td>
-                            <td>{{degree.stage}}</td>
-                            <td>{{degree.selection}}</td>
-                            <td>{{degree.subject}}</td>
-                            <td>{{degree.type}}</td>
-                            <td>{{degree.degrees}}</td>
-                            <td><a class="btn btn-white btn-round btn-just-icon" (click)="onDelete(degree.id)">
-                                <i class="material-icons">delete</i>
-                              </a>
-                              <!-- <a class="btn btn-white btn-round btn-just-icon"
-                                (click)="onEdit(degree.id, degree.name, degree.selection, degree.stage, degree.subject, degree.type,degree.degrees)">
-                                <i class="material-icons">edit</i>
-                              </a>-->
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class="text-danger">
+                        <th>الاسم</th>
+                        <th>المرحلة</th>
+                        <th>الشعبة</th>
+                        <th>المادة </th>
+                        <th>نوع الامتحان</th>
+                        <th>الدرجة</th>
+                        <th>الاجرائات</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let degree of degreeData">
+                          <td>{{degree.name}}</td>
+                          <td>{{degree.stage}}</td>
+                          <td>{{degree.selection}}</td>
+                          <td>{{degree.subject}}</td>
+                          <td>{{degree.type}}</td>
+                          <td>{{degree.degrees}}</td>
+                          <td><a style="color:white; background: #ff5e00" class="btn btn-white btn-round btn-just-icon"
+                              (click)="onDelete(degree.id)">
+                              <i class="material-icons">delete</i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

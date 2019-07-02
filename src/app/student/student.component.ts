@@ -24,20 +24,18 @@ export class StudentComponent implements OnInit, AfterViewInit {
   isEdit: boolean;
   btnTXT = 'اضافة'
 
-  stage:any;
-  class1:any;
-  class2:any;
-  class3:any;
-  class4:any;
-  class5:any;
-  class6:any;
-
+  stage: any;
+  class1: any;
+  class2: any;
+  class3: any;
+  class4: any;
+  class5: any;
+  class6: any;
 
   classList: any;
   classData: any;
 
   classArray = [];
-
 
   constructor(private service: StudentService,
     private firestoreService: FirebaseService,
@@ -88,9 +86,9 @@ export class StudentComponent implements OnInit, AfterViewInit {
   }
 
   stageSelect() {
-    this.classArray= [];  
+    this.classArray = [];
     this.classList = this.firestoreService.getClass(this.stage);
- 
+
     this.classList.subscribe(data => {
       if (data.length != 0 && data != undefined && data != null) {
         this.classData = data;
