@@ -119,9 +119,9 @@
                                     <tbody>
                                         <tr *ngFor="let student of studentList">
                                             <td>{{student.fullName}}</td>
-                                            <td>{{student.departments}}</td>
                                             <td>{{student.stage}}</td>
                                             <td>{{student.selection}}</td>
+                                            <td>{{student.gender}}</td>
                                             <td>{{student.birthdate.toDate() | date: 'mediumDate'}}</td>
                                             <td>{{student.address}}</td>
                                             <td>{{student.mobile}}</td>
