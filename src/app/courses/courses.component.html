@@ -123,6 +123,7 @@
                                         <th>المادة الثامنة</th>
                                         <th>المادة التاسعة</th>
                                         <th>المادة العاشرة</th>
+                                        <th>الاجرائات</th>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let course of courseList">
@@ -137,12 +138,13 @@
                                             <td>{{course.course8}}</td>
                                             <td>{{course.course9}}</td>
                                             <td>{{course.course10}}</td>
-                                            <td><a class="btn btn-white btn-round btn-just-icon"
-                                                    (click)="onDelete(course.stage)">
+                                            <td><a style="color:white; background: #ff5e00"
+                                                    class="btn btn-white btn-round btn-just-icon"
+                                                    (click)="onDelete(class.stage)">
                                                     <i class="material-icons">delete</i>
                                                 </a>
                                                 <a class="btn btn-white btn-round btn-just-icon"
-                                                    (click)="onEdit(course)">
+                                                    (click)="onEdit(class)">
                                                     <i class="material-icons">edit</i>
                                                 </a>
                                             </td>

@@ -1,0 +1,32 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title" style="text-align: center">لوحة الاشعارات الرئيسية</h4>
+                <p class="card-category" style="text-align: center">لوحة الاشعارات المرسلة الى التطبيق</p>
+                <button mat-raised-button class="btn btn-danger btn-round pull-right" routerLink="/notify"><i
+                        class="material-icons">control_point</i> اضافة اشعار جديد</button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div id="no-items-ava">
+                        <img src="assets/img/notification.svg" style="width: 100px;height: 100px;">
+                        <p style="font-weight: bold; margin:10px">لا يوجد عناصر</p>
+                    </div>
+                    <div id="SHOW" class="col-md-6 col-sm-6 col-lg-4" *ngFor="let item of notifyData">
+                        <div class="card card-profile">
+                            <div class="card-body" style="text-align: right;direction: rtl;padding: 10px">
+                                <h3 class="card-category text-gray">{{item.title}}</h3>
+                                <hr>
+                                <p style="font-size:18px" class="card-description">{{item.content}}</p>
+                                <h6 class="card-title"><i class="material-icons">update</i> {{item.date}}</h6>
+                                <button class="btn btn-danger btn-round btn-sm" (click)="openDialog(item.id)"><i
+                                        style="margin: 0 auto" class="material-icons">delete</i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

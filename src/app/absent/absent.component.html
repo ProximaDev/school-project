@@ -28,9 +28,9 @@
                 <mat-form-field>
                   <mat-label>اختر الشعبة</mat-label>
                   <mat-select name="selection" [(ngModel)]="selection">
-                    <mat-option *ngFor="let data of classArray" [value]="data">{{data}}</mat-option>                                           
-                   
-                   
+                    <mat-option *ngFor="let data of classArray" [value]="data">{{data}}</mat-option>
+
+
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -89,6 +89,7 @@
                           <th>الشعبة</th>
                           <th>المادة الغائب بها</th>
                           <th>تاريخ الغياب</th>
+                          <th>الاجرائات</th>
                         </thead>
                         <tbody>
                           <tr *ngFor="let absent of absentData">
@@ -97,13 +98,10 @@
                             <td>{{absent.selection}}</td>
                             <td>{{absent.subject}}</td>
                             <td>{{absent.adate.toDate() | date: 'mediumDate'}}</td>
-                            <td><a class="btn btn-white btn-round btn-just-icon" (click)="onDelete(absent.id)">
+                            <td><a style="color:white; background: #ff5e00"
+                                class="btn btn-white btn-round btn-just-icon" (click)="onDelete(absent.id)">
                                 <i class="material-icons">delete</i>
                               </a>
-                              <!-- <a class="btn btn-white btn-round btn-just-icon"
-                                (click)="onEdit(absent.id, absent.name, absent.selection, absent.stage, absent.subject, absent.adate)">
-                                <i class="material-icons">edit</i>
-                              </a>-->
                             </td>
                           </tr>
                         </tbody>

@@ -1,0 +1,40 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title" style="text-align: center">لوحة الاخبار الرئيسية</h4>
+                <p class="card-category" style="text-align: center">قائمة الاخبار المضافة الى المنصة</p>
+                <button mat-raised-button class="btn btn-danger btn-round pull-right" routerLink="/add-article">
+                    <i class="material-icons">control_point</i> اضافة خبر جديد</button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div id="no-items-ava">
+                        <img src="assets/img/news.svg" style="width: 100px;height: 100px;">
+                        <p style="font-weight: bold; margin:10px">لا يوجد عناصر</p>
+                    </div>
+                    <div id="SHOW">
+                        <div class="card-group">
+                            <div class="card" *ngFor="let item of articlesData" style="margin:5px">
+                                <img class="card-img-top" src="{{item.image}}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{item.title}}</h5>
+                                    <p style="max-width: 250px" class="card-text"
+                                        [innerHTML]="substringText(item.description)"></p>
+                                    <p class="card-text"><small class="text-muted">{{item.date}}</small></p>
+                                    <button class="btn btn-danger btn-round btn-sm" (click)="viewDialog(item)"><i
+                                            style="margin: 0 auto" class="material-icons">visibility</i></button>
+                                    <button class="btn btn-danger btn-round btn-sm" (click)="updateArticle(item)"><i
+                                            style="margin: 0 auto" class="material-icons">edit</i></button>
+                                    <button class="btn btn-danger btn-round btn-sm"
+                                        (click)="openDialog(item.id, item.imgname)"><i style="margin: 0 auto"
+                                            class="material-icons">delete</i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,7 +15,8 @@
                                     <mat-form-field>
 
                                         <mat-label>اختر المرحلة</mat-label>
-                                        <mat-select (selectionChange)="stageSelect($event.value)"  name="stage" [(ngModel)]="stage">
+                                        <mat-select (selectionChange)="stageSelect($event.value)" name="stage"
+                                            [(ngModel)]="stage">
                                             <mat-option value="الاولى">الاولى</mat-option>
                                             <mat-option value="الثانية">الثانية</mat-option>
                                             <mat-option value="الثالثة">الثالثة</mat-option>
@@ -30,7 +31,8 @@
                                     <mat-form-field>
                                         <mat-label>اختر الشعبة</mat-label>
                                         <mat-select name="Division" [(ngModel)]="Division">
-                                            <mat-option *ngFor="let data of classArray" [value]="data">{{data}}</mat-option>                                           
+                                            <mat-option *ngFor="let data of classArray" [value]="data">{{data}}
+                                            </mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -38,12 +40,13 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field>
-                                      <mat-label>اختر المادة</mat-label>
-                                      <mat-select name="course" [(ngModel)]="course">
-                                        <mat-option *ngFor="let data of subArray" [value]="data">{{data}}</mat-option>
-                                      </mat-select>
+                                        <mat-label>اختر المادة</mat-label>
+                                        <mat-select name="course" [(ngModel)]="course">
+                                            <mat-option *ngFor="let data of subArray" [value]="data">{{data}}
+                                            </mat-option>
+                                        </mat-select>
                                     </mat-form-field>
-                                  </div>
+                                </div>
 
                                 <div class="col-md-4">
                                     <mat-form-field>
@@ -105,7 +108,8 @@
                                             <td>{{homework.Subject}}</td>
                                             <td>{{homework.description}}</td>
                                             <td>{{homework.date.toDate() | date: 'mediumDate'}}</td>
-                                            <td><a class="btn btn-white btn-round btn-just-icon"
+                                            <td><a style="color:white; background: #ff5e00"
+                                                    class="btn btn-white btn-round btn-just-icon"
                                                     (click)="onDelete(homework.id)">
                                                     <i class="material-icons">delete</i>
                                                 </a>

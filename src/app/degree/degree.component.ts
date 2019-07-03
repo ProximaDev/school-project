@@ -16,13 +16,13 @@ const STORAGE_KEY = 'local_user';
   styleUrls: ['./degree.component.scss']
 })
 export class DegreeComponent implements OnInit, AfterViewInit {
- 
+
   name: any;
   selection: any;
   stage: any;
   subject: any;
   degrees: any;
-  type:any;
+  type: any;
 
   course1: any;
   course2: any;
@@ -35,12 +35,12 @@ export class DegreeComponent implements OnInit, AfterViewInit {
   course9: any;
   course10: any;
 
-  class1:any;
-  class2:any;
-  class3:any;
-  class4:any;
-  class5:any;
-  class6:any;
+  class1: any;
+  class2: any;
+  class3: any;
+  class4: any;
+  class5: any;
+  class6: any;
 
 
 
@@ -56,12 +56,12 @@ export class DegreeComponent implements OnInit, AfterViewInit {
   stuList: Observable<any[]>;
   stuData: any;
 
- 
+
 
   degree: Observable<any[]>;
   degreeData: any;
 
-  
+
 
   constructor(private firestoreService: FirebaseService,
     private router: Router,
@@ -92,7 +92,7 @@ export class DegreeComponent implements OnInit, AfterViewInit {
   }
 
   stageSelect() {
-    this.classArray= [];
+    this.classArray = [];
     this.subArray = [];
     this.SubList = this.firestoreService.getCourse(this.stage);
     this.classList = this.firestoreService.getClass(this.stage);
@@ -127,8 +127,6 @@ export class DegreeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  //onEdit(id, name, selection, stage, subject, adate) {}
-
   onDelete(id: string): void {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
@@ -140,7 +138,7 @@ export class DegreeComponent implements OnInit, AfterViewInit {
   }
 
   addDegree() {
-    this.firestoreService.addDegree(this.name, this.selection, this.stage, this.subject,this.type, this.degrees);
+    this.firestoreService.addDegree(this.name, this.selection, this.stage, this.subject, this.type, this.degrees);
   }
 
 }

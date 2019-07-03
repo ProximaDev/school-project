@@ -1,5 +1,5 @@
 export class Class {
-        id : string;
+        id: string;
         stage: string;
         class1: string;
         class2: string;

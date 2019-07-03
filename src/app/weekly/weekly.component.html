@@ -30,7 +30,7 @@
                 <mat-form-field>
                   <mat-label>اختر الشعبة</mat-label>
                   <mat-select name="selection" [(ngModel)]="selection">
-                    <mat-option *ngFor="let data of classArray" [value]="data">{{data}}</mat-option>                                           
+                    <mat-option *ngFor="let data of classArray" [value]="data">{{data}}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -46,8 +46,9 @@
                     <img class="card-img-top img-adjusted" src="{{item.image}}">
                     <div class="card-body">
                       <h5 class="card-title">{{item.stage}} {{item.selection}}</h5>
-                      <button class="btn btn-danger btn-round btn-sm" (click)="openDialog(item.id, item.imgname)"><i
-                          style="margin: 0 auto" class="material-icons">delete</i></button>
+                      <button style="color:white; background: #ff5e00" class="btn btn-danger btn-round btn-sm"
+                        (click)="openDialog(item.id, item.imgname)"><i style="margin: 0 auto"
+                          class="material-icons">delete</i></button>
                     </div>
                   </div>
                 </div>

@@ -17,9 +17,9 @@
 }
 
 .login-main {
-  background-size: cover;
+  background-size: auto;
   background-repeat: no-repeat;
   background-position: center center;
   height: 100vh;
-  background-color: white;
+  background-image: url(/assets/img/login.png);
 }
