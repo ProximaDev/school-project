@@ -24,6 +24,7 @@ export class StudentComponent implements OnInit, AfterViewInit {
   isEdit: boolean;
   btnTXT = 'اضافة'
 
+
   stage: any;
   class1: any;
   class2: any;

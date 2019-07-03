@@ -25,6 +25,7 @@ import { AddArticleComponent } from '../../add-article/add-article.component';
 import { EditArticleComponent } from '../../edit-article/edit-article.component';
 import { ArticleViewComponent } from '../../article-view/article-view.component';
 import { NgxTrumbowygModule } from 'ngx-trumbowyg';
+import {PaymentsComponent} from '../../payments/payments.component'
 
 import {
   MatButtonModule,
@@ -93,7 +94,8 @@ import {
     ArticleViewComponent,
     ArticlesComponent,
     AddArticleComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    PaymentsComponent
   ],
   entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })
