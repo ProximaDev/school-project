@@ -54,7 +54,7 @@ export class EditArticleComponent implements OnInit {
       let date = formatDate(today, 'medium', 'en-US');
       const storageRef = firebase.storage().ref();
       storageRef.child(`posts/${this.article.oldname}`).delete();
-      this.FirebaseService.updateFirestoreData(this.article.id, "newsList", this.article);
+      this.FirebaseService.updateFirestoreData('newsList', this.article.id, this.article);
       this.route.navigate(['articles']);
     }
     else {
