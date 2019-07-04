@@ -109,31 +109,6 @@ export class FirebaseService {
     return this.firestore.collection('Absents').valueChanges();
   }
 
-
-  addVideos(title, link) {
-    const id = this.firestore.createId();
-    this.firestore.doc(`videosList/${id}`).set({
-      id,
-      title,
-      link,
-    });
-  }
-
-  updateVideos(id, title, link) {
-    this.firestore.doc(`videosList/${id}`).set({
-      id,
-      title,
-      link,
-    });
-  }
-  getVideos() {
-    return this.firestore.collection('videosList').valueChanges();
-  }
-
-  deleteVideos(id) {
-    this.firestore.doc(`videosList/${id}`).delete();
-  }
-
   addweekly(stage, selection, image, imgname) {
     let filter = stage + "_" + selection;
     const id = this.firestore.createId();

@@ -27,11 +27,11 @@ export class VideosComponent implements OnInit, AfterViewInit {
     private toastr: ToastrService,
     private dialog: MatDialog) { }
 
-  openDialog(item): void {
+  openDialog(id): void {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true')
-        this.deleteVideo(item);
+        this.deleteVideo(id);
     });
   }
 
@@ -40,7 +40,7 @@ export class VideosComponent implements OnInit, AfterViewInit {
     if (this.storage.get(STORAGE_KEY) == null) {
       this.router.navigate(['login']);
     } else {
-      this.videosList = this.firestoreService.getVideos();
+      this.videosList = this.firestoreService.getFirestoreData('videosList');
     }
   }
 
@@ -59,8 +59,8 @@ export class VideosComponent implements OnInit, AfterViewInit {
     });
   }
 
-  deleteVideo(item) {
-    this.firestoreService.deleteVideos(item);
+  deleteVideo(id) {
+    this.firestoreService.deleteFirestoreData('videosList', id);
     this.toastr.success('تم الحذف', 'تم حذف الفيديو بنجاح');
   }
   updateVideo(item) {
