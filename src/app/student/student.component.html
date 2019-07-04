@@ -9,19 +9,17 @@
                     </div>
                     <div class="card-body">
                         <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
-                            <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
                             <div class="row">
                                 <div class="col-md-3">
                                     <mat-form-field>
                                         <input matInput placeholder="الاسم الكامل" name="fullName"
-                                            [(ngModel)]="service.formData.fullName" required>
+                                            [(ngModel)]="student.fullName" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field>
                                         <mat-label>اختر المرحلة</mat-label>
-                                        <mat-select (selectionChange)="stageSelect($event.value)" name="stage"
-                                            [(ngModel)]="stage">
+                                        <mat-select name="stage" [(ngModel)]="student.stage">
                                             <mat-option value="الاولى">الاولى</mat-option>
                                             <mat-option value="الثانية">الثانية</mat-option>
                                             <mat-option value="الثالثة">الثالثة</mat-option>
@@ -34,16 +32,19 @@
                                 <div class="col-md-3">
                                     <mat-form-field>
                                         <mat-label>اختر الشعبة</mat-label>
-                                        <mat-select name="selection" [(ngModel)]="selection">
-                                            <mat-option *ngFor="let data of classArray" [value]="data">{{data}}
-                                            </mat-option>
+                                        <mat-select name="selection" [(ngModel)]="student.selection">
+                                            <mat-option value="أ">أ</mat-option>
+                                            <mat-option value="ب">ب</mat-option>
+                                            <mat-option value="ج">ج</mat-option>
+                                            <mat-option value="د">د</mat-option>
+                                            <mat-option value="ه">ه</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field>
                                         <mat-label>الجنس</mat-label>
-                                        <mat-select required name="gender" [(ngModel)]="service.formData.gender">
+                                        <mat-select required name="gender" [(ngModel)]="student.gender">
                                             <mat-option value="ذكر">ذكر</mat-option>
                                             <mat-option value="انثى">انثى</mat-option>
                                         </mat-select>
@@ -54,19 +55,19 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="العنوان" name="address"
-                                            [(ngModel)]="service.formData.address" required>
+                                            [(ngModel)]="student.address" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="رقم الهاتف" name="mobile"
-                                            [(ngModel)]="service.formData.mobile" required>
+                                            [(ngModel)]="student.mobile" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput [matDatepicker]="picker" placeholder="تاريخ الميلاد"
-                                            name="birthdate" [(ngModel)]="service.formData.birthdate" required>
+                                            name="birthdate" [(ngModel)]="student.birthdate" required>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
@@ -76,13 +77,13 @@
                                 <div class="col-md-6">
                                     <mat-form-field>
                                         <input matInput placeholder="البريد الالكتروني" name="email"
-                                            [(ngModel)]="service.formData.email" required>
+                                            [(ngModel)]="student.email" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field>
                                         <input matInput placeholder="كلمة المرور" name="password"
-                                            [(ngModel)]="service.formData.password" required>
+                                            [(ngModel)]="student.password" required>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -117,19 +118,19 @@
                                         <th>الاجرائات</th>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let student of studentList">
+                                        <tr *ngFor="let student of studentData">
                                             <td>{{student.fullName}}</td>
-                                            <td>{{student.departments}}</td>
                                             <td>{{student.stage}}</td>
                                             <td>{{student.selection}}</td>
-                                            <td>{{student.birthdate.toDate() | date: 'mediumDate'}}</td>
+                                            <td>{{student.gender}}</td>
+                                            <td>{{student.birthdate}}</td>
                                             <td>{{student.address}}</td>
                                             <td>{{student.mobile}}</td>
                                             <td>{{student.email}}</td>
                                             <td>{{student.password}}</td>
                                             <td><a style="color:white; background: #ff5e00"
                                                     class="btn btn-white btn-round btn-just-icon"
-                                                    (click)="onDelete(student.email)">
+                                                    (click)="onDelete(student)">
                                                     <i class="material-icons">delete</i>
                                                 </a>
                                                 <a class="btn btn-white btn-round btn-just-icon"

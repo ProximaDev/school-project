@@ -40,7 +40,7 @@ export class AddArticleComponent implements OnInit {
 
 	saveFormData(form) {
 		if (this.article.image) {
-			this.FirebaseService.addFirestoreData('newsList', this.article);
+			this.FirebaseService.addFirestoreData('newsList', this.article, false);
 			this.router.navigate(['articles']);
 		}
 		else {
