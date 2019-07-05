@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
-import { HomeworkService } from '../services/homework/homework.service'
-import { Homework } from '../services/homework/homework.model';
+import { Homework } from '../services/models/homework.model';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from "@angular/material";
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
 import { FirebaseService } from '../services/firebase.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
+import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
+import { Observable } from 'rxjs';
+const STORAGE_KEY = 'local_user';
 
 @Component({
   selector: 'app-homework',
@@ -16,135 +18,64 @@ import { FirebaseService } from '../services/firebase.service';
   styleUrls: ['./homework.component.scss']
 })
 export class HomeworkComponent implements OnInit {
-  homeworkList: Homework[];
-  isEdit: boolean;
-  stage:any;
-  course1: any;
-  course2: any;
-  course3: any;
-  course4: any;
-  course5: any;
-  course6: any;
-  course7: any;
-  course8: any;
-  course9: any;
-  course10: any;
 
-  class1:any;
-  class2:any;
-  class3:any;
-  class4:any;
-  class5:any;
-  class6:any;
-
-
-
-  SubList: any;
-  SubData: any
-
-  classList: any;
-  classData: any;
-
-  subArray = [];
-  classArray = [];
+  CourseList: Observable<any[]>;
+  CourseData: any;
+  homeworkList: Observable<any[]>;
+  homeworkData: any;
+  isEdit: boolean = false;
+  btnTXT = 'اضافة'
 
   constructor(private firestoreService: FirebaseService,
-    private service: HomeworkService,
-    private firestore: AngularFirestore,
+    @Inject(SESSION_STORAGE) private storage: StorageService,
     private toastr: ToastrService,
-    private datePipe: DatePipe,
-    private dialog: MatDialog) { }
+    private spinnerService: NgxSpinnerService,
+    private router: Router,
+    private dialog: MatDialog,
+    private homework: Homework) { }
 
   ngOnInit() {
-      this.resetForm();
+    this.spinnerService.show();
+    if (this.storage.get(STORAGE_KEY) == null) {
+      this.router.navigate(['login']);
+    }
+    this.homeworkList = this.firestoreService.getFirestoreData('homeworkList');
+  }
 
-
-     
-
-    this.service.getHomework().subscribe(actionArray => {
-      this.homeworkList = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id,
-          ...item.payload.doc.data()
-        } as Homework;
-      })
+  ngAfterViewInit() {
+    this.spinnerService.hide();
+    this.homeworkList.subscribe(data => {
+      this.homeworkData = data;
     });
   }
 
   stageSelect() {
-    this.classArray= [];
-    this.subArray = [];
-    this.SubList = this.firestoreService.getCourse(this.stage);
-    this.classList = this.firestoreService.getClass(this.stage);
-
-    this.SubList.subscribe(data => {
-      if (data.length != 0 && data != undefined && data != null) {
-        this.SubData = data;
-        this.subArray.push(this.SubData.course1);
-        this.subArray.push(this.SubData.course2);
-        this.subArray.push(this.SubData.course3);
-        this.subArray.push(this.SubData.course4);
-        this.subArray.push(this.SubData.course5);
-        this.subArray.push(this.SubData.course6);
-        this.subArray.push(this.SubData.course7);
-        this.subArray.push(this.SubData.course8);
-        this.subArray.push(this.SubData.course9);
-        this.subArray.push(this.SubData.course10);
-      }
-
-    });
-
-    this.classList.subscribe(data => {
-      if (data.length != 0 && data != undefined && data != null) {
-        this.classData = data;
-        this.classArray.push(this.classData.class1);
-        this.classArray.push(this.classData.class2);
-        this.classArray.push(this.classData.class3);
-        this.classArray.push(this.classData.class4);
-        this.classArray.push(this.classData.class5);
-        this.classArray.push(this.classData.class6);
-      }
+    this.CourseList = this.firestoreService.getRealTimeData('courseList', this.homework.stage);
+    this.CourseList.subscribe(data => {
+      this.CourseData = data;
     });
   }
 
-  resetForm(form?: NgForm) {
-    if (form != null)
-      form.resetForm();
-    this.service.formData = {
-      id: null,
-      stage: '',
-      Division: '',
-      course: '',
-      Subject: '',
-      description: '',
-      date: '',
-    }
-  }
-  
-  
   saveFormData(form: NgForm) {
-    let data = Object.assign({}, form.value);
-    delete data.id;
-    if (form.value.id == null)
-      this.firestore.collection('Homeworks').add(data);
-    else
-      this.firestore.doc('Homeworks/' + form.value.id).update(data);
-    this.resetForm(form);
-    this.toastr.success('تمت الاضافة بنجاح', 'اضافة');
-  }
-  onEdit(stu: Homework) {
-    this.service.formData = Object.assign({}, stu);
+    var datePipe = new DatePipe('en-US');
+    this.homework.date = datePipe.transform(new Date(this.homework.date), 'dd/MM/yyyy');
+    if (this.isEdit) {
+      this.firestoreService.updateFirestoreData('homeworkList', this.homework.id, this.homework);
+    } else {
+      this.firestoreService.addFirestoreData('homeworkList', this.homework, false);
+    }
+    this.isEdit = false;
+    this.btnTXT = 'اضافة';
+    form.resetForm();
   }
 
-  onDelete(id: string): void {
+  onDelete(homework: Homework): void {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        this.firestore.doc('Homeworks/' + id).delete();
+        this.firestoreService.deleteFirestoreData('homeworkList', homework.id);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
     });
   }
-
-  
 }

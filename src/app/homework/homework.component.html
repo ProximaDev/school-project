@@ -9,14 +9,12 @@
                     </div>
                     <div class="card-body">
                         <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
-                            <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field>
-
                                         <mat-label>اختر المرحلة</mat-label>
                                         <mat-select (selectionChange)="stageSelect($event.value)" name="stage"
-                                            [(ngModel)]="stage">
+                                            [(ngModel)]="homework.stage">
                                             <mat-option value="الاولى">الاولى</mat-option>
                                             <mat-option value="الثانية">الثانية</mat-option>
                                             <mat-option value="الثالثة">الثالثة</mat-option>
@@ -25,14 +23,16 @@
                                             <mat-option value="السادسة">السادسة</mat-option>
                                         </mat-select>
                                     </mat-form-field>
-
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field>
                                         <mat-label>اختر الشعبة</mat-label>
-                                        <mat-select name="Division" [(ngModel)]="Division">
-                                            <mat-option *ngFor="let data of classArray" [value]="data">{{data}}
-                                            </mat-option>
+                                        <mat-select name="division" [(ngModel)]="homework.division">
+                                            <mat-option value="أ">أ</mat-option>
+                                            <mat-option value="ب">ب</mat-option>
+                                            <mat-option value="ج">ج</mat-option>
+                                            <mat-option value="د">د</mat-option>
+                                            <mat-option value="ه">ه</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -41,24 +41,22 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <mat-label>اختر المادة</mat-label>
-                                        <mat-select name="course" [(ngModel)]="course">
-                                            <mat-option *ngFor="let data of subArray" [value]="data">{{data}}
+                                        <mat-select name="course" [(ngModel)]="homework.course">
+                                            <mat-option *ngFor="let data of CourseData" [value]="data">{{data}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
-
                                 <div class="col-md-4">
                                     <mat-form-field>
-                                        <input matInput placeholder="الموضوع" name="Subject"
-                                            [(ngModel)]="service.formData.Subject" required>
+                                        <input matInput placeholder="الموضوع" name="subject"
+                                            [(ngModel)]="homework.subject" required>
                                     </mat-form-field>
                                 </div>
-
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput [matDatepicker]="picker" placeholder="تاريخ الواجب" name="date"
-                                            [(ngModel)]="service.formData.date" required>
+                                            [(ngModel)]="homework.date" required>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
@@ -69,7 +67,7 @@
                                 <div class="col-md-12">
                                     <mat-form-field>
                                         <textarea matInput placeholder="التفاصيل" name="description"
-                                            [(ngModel)]="service.formData.description" required></textarea>
+                                            [(ngModel)]="homework.description" required></textarea>
                                     </mat-form-field>
                                 </div>
 
@@ -103,11 +101,11 @@
                                     <tbody>
                                         <tr *ngFor="let homework of homeworkList">
                                             <td>{{homework.stage}}</td>
-                                            <td>{{homework.Division}}</td>
+                                            <td>{{homework.division}}</td>
                                             <td>{{homework.course}}</td>
-                                            <td>{{homework.Subject}}</td>
+                                            <td>{{homework.subject}}</td>
                                             <td>{{homework.description}}</td>
-                                            <td>{{homework.date.toDate() | date: 'mediumDate'}}</td>
+                                            <td>{{homework.date}}</td>
                                             <td><a style="color:white; background: #ff5e00"
                                                     class="btn btn-white btn-round btn-just-icon"
                                                     (click)="onDelete(homework.id)">
