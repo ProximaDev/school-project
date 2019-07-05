@@ -19,7 +19,6 @@ import { AllNotifyComponent } from '../../all-notify/all-notify.component';
 import { CoursesComponent } from '../../courses/courses.component'
 import { AbsentComponent } from '../../absent/absent.component';
 import { DegreeComponent } from '../../degree/degree.component';
-import { ClassesComponent } from '../../classes/classes.component';
 import { ArticlesComponent } from '../../articles/articles.component';
 import { AddArticleComponent } from '../../add-article/add-article.component';
 import { EditArticleComponent } from '../../edit-article/edit-article.component';
@@ -89,7 +88,6 @@ import {
     CoursesComponent,
     AbsentComponent,
     DegreeComponent,
-    ClassesComponent,
     ArticleViewComponent,
     ArticlesComponent,
     AddArticleComponent,

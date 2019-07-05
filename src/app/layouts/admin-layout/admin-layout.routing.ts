@@ -13,7 +13,6 @@ import { AllNotifyComponent } from '../../all-notify/all-notify.component';
 import { CoursesComponent } from '../../courses/courses.component'
 import { AbsentComponent } from '../../absent/absent.component';
 import { DegreeComponent } from '../../degree/degree.component';
-import { ClassesComponent } from '../../classes/classes.component'
 import { ArticlesComponent } from '../../articles/articles.component';
 import { AddArticleComponent } from '../../add-article/add-article.component';
 import { EditArticleComponent } from '../../edit-article/edit-article.component';
@@ -33,7 +32,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'all-notify', component: AllNotifyComponent, canActivate: [AuthGuard] },
     { path: 'add-weekly', component: AddWeeklyComponent, canActivate: [AuthGuard] },
     { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
-    { path: 'classes', component: ClassesComponent, canActivate: [AuthGuard] },
     { path: 'absent', component: AbsentComponent, canActivate: [AuthGuard] },
     { path: 'degree', component: DegreeComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/dashboard' }
