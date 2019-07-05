@@ -1,5 +1,11 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+    providedIn: 'root'
+})
+
 export class Course {
-    id : string;
+    id: string;
     stage: string;
     course1: string;
     course2: string;
@@ -11,5 +17,4 @@ export class Course {
     course8: string;
     course9: string;
     course10: string;
-
 }

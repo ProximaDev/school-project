@@ -1,83 +1,66 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
-import { Course } from '../services/courses/course.model'
-import { CourseService } from '../services/courses/course.service';
-import { MatDialog } from "@angular/material";
+import { FirebaseService } from '../services/firebase.service';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
+import { NgxSpinnerService } from 'ngx-spinner';
+import { MatDialog } from "@angular/material";
+import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
+import { Course } from 'app/services/models/course.model';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+const STORAGE_KEY = 'local_user';
 
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.scss']
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, AfterViewInit {
 
-  stage: any;
-  courseList: Course[];
-  isEdit: boolean;
+  CourseList: Observable<any[]>;
+  CourseData: any;
   btnTXT = 'اضافة'
 
-  constructor(private service: CourseService,
-    private firestore: AngularFirestore,
+  constructor(private firestoreService: FirebaseService,
+    @Inject(SESSION_STORAGE) private storage: StorageService,
+    private spinnerService: NgxSpinnerService,
     private toastr: ToastrService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private router: Router,
+    private course: Course) { }
 
   ngOnInit() {
-    this.resetForm();
-    this.service.getCourse().subscribe(actionArray => {
-      this.courseList = actionArray.map(item => {
-        return {
-          id: item.payload.doc.id,
-          ...item.payload.doc.data()
-        } as Course;
-      })
+    this.spinnerService.show();
+    if (this.storage.get(STORAGE_KEY) == null) {
+      this.router.navigate(['login']);
+    }
+    this.CourseList = this.firestoreService.getRealTimeDataCol('courseList');
+  }
+
+  ngAfterViewInit() {
+    this.spinnerService.hide();
+    this.CourseList.subscribe(data => {
+      this.CourseData = data;
     });
   }
 
-  resetForm(form?: NgForm) {
-    if (form != null)
-      form.resetForm();
-    this.service.formData = {
-      id: null,
-      stage: '',
-      course1: '',
-      course2: '',
-      course3: '',
-      course4: '',
-      course5: '',
-      course6: '',
-      course7: '',
-      course8: '',
-      course9: '',
-      course10: '',
-    }
-  }
   saveFormData(form: NgForm) {
+    this.firestoreService.addRealTimeData('courseList', `${this.course.stage}`, this.course);
     this.btnTXT = 'اضافة';
-    let data = Object.assign({}, form.value);
-    delete data.id;
-    if (form.value.id == null)
-      this.firestore.doc(`Courses/${data.stage}`).set(data);
-    else {
-      this.firestore.doc('Courses/' + form.value.stage).update(data);
-    }
-    this.resetForm(form);
-    this.toastr.success('تمت العملية بنجاح', 'العملية');
+    form.resetForm();
   }
 
-  onEdit(stu: Course) {
-    this.service.formData = Object.assign({}, stu);
-    this.stage = stu.stage;
+  onEdit(cou: Course) {
+    this.course = cou;
     this.btnTXT = "تحديث";
   }
 
-  onDelete(stage: string): void {
+  onDelete(cou: Course) {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        this.firestore.doc('Courses/' + stage).delete();
+        this.firestoreService.deleteRealTimeData('courseList', cou.stage);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
     });

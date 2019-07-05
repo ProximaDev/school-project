@@ -52,6 +52,10 @@ export class FirebaseService {
     return this.db.list(`${colName}/${path}`).valueChanges();
   }
 
+  getRealTimeDataCol(colName: string) {
+    return this.db.list(`${colName}`).valueChanges();
+  }
+
   addEvent(title, content) {
     let today = new Date();
     let date = formatDate(today, 'medium', 'en-US');

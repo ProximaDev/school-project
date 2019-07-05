@@ -9,12 +9,11 @@
                     </div>
                     <div class="card-body">
                         <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
-                            <input type="hidden" name="id" #id="ngModel" [(ngModel)]="service.formData.id">
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field>
                                         <mat-label>اختر المرحلة</mat-label>
-                                        <mat-select name="stage" [(ngModel)]="stage">
+                                        <mat-select name="stage" [(ngModel)]="course.stage">
                                             <mat-option value="الاولى">الاولى</mat-option>
                                             <mat-option value="الثانية">الثانية</mat-option>
                                             <mat-option value="الثالثة">الثالثة</mat-option>
@@ -29,19 +28,19 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="المادة الاولى" name="course1"
-                                            [(ngModel)]="service.formData.course1" required>
+                                            [(ngModel)]="course.course1" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="المادة الثانية" name="course2"
-                                            [(ngModel)]="service.formData.course2" required>
+                                            [(ngModel)]="course.course2" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="المادة الثالثة" name="course3"
-                                            [(ngModel)]="service.formData.course3" required>
+                                            [(ngModel)]="course.course3" required>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -49,19 +48,19 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="المادة الرابعة" name="course4"
-                                            [(ngModel)]="service.formData.course4" required>
+                                            [(ngModel)]="course.course4" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="المادة الخامسة" name="course5"
-                                            [(ngModel)]="service.formData.course5">
+                                            [(ngModel)]="course.course5">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="المادة السادسة" name="course6"
-                                            [(ngModel)]="service.formData.course6">
+                                            [(ngModel)]="course.course6">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -69,19 +68,19 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="المادة السابعة" name="course7"
-                                            [(ngModel)]="service.formData.course7">
+                                            [(ngModel)]="course.course7">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="المادة الثامنة" name="course8"
-                                            [(ngModel)]="service.formData.course8">
+                                            [(ngModel)]="course.course8">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="المادة التاسعة" name="course9"
-                                            [(ngModel)]="service.formData.course9">
+                                            [(ngModel)]="course.course9">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -89,7 +88,7 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="المادة العاشرة" name="course10"
-                                            [(ngModel)]="service.formData.course10">
+                                            [(ngModel)]="course.course10">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -114,7 +113,7 @@
                                     <thead class="text-danger">
                                         <th>المرحلة</th>
                                         <th>المادة الاولى</th>
-                                        <th>المادة الثانية </th>
+                                        <th>المادة الثانية</th>
                                         <th>المادة الثالثة</th>
                                         <th>المادة الرابعة</th>
                                         <th>المادة الخامسة</th>
@@ -126,7 +125,7 @@
                                         <th>الاجرائات</th>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let course of courseList">
+                                        <tr *ngFor="let course of CourseData">
                                             <td>{{course.stage}}</td>
                                             <td>{{course.course1}}</td>
                                             <td>{{course.course2}}</td>
