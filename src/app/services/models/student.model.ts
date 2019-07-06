@@ -9,7 +9,7 @@ export class Student {
     fullName: string;
     gender: string;
     stage: string;
-    selection: string;
+    division: string;
     birthdate: string;
     address: string;
     mobile: string;

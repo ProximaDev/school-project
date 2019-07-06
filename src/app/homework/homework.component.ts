@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Homework } from '../services/models/homework.model';
@@ -17,7 +17,7 @@ const STORAGE_KEY = 'local_user';
   templateUrl: './homework.component.html',
   styleUrls: ['./homework.component.scss']
 })
-export class HomeworkComponent implements OnInit {
+export class HomeworkComponent implements OnInit, AfterViewInit {
 
   CourseList: Observable<any[]>;
   CourseData: any;
@@ -67,6 +67,12 @@ export class HomeworkComponent implements OnInit {
     this.isEdit = false;
     this.btnTXT = 'اضافة';
     form.resetForm();
+  }
+
+  onEdit(homework: Homework) {
+    this.homework = homework;
+    this.isEdit = true;
+    this.btnTXT = "تحديث";
   }
 
   onDelete(homework: Homework): void {

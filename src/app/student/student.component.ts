@@ -37,7 +37,7 @@ export class StudentComponent implements OnInit, AfterViewInit {
     if (this.storage.get(STORAGE_KEY) == null) {
       this.router.navigate(['login']);
     }
-    this.studentList = this.firestoreService.getFirestoreData('Students');
+    this.studentList = this.firestoreService.getFirestoreData('studentList');
   }
 
   ngAfterViewInit() {
@@ -51,11 +51,11 @@ export class StudentComponent implements OnInit, AfterViewInit {
     var datePipe = new DatePipe('en-US');
     this.student.birthdate = datePipe.transform(new Date(this.student.birthdate), 'dd/MM/yyyy');
     if (this.isEdit) {
-      this.firestoreService.updateFirestoreData('Students', this.student.email, this.student);
+      this.firestoreService.updateFirestoreData('studentList', this.student.email, this.student);
     } else {
-      this.firestoreService.addFirestoreData('Students', this.student, true);
+      this.firestoreService.addFirestoreData('studentList', this.student, true);
     }
-    this.firestoreService.addRealTimeData('Students', `${this.student.stage}/${this.student.selection}/${this.student.fullName}`, this.student);
+    this.firestoreService.addRealTimeData('studentList', `${this.student.stage}/${this.student.division}/${this.student.fullName}`, this.student);
     this.isEdit = false;
     this.btnTXT = 'اضافة';
     form.resetForm();
@@ -67,12 +67,12 @@ export class StudentComponent implements OnInit, AfterViewInit {
     this.btnTXT = "تحديث";
   }
 
-  onDelete(stu: Student): void {
+  onDelete(stu: Student) {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        this.firestoreService.deleteFirestoreData('Students', stu.email);
-        this.firestoreService.deleteRealTimeData('Students', `${stu.stage}/${stu.selection}/${stu.fullName}`);
+        this.firestoreService.deleteFirestoreData('studentList', stu.email);
+        this.firestoreService.deleteRealTimeData('studentList', `${stu.stage}/${stu.division}/${stu.fullName}`);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
     });
