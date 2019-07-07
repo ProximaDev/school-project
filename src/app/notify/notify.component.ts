@@ -2,6 +2,8 @@ import { FirebaseService } from '../services/firebase.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
+import { Notify } from '../services/models/notify.model';
+import { formatDate } from '@angular/common';
 const STORAGE_KEY = 'local_user';
 
 @Component({
@@ -11,12 +13,10 @@ const STORAGE_KEY = 'local_user';
 })
 export class NotifyComponent implements OnInit {
 
-	event_title: any;
-  event_content: any;
-
   constructor(private router: Router,
     public FirebaseService: FirebaseService,
-    @Inject(SESSION_STORAGE) private mstorage: StorageService) {}
+    @Inject(SESSION_STORAGE) private mstorage: StorageService,
+    private notify: Notify) { }
 
   ngOnInit() {
     if (this.mstorage
@@ -24,9 +24,11 @@ export class NotifyComponent implements OnInit {
       this.router.navigate(['login']);
     }
   }
-  
+
   saveFormData(form) {
-    this.FirebaseService.addEvent(this.event_title, this.event_content);
+    let today = new Date();
+    this.notify.date = formatDate(today, 'medium', 'en-US');
+    this.FirebaseService.addFirestoreData('notifyList', this.notify, false);
     this.router.navigate(['all-notify']);
   }
 }

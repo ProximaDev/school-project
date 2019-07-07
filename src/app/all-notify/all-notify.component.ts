@@ -39,7 +39,7 @@ export class AllNotifyComponent implements OnInit, AfterViewInit {
     if (this.storage.get(STORAGE_KEY) == null) {
       this.router.navigate(['login']);
     } else {
-      this.notifyList = this.firestoreService.getEvents();
+      this.notifyList = this.firestoreService.getFirestoreData('notifyList');
     }
   }
 
@@ -59,7 +59,7 @@ export class AllNotifyComponent implements OnInit, AfterViewInit {
   }
 
   deleteEvent(item) {
-    this.firestoreService.deleteEvent(item);
+    this.firestoreService.deleteFirestoreData('notifyList', item.id);
     this.toastr.success('تم الحذف', 'تم حذف الحدث بنجاح');
   }
 }
