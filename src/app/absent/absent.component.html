@@ -6,109 +6,108 @@
         <p class="card-category" style="text-align: center">قائمة الغيابات الخاصة بلمراحل والاقسام</p>
       </div>
       <div class="card-body">
-        <div class="card-body">
-          <div>
-            <div class="row" style="direction: rtl">
-              <div class="col-md-4">
-                <h4 style="text-align: right">المرحلة</h4>
-                <mat-form-field>
-                  <mat-label>اختر المرحلة</mat-label>
-                  <mat-select (selectionChange)="stageSelect($event.value)" name="stage" [(ngModel)]="stage">
-                    <mat-option value="الاولى">الاولى</mat-option>
-                    <mat-option value="الثانية">الثانية</mat-option>
-                    <mat-option value="الثالثة">الثالثة</mat-option>
-                    <mat-option value="الرابعة">الرابعة</mat-option>
-                    <mat-option value="الخامسة">الخامسة</mat-option>
-                    <mat-option value="السادسة">السادسة</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-md-4">
-                <h4 style="text-align: right">الشعبة</h4>
-                <mat-form-field>
-                  <mat-label>اختر الشعبة</mat-label>
-                  <mat-select name="selection" [(ngModel)]="selection">
-                    <mat-option *ngFor="let data of classArray" [value]="data">{{data}}</mat-option>
-
-
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-md-4">
-                <h4 style="text-align: right">اسم الطالب</h4>
-                <mat-form-field>
-                  <mat-label>اختر الاسم</mat-label>
-                  <mat-select name="name" [(ngModel)]="name">
-                    <mat-option *ngFor="let stu of stuData" [value]="stu.fullName">
-                      {{stu.fullName}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
+        <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
+          <div class="row" style="direction: rtl">
+            <div class="col-md-4">
+              <h4 style="text-align: right">المرحلة</h4>
+              <mat-form-field>
+                <mat-label>اختر المرحلة</mat-label>
+                <mat-select (selectionChange)="stageSelect($event.value)" name="stage" [(ngModel)]="absent.stage">
+                  <mat-option value="الاولى">الاولى</mat-option>
+                  <mat-option value="الثانية">الثانية</mat-option>
+                  <mat-option value="الثالثة">الثالثة</mat-option>
+                  <mat-option value="الرابعة">الرابعة</mat-option>
+                  <mat-option value="الخامسة">الخامسة</mat-option>
+                  <mat-option value="السادسة">السادسة</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-            <div class="row" style="direction: rtl">
-              <div class="col-md-6">
-                <mat-form-field>
-                  <mat-label>اختر المادة</mat-label>
-                  <mat-select name="subject" [(ngModel)]="subject">
-                    <mat-option *ngFor="let data of subArray" [value]="data">{{data}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field>
-                  <input matInput [matDatepicker]="picker" placeholder="تاريخ الغياب" name="adate" [(ngModel)]="adate"
-                    required>
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="row" style="margin-right: 25px">
-                <button mat-raised-button class="btn btn-danger pull-right" (click)="addAbsent()"><i
-                    class="material-icons">check</i>
-                  اضافة</button>
-                <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
-                    class="material-icons">cancel</i>
-                  الغاء</button>
-                <div class="clearfix"></div>
-              </div>
+            <div class="col-md-4">
+              <h4 style="text-align: right">الشعبة</h4>
+              <mat-form-field>
+                <mat-label>اختر الشعبة</mat-label>
+                <mat-select (selectionChange)="divSelect($event.value)" name="division" [(ngModel)]="absent.division">
+                  <mat-option value="أ">أ</mat-option>
+                  <mat-option value="ب">ب</mat-option>
+                  <mat-option value="ج">ج</mat-option>
+                  <mat-option value="د">د</mat-option>
+                  <mat-option value="ه">ه</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
-            <div class="row">
-              <div class="col-md-12" style="direction: rtl">
-                <div class="card">
-                  <div class="card-header card-header-danger" style="text-align: center">
-                    <h4 class="card-title ">قائمة الغيابات</h4>
-                    <p class="card-category">معلومات الغياب</p>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead class="text-danger">
-                          <th>الاسم</th>
-                          <th>المرحلة</th>
-                          <th>الشعبة</th>
-                          <th>المادة الغائب بها</th>
-                          <th>تاريخ الغياب</th>
-                          <th>الاجرائات</th>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let absent of absentData">
-                            <td>{{absent.name}}</td>
-                            <td>{{absent.stage}}</td>
-                            <td>{{absent.selection}}</td>
-                            <td>{{absent.subject}}</td>
-                            <td>{{absent.adate.toDate() | date: 'mediumDate'}}</td>
-                            <td><a style="color:white; background: #ff5e00"
-                                class="btn btn-white btn-round btn-just-icon" (click)="onDelete(absent.id)">
-                                <i class="material-icons">delete</i>
-                              </a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
+            <div class="col-md-4">
+              <h4 style="text-align: right">اسم الطالب</h4>
+              <mat-form-field>
+                <mat-label>اختر الاسم</mat-label>
+                <mat-select name="name" [(ngModel)]="absent.name">
+                  <mat-option *ngFor="let stu of StudentData" [value]="stu.fullName">
+                    {{stu.fullName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row" style="direction: rtl">
+            <div class="col-md-6">
+              <mat-form-field>
+                <mat-label>اختر المادة</mat-label>
+                <mat-select name="course" [(ngModel)]="absent.course">
+                  <mat-option *ngFor="let data of CourseData" [value]="data">{{data}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="تاريخ الغياب" name="date"
+                  [(ngModel)]="absent.date" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="row" style="margin-right: 25px" style="direction:rtl">
+              <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
+                  class="material-icons">check</i> اضافة</button>
+              <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                  class="material-icons">cancel</i>
+                الغاء</button>
+              <div class="clearfix"></div>
+            </div>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="direction: rtl">
+          <div class="card">
+            <div class="card-header card-header-danger" style="text-align: center">
+              <h4 class="card-title ">قائمة الغيابات</h4>
+              <p class="card-category">معلومات الغياب</p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="text-danger">
+                    <th>الاسم</th>
+                    <th>المرحلة</th>
+                    <th>الشعبة</th>
+                    <th>المادة الغائب بها</th>
+                    <th>تاريخ الغياب</th>
+                    <th>الاجرائات</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let absent of absentData">
+                      <td>{{absent.name}}</td>
+                      <td>{{absent.stage}}</td>
+                      <td>{{absent.division}}</td>
+                      <td>{{absent.course}}</td>
+                      <td>{{absent.date}}</td>
+                      <td><a style="color:white; background: #ff5e00" class="btn btn-white btn-round btn-just-icon"
+                          (click)="onDelete(absent)">
+                          <i class="material-icons">delete</i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -116,4 +115,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

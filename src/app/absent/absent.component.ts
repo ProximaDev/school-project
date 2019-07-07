@@ -7,7 +7,9 @@ import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
 import { MatDialog } from "@angular/material";
 import { ToastrService } from 'ngx-toastr';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Absent } from '../services/models/absent.model';
+import { NgForm } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 const STORAGE_KEY = 'local_user';
 
 @Component({
@@ -17,48 +19,14 @@ const STORAGE_KEY = 'local_user';
 })
 export class AbsentComponent implements OnInit, AfterViewInit {
 
-  name: any;
-  selection: any;
-  stage: any;
-  subject: any;
-  adate: any;
-
-  course1: any;
-  course2: any;
-  course3: any;
-  course4: any;
-  course5: any;
-  course6: any;
-  course7: any;
-  course8: any;
-  course9: any;
-  course10: any;
-
-  class1: any;
-  class2: any;
-  class3: any;
-  class4: any;
-  class5: any;
-  class6: any;
-
-
-
-  SubList: any;
-  SubData: any
-
-  classList: any;
-  classData: any;
-
-  subArray = [];
-  classArray = [];
-
-  stuList: Observable<any[]>;
-  stuData: any;
-
-
-
-  absent: Observable<any[]>;
-  absentData: any;
+  CourseList: Observable<any[]>;
+  CourseData: any;
+  AbsentList: Observable<any[]>;
+  AbsentData: any;
+  StudentList: Observable<any[]>;
+  StudentData: any;
+  isEdit: boolean = false;
+  btnTXT = 'اضافة'
 
   constructor(private firestoreService: FirebaseService,
     private router: Router,
@@ -66,75 +34,57 @@ export class AbsentComponent implements OnInit, AfterViewInit {
     @Inject(SESSION_STORAGE) private storage: StorageService,
     private toastr: ToastrService,
     private dialog: MatDialog,
-    private firestore: AngularFirestore) { }
+    private absent: Absent) { }
 
   ngOnInit() {
     this.spinnerService.show();
     if (this.storage.get(STORAGE_KEY) == null) {
       this.router.navigate(['login']);
-    } else {
-      this.stuList = this.firestoreService.getStudents();
-      this.absent = this.firestoreService.getAbsent();
     }
+    this.AbsentList = this.firestoreService.getFirestoreData('absentList');
   }
 
   ngAfterViewInit() {
-    this.stuList.subscribe(data => {
-      this.stuData = data;
-      this.spinnerService.hide();
-    });
-    this.absent.subscribe(data => {
-      this.absentData = data;
+    this.spinnerService.hide();
+    this.AbsentList.subscribe(data => {
+      this.AbsentData = data;
     });
   }
 
   stageSelect() {
-    this.classArray = [];
-    this.subArray = [];
-    this.SubList = this.firestoreService.getCourse(this.stage);
-    this.classList = this.firestoreService.getClass(this.stage);
-
-    this.SubList.subscribe(data => {
-      if (data.length != 0 && data != undefined && data != null) {
-        this.SubData = data;
-        this.subArray.push(this.SubData.course1);
-        this.subArray.push(this.SubData.course2);
-        this.subArray.push(this.SubData.course3);
-        this.subArray.push(this.SubData.course4);
-        this.subArray.push(this.SubData.course5);
-        this.subArray.push(this.SubData.course6);
-        this.subArray.push(this.SubData.course7);
-        this.subArray.push(this.SubData.course8);
-        this.subArray.push(this.SubData.course9);
-        this.subArray.push(this.SubData.course10);
-      }
-
-    });
-
-    this.classList.subscribe(data => {
-      if (data.length != 0 && data != undefined && data != null) {
-        this.classData = data;
-        this.classArray.push(this.classData.class1);
-        this.classArray.push(this.classData.class2);
-        this.classArray.push(this.classData.class3);
-        this.classArray.push(this.classData.class4);
-        this.classArray.push(this.classData.class5);
-        this.classArray.push(this.classData.class6);
-      }
+    this.CourseList = this.firestoreService.getRealTimeData('courseList', this.absent.stage);
+    this.CourseList.subscribe(data => {
+      this.CourseData = data;
     });
   }
 
-  onDelete(id: string): void {
+  divSelect() {
+    this.StudentList = this.firestoreService.getRealTimeData('studentList', `${this.absent.stage}/${this.absent.division}`);
+    this.StudentList.subscribe(data => {
+      this.StudentData = data;
+    });
+  }
+
+  saveFormData(form: NgForm) {
+    var datePipe = new DatePipe('en-US');
+    this.absent.date = datePipe.transform(new Date(this.absent.date), 'dd/MM/yyyy');
+    if (this.isEdit) {
+      this.firestoreService.updateFirestoreData('absentList', this.absent.id, this.absent);
+    } else {
+      this.firestoreService.addFirestoreData('absentList', this.absent, false);
+    }
+    this.isEdit = false;
+    this.btnTXT = 'اضافة';
+    form.resetForm();
+  }
+
+  onDelete(absent: Absent) {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        this.firestore.doc('Absents/' + id).delete();
+        this.firestoreService.deleteFirestoreData('absentList', absent.id);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
     });
-  }
-
-  addAbsent() {
-    this.firestoreService.addAbsent(this.name, this.selection, this.stage, this.subject, this.adate);
   }
 }
