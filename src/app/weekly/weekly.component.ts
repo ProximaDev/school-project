@@ -7,6 +7,7 @@ import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
 import { MatDialog } from "@angular/material";
 import { ToastrService } from 'ngx-toastr';
+import { Weekly } from '../services/models/weekly.model';
 const STORAGE_KEY = 'local_user';
 import * as $ from 'jquery';
 import * as _ from 'lodash';
@@ -18,27 +19,10 @@ import * as _ from 'lodash';
 })
 export class WeeklyComponent implements OnInit, AfterViewInit {
 
-  stage: any;
-  selection: any;
   rule: any;
-
   weeklyList: Observable<any[]>;
   weeklyData: any;
   filterData: any;
-
-  class1:any;
-  class2:any;
-  class3:any;
-  class4:any;
-  class5:any;
-  class6:any;
-
-
-  classList: any;
-  classData: any;
-
-  classArray = [];
-
   /// Active filter rules
   filters = {}
 
@@ -47,14 +31,15 @@ export class WeeklyComponent implements OnInit, AfterViewInit {
     private spinnerService: NgxSpinnerService,
     @Inject(SESSION_STORAGE) private storage: StorageService,
     private dialog: MatDialog,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private weekly: Weekly) { }
 
   ngOnInit() {
     this.spinnerService.show();
     if (this.storage.get(STORAGE_KEY) == null) {
       this.router.navigate(['login']);
     } else {
-      this.weeklyList = this.firestoreService.getWeekly();
+      this.weeklyList = this.firestoreService.getFirestoreData('weeklyList');
     }
   }
 
@@ -74,44 +59,28 @@ export class WeeklyComponent implements OnInit, AfterViewInit {
     });
   }
 
-  stageSelect() {
-    this.classArray= [];  
-    this.classList = this.firestoreService.getClass(this.stage);
- 
-    this.classList.subscribe(data => {
-      if (data.length != 0 && data != undefined && data != null) {
-        this.classData = data;
-        this.classArray.push(this.classData.class1);
-        this.classArray.push(this.classData.class2);
-        this.classArray.push(this.classData.class3);
-        this.classArray.push(this.classData.class4);
-        this.classArray.push(this.classData.class5);
-        this.classArray.push(this.classData.class6);
-      }
-    });
-  }
-
   private applyFilters() {
     this.filterData = _.filter(this.weeklyData, _.conforms(this.filters))
   }
 
   /// filter property by equality to rule
   filterExact(property: string) {
-    this.rule = this.stage + "_" + this.selection;
+    this.rule = this.weekly.stage + "_" + this.weekly.division;
     this.filters[property] = val => val == this.rule
     this.applyFilters()
   }
 
-  openDialog(id, imgid): void {
+  openDialog(item, img): void {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true')
-        this.deleteWeekly(id, imgid);
+        this.deleteWeekly(item, img);
     });
   }
 
-  deleteWeekly(id, imgid) {
-    this.firestoreService.deleteWeekly(id, imgid);
+  deleteWeekly(id, fileName) {
+    this.firestoreService.deleteFirestoreData('weeklyList', id);
+    this.firestoreService.deleteStorageFile('weekly', fileName);
     this.toastr.success('تم الحذف', 'تم حذف الجدول بنجاح');
   }
 }
