@@ -22,6 +22,8 @@ export const ROUTES: RouteInfo[] = [
   { path: '/courses', title: 'المواد', icon: 'book', class: '' },
   { path: '/absent', title: 'الغيابات', icon: 'schedule', class: '' },
   { path: '/degree', title: 'الدرجات', icon: 'assignment', class: '' },
+  { path: '/payment', title: 'الاقساط', icon: 'euro_symbol', class: '' },
+
 ];
 
 @Component({
