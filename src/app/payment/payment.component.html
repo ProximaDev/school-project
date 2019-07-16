@@ -1,0 +1,132 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h4 class="card-title" style="text-align: center">قائمة الاقساط</h4>
+        <p class="card-category" style="text-align: center">قائمة الاقساط الخاصة بلطلاب</p>
+        <button mat-raised-button class="btn btn-danger btn-round pull-right" routerLink="#">
+          <i class="material-icons">control_point</i> تسديد الاقساط</button>
+      </div>
+      <div class="card-body">
+        <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
+          <div class="row" style="direction: rtl">
+            <div class="col-md-4">
+              <h4 style="text-align: right">المرحلة</h4>
+              <mat-form-field>
+                <mat-label>اختر المرحلة</mat-label>
+                <mat-select (selectionChange)="stageSelect($event.value)" name="stage" [(ngModel)]="payment.stage">
+                  <mat-option value="الاولى">الاولى</mat-option>
+                  <mat-option value="الثانية">الثانية</mat-option>
+                  <mat-option value="الثالثة">الثالثة</mat-option>
+                  <mat-option value="الرابعة">الرابعة</mat-option>
+                  <mat-option value="الخامسة">الخامسة</mat-option>
+                  <mat-option value="السادسة">السادسة</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <h4 style="text-align: right">الشعبة</h4>
+              <mat-form-field>
+                <mat-label>اختر الشعبة</mat-label>
+                <mat-select (selectionChange)="divSelect($event.value)" name="division" [(ngModel)]="payment.division">
+                  <mat-option value="أ">أ</mat-option>
+                  <mat-option value="ب">ب</mat-option>
+                  <mat-option value="ج">ج</mat-option>
+                  <mat-option value="د">د</mat-option>
+                  <mat-option value="ه">ه</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <h4 style="text-align: right">اسم الطالب</h4>
+              <mat-form-field>
+                <mat-label>اختر الاسم</mat-label>
+                <mat-select name="name" [(ngModel)]="payment.name">
+                  <mat-option *ngFor="let stu of StudentData" [value]="stu.fullName">
+                    {{stu.fullName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row" style="direction: rtl">
+            <div class="col-md-12">    
+                <mat-form-field>
+                  <input matInput placeholder="مبلغ السنوي" name="total_amount"
+                      [(ngModel)]="payment.total_amount">
+              </mat-form-field>
+            </div>
+            <div class="row" style="margin-right: 25px" style="direction:rtl">
+              <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
+                  class="material-icons">check</i> اضافة</button>
+              <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                  class="material-icons">cancel</i>
+                الغاء</button>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="direction: rtl">
+          <div class="card">
+            <div class="card-header card-header-danger" style="text-align: center">
+              <h4 class="card-title ">قائمة الاقساط</h4>
+              <p class="card-category">معلومات الاقساط</p>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="text-danger">
+                    <th>الاسم</th>
+                    <th></th>
+                    <th></th>
+
+                    <th>المرحلة</th>
+                    <th></th>
+                    <th></th>
+
+                    <th>الشعبة</th>
+                    <th></th>
+                    <th></th>
+
+                    <th>القسط الكلي</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>الاجرائات</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let payment of PaymentData">
+                      <td>{{payment.name}}</td>
+                      <td></td>
+                      <td></td>
+
+                      <td>{{payment.stage}}</td>
+                      <td></td>
+                      <td></td>
+
+                      <td>{{payment.division}}</td>
+                      <td></td>
+                      <td></td>
+
+                      <td>{{payment.total_amount}}</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td><a style="color:white; background: #ff5e00" class="btn btn-white btn-round btn-just-icon"
+                          (click)="onDelete(payment)">
+                          <i class="material-icons">delete</i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

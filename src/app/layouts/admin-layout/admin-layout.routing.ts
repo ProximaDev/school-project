@@ -16,6 +16,8 @@ import { DegreeComponent } from '../../degree/degree.component';
 import { ArticlesComponent } from '../../articles/articles.component';
 import { AddArticleComponent } from '../../add-article/add-article.component';
 import { EditArticleComponent } from '../../edit-article/edit-article.component';
+import {PaymentComponent} from '../../payment/payment.component';
+
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -34,5 +36,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
     { path: 'absent', component: AbsentComponent, canActivate: [AuthGuard] },
     { path: 'degree', component: DegreeComponent, canActivate: [AuthGuard] },
+    { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/dashboard' }
 ];
