@@ -12,4 +12,5 @@ export class Homework {
     subject: string;
     description: string;
     date: string;
+    tag: string;
 }

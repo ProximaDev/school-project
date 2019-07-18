@@ -10,4 +10,5 @@ export class Weekly {
     division: string;
     image: string;
     imgname: string;
+    tag: string;
 }

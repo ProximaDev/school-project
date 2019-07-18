@@ -12,4 +12,5 @@ export class Degrees {
     course: any;
     degree: any;
     type: any;
+    tag: string;
 }

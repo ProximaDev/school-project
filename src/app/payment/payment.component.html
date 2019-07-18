@@ -50,10 +50,9 @@
             </div>
           </div>
           <div class="row" style="direction: rtl">
-            <div class="col-md-12">    
-                <mat-form-field>
-                  <input matInput placeholder="مبلغ السنوي" name="total_amount"
-                      [(ngModel)]="payment.total_amount">
+            <div class="col-md-12">
+              <mat-form-field>
+                <input matInput placeholder="مبلغ السنوي" name="total_amount" [(ngModel)]="payment.total_amount">
               </mat-form-field>
             </div>
             <div class="row" style="margin-right: 25px" style="direction:rtl">
@@ -73,6 +72,40 @@
             <div class="card-header card-header-danger" style="text-align: center">
               <h4 class="card-title ">قائمة الاقساط</h4>
               <p class="card-category">معلومات الاقساط</p>
+              <div class="row" style="direction: rtl">
+                <div class="col-md-4">
+                  <h4 style="text-align: right">المرحلة</h4>
+                  <mat-form-field>
+                    <mat-label>اختر المرحلة</mat-label>
+                    <mat-select name="stage" [(ngModel)]="stage">
+                      <mat-option value="الاولى">الاولى</mat-option>
+                      <mat-option value="الثانية">الثانية</mat-option>
+                      <mat-option value="الثالثة">الثالثة</mat-option>
+                      <mat-option value="الرابعة">الرابعة</mat-option>
+                      <mat-option value="الخامسة">الخامسة</mat-option>
+                      <mat-option value="السادسة">السادسة</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <h4 style="text-align: right">الشعبة</h4>
+                  <mat-form-field>
+                    <mat-label>اختر الشعبة</mat-label>
+                    <mat-select name="division" [(ngModel)]="division">
+                      <mat-option value="أ">أ</mat-option>
+                      <mat-option value="ب">ب</mat-option>
+                      <mat-option value="ج">ج</mat-option>
+                      <mat-option value="د">د</mat-option>
+                      <mat-option value="ه">ه</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4" style="margin-top: 25px">
+                  <button mat-raised-button (click)="filterExact(stage, division)" class="btn btn-danger pull-right"><i
+                      class="material-icons">check</i>
+                    بحث</button>
+                </div>
+              </div>
             </div>
             <div class="card-body">
               <div class="table-responsive">

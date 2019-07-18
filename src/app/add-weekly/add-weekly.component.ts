@@ -40,6 +40,7 @@ export class AddWeeklyComponent implements OnInit {
 
   saveFormData(form) {
     if (this.weekly.image) {
+      this.weekly.tag = this.weekly.stage + '_' + this.weekly.division;
       this.FirebaseService.addFirestoreData('weeklyList', this.weekly, false);
       this.router.navigate(['weekly']);
     }

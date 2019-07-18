@@ -65,6 +65,7 @@ export class DegreeComponent implements OnInit, AfterViewInit {
   }
 
   saveFormData(form: NgForm) {
+    this.degree.tag = this.degree.stage + '_' + this.degree.division;
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('degreeList', this.degree.id, this.degree);
     } else {
@@ -82,6 +83,14 @@ export class DegreeComponent implements OnInit, AfterViewInit {
         this.firestoreService.deleteFirestoreData('degreeList', degree.id);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
+    });
+  }
+
+  filterExact(stage: string, division: string) {
+    const value = stage + '_' + division;
+    this.DegreeList = this.firestoreService.getFirestoreData('degreeList', 'tag', value);
+    this.DegreeList.subscribe(data => {
+      this.DegreeData = data;
     });
   }
 }

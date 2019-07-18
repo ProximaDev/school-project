@@ -15,4 +15,5 @@ export class Student {
     mobile: string;
     email: string;
     password: string;
+    tag: string;
 }
