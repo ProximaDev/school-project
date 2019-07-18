@@ -85,4 +85,12 @@ export class DegreeComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  filterExact(stage: string, division: string) {
+    const value = stage + '_' + division;
+    this.DegreeList = this.firestoreService.getFirestoreData('degreeList', 'tag', value);
+    this.DegreeList.subscribe(data => {
+      this.DegreeData = data;
+    });
+  }
 }

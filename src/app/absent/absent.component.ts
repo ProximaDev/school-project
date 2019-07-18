@@ -88,4 +88,12 @@ export class AbsentComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  filterExact(stage: string, division: string) {
+    const value = stage + '_' + division;
+    this.CourseList = this.firestoreService.getFirestoreData('absentList', 'tag', value);
+    this.CourseList.subscribe(data => {
+      this.CourseData = data;
+    });
+  }
 }

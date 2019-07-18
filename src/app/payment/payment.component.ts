@@ -84,6 +84,11 @@ export class PaymentComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
-
+  filterExact(stage: string, division: string) {
+    const value = stage + '_' + division;
+    this.PaymentList = this.firestoreService.getFirestoreData('paymentList', 'tag', value);
+    this.PaymentList.subscribe(data => {
+      this.PaymentData = data;
+    });
+  }
 }

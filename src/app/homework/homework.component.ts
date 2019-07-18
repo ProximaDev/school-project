@@ -85,4 +85,12 @@ export class HomeworkComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  filterExact(stage: string, division: string) {
+    const value = stage + '_' + division;
+    this.homeworkList = this.firestoreService.getFirestoreData('homeworkList', 'tag', value);
+    this.homeworkList.subscribe(data => {
+      this.homeworkData = data;
+    });
+  }
 }

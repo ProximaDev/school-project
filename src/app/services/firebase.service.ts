@@ -11,14 +11,14 @@ export class FirebaseService {
 
   constructor(private db: AngularFireDatabase, private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
-  getFirestoreData(colName: string, property?: string, query?: string) {
-    if (query == null || property == null) {
+  getFirestoreData(colName: string, property?: string, value?: string) {
+    if (value == null || property == null) {
       return this.firestore.collection(colName).valueChanges();
     }
     else {
       return this.firestore.collection(colName, ref => {
         let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-        query = query.where(property, '==', query);
+        query = query.where(property, '==', value);
         return query;
       }).valueChanges();
     }

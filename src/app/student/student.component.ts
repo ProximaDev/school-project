@@ -86,5 +86,11 @@ export class StudentComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
+  filterExact(stage: string, division: string) {
+    const value = stage + '_' + division;
+    this.studentList = this.firestoreService.getFirestoreData('studentList', 'tag', value);
+    this.studentList.subscribe(data => {
+      this.studentData = data;
+    });
+  }
 }
