@@ -52,6 +52,7 @@ export class StudentComponent implements OnInit, AfterViewInit {
   saveFormData(form: NgForm) {
     var datePipe = new DatePipe('en-US');
     this.student.birthdate = datePipe.transform(new Date(this.student.birthdate), 'dd/MM/yyyy');
+    this.student.tag = this.student.stage + '_' + this.student.division;
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('studentList', this.student.email, this.student);
       if (this.student.email != this.oldEmail || this.student.password != this.oldPassword) {

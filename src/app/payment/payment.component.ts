@@ -16,8 +16,8 @@ const STORAGE_KEY = 'local_user';
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
-export class PaymentComponent  implements OnInit, AfterViewInit {
-  
+export class PaymentComponent implements OnInit, AfterViewInit {
+
   CourseList: Observable<any[]>;
   CourseData: any;
   PaymentList: Observable<any[]>;
@@ -64,7 +64,7 @@ export class PaymentComponent  implements OnInit, AfterViewInit {
   }
 
   saveFormData(form: NgForm) {
-    
+    this.payment.tag = this.payment.stage + '_' + this.payment.division;
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('paymentList', this.payment.id, this.payment);
     } else {

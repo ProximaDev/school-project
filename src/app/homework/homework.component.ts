@@ -59,6 +59,7 @@ export class HomeworkComponent implements OnInit, AfterViewInit {
   saveFormData(form: NgForm) {
     var datePipe = new DatePipe('en-US');
     this.homework.date = datePipe.transform(new Date(this.homework.date), 'dd/MM/yyyy');
+    this.homework.tag = this.homework.stage + '_' + this.homework.division;
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('homeworkList', this.homework.id, this.homework);
     } else {

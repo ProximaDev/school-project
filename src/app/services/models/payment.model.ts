@@ -11,4 +11,5 @@ export class Payment {
     stage: string;
     total_amount: string;
     amount_paid: string;
+    tag: string;
 }

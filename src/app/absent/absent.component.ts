@@ -68,6 +68,7 @@ export class AbsentComponent implements OnInit, AfterViewInit {
   saveFormData(form: NgForm) {
     var datePipe = new DatePipe('en-US');
     this.absent.date = datePipe.transform(new Date(this.absent.date), 'dd/MM/yyyy');
+    this.absent.tag = this.absent.stage + '_' + this.absent.division;
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('absentList', this.absent.id, this.absent);
     } else {

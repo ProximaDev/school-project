@@ -65,6 +65,7 @@ export class DegreeComponent implements OnInit, AfterViewInit {
   }
 
   saveFormData(form: NgForm) {
+    this.degree.tag = this.degree.stage + '_' + this.degree.division;
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('degreeList', this.degree.id, this.degree);
     } else {
