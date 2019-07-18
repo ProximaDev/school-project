@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app'
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -57,5 +57,15 @@ export class FirebaseService {
 
   async login(email: string, password: string) {
     return await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+  async setStuEmailPassword(email: string, password: string) {
+    await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  async updateStuEmailPassword(email: string, password: string, newEmail: string, newPassword: string) {
+    await this.afAuth.auth.signInWithEmailAndPassword(email, password).then((userCredential) => {
+      userCredential.user.updateEmail(newEmail)
+      userCredential.user.updatePassword(newPassword)
+      });
   }
 }
