@@ -11,8 +11,17 @@ export class FirebaseService {
 
   constructor(private db: AngularFireDatabase, private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
-  getFirestoreData(colName: string) {
-    return this.firestore.collection(colName).valueChanges();
+  getFirestoreData(colName: string, property?: string, query?: string) {
+    if (query == null || property == null) {
+      return this.firestore.collection(colName).valueChanges();
+    }
+    else {
+      return this.firestore.collection(colName, ref => {
+        let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+        query = query.where(property, '==', query);
+        return query;
+      }).valueChanges();
+    }
   }
 
   addFirestoreData(colName: string, dataObject: any, emailAsId: boolean) {
@@ -66,6 +75,6 @@ export class FirebaseService {
     await this.afAuth.auth.signInWithEmailAndPassword(email, password).then((userCredential) => {
       userCredential.user.updateEmail(newEmail)
       userCredential.user.updatePassword(newPassword)
-      });
+    });
   }
 }
