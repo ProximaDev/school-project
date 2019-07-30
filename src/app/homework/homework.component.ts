@@ -59,6 +59,7 @@ export class HomeworkComponent implements OnInit, AfterViewInit {
   saveFormData(form: NgForm) {
     var datePipe = new DatePipe('en-US');
     this.homework.date = datePipe.transform(new Date(this.homework.date), 'dd/MM/yyyy');
+    this.homework.tag = this.homework.stage + '_' + this.homework.division;
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('homeworkList', this.homework.id, this.homework);
     } else {
@@ -82,6 +83,14 @@ export class HomeworkComponent implements OnInit, AfterViewInit {
         this.firestoreService.deleteFirestoreData('homeworkList', homework.id);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
+    });
+  }
+
+  filterExact(stage: string, division: string) {
+    const value = stage + '_' + division;
+    this.homeworkList = this.firestoreService.getFirestoreData('homeworkList', 'tag', value);
+    this.homeworkList.subscribe(data => {
+      this.homeworkData = data;
     });
   }
 }

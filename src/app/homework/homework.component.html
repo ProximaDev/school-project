@@ -83,6 +83,57 @@
                         <div class="card-header card-header-danger" style="text-align: center">
                             <h4 class="card-title ">قائمة الواجبات</h4>
                             <p class="card-category">معلومات الواجبات</p>
+                            <div class="row" style="direction: rtl">
+                                <div class="col-md-4">
+                                    <h4 style="text-align: right">المرحلة</h4>
+                                    <mat-form-field>
+                                        <mat-label>اختر المرحلة</mat-label>
+                                        <mat-select name="stage" [(ngModel)]="stage">
+                                            <mat-option value="الاولى">الاولى</mat-option>
+                                            <mat-option value="الثانية">الثانية</mat-option>
+                                            <mat-option value="الثالثة">الثالثة</mat-option>
+                                            <mat-option value="الرابعة">الرابعة</mat-option>
+                                            <mat-option value="الخامسة">الخامسة</mat-option>
+                                            <mat-option value="السادسة">السادسة</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4 style="text-align: right">الشعبة</h4>
+                                    <mat-form-field>
+                                        <mat-label>اختر الشعبة</mat-label>
+                                        <mat-select name="division" [(ngModel)]="division">
+                                            <mat-option value="أ">أ</mat-option>
+                                            <mat-option value="ب">ب</mat-option>
+                                            <mat-option value="ج">ج</mat-option>
+                                            <mat-option value="د">د</mat-option>
+                                            <mat-option value="ه">ه</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4" style="margin-top: 25px">
+                                    <button mat-raised-button (click)="filterExact(stage, division)"
+                                        class="btn btn-danger pull-right"><i class="material-icons">check</i>
+                                        بحث</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4" *ngFor="let item of filterData">
+                                    <div class="card-deck">
+                                        <div class="card">
+                                            <img class="card-img-top img-adjusted" src="{{item.image}}">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{item.stage}} {{item.division}}</h5>
+                                                <button style="color:white; background: #ff5e00"
+                                                    class="btn btn-danger btn-round btn-sm"
+                                                    (click)="openDialog(item.id, item.imgname)"><i
+                                                        style="margin: 0 auto"
+                                                        class="material-icons">delete</i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

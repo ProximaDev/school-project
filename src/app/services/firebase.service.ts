@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app'
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -11,8 +11,17 @@ export class FirebaseService {
 
   constructor(private db: AngularFireDatabase, private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
-  getFirestoreData(colName: string) {
-    return this.firestore.collection(colName).valueChanges();
+  getFirestoreData(colName: string, property?: string, value?: string) {
+    if (value == null || property == null) {
+      return this.firestore.collection(colName).valueChanges();
+    }
+    else {
+      return this.firestore.collection(colName, ref => {
+        let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+        query = query.where(property, '==', value);
+        return query;
+      }).valueChanges();
+    }
   }
 
   addFirestoreData(colName: string, dataObject: any, emailAsId: boolean) {
@@ -57,5 +66,15 @@ export class FirebaseService {
 
   async login(email: string, password: string) {
     return await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+  async setStuEmailPassword(email: string, password: string) {
+    await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  async updateStuEmailPassword(email: string, password: string, newEmail: string, newPassword: string) {
+    await this.afAuth.auth.signInWithEmailAndPassword(email, password).then((userCredential) => {
+      userCredential.user.updateEmail(newEmail)
+      userCredential.user.updatePassword(newPassword)
+    });
   }
 }

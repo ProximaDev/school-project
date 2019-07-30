@@ -11,4 +11,5 @@ export class Absent {
     stage: string;
     course: string;
     date: string;
+    tag: string;
 }

@@ -23,6 +23,8 @@ export class StudentComponent implements OnInit, AfterViewInit {
   studentData: any;
   isEdit: boolean = false;
   btnTXT = 'اضافة'
+  oldEmail: string;
+  oldPassword: string;
 
   constructor(private firestoreService: FirebaseService,
     @Inject(SESSION_STORAGE) private storage: StorageService,
@@ -50,10 +52,15 @@ export class StudentComponent implements OnInit, AfterViewInit {
   saveFormData(form: NgForm) {
     var datePipe = new DatePipe('en-US');
     this.student.birthdate = datePipe.transform(new Date(this.student.birthdate), 'dd/MM/yyyy');
+    this.student.tag = this.student.stage + '_' + this.student.division;
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('studentList', this.student.email, this.student);
+      if (this.student.email != this.oldEmail || this.student.password != this.oldPassword) {
+        this.firestoreService.updateStuEmailPassword(this.oldEmail, this.oldPassword, this.student.email, this.student.password);
+      }
     } else {
       this.firestoreService.addFirestoreData('studentList', this.student, true);
+      this.firestoreService.setStuEmailPassword(this.student.email, this.student.password);
     }
     this.firestoreService.addRealTimeData('studentList', `${this.student.stage}/${this.student.division}/${this.student.fullName}`, this.student);
     this.isEdit = false;
@@ -65,6 +72,8 @@ export class StudentComponent implements OnInit, AfterViewInit {
     this.student = stu;
     this.isEdit = true;
     this.btnTXT = "تحديث";
+    this.oldEmail = stu.email;
+    this.oldPassword = stu.password;
   }
 
   onDelete(stu: Student) {
@@ -75,6 +84,13 @@ export class StudentComponent implements OnInit, AfterViewInit {
         this.firestoreService.deleteRealTimeData('studentList', `${stu.stage}/${stu.division}/${stu.fullName}`);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
+    });
+  }
+  filterExact(stage: string, division: string) {
+    const value = stage + '_' + division;
+    this.studentList = this.firestoreService.getFirestoreData('studentList', 'tag', value);
+    this.studentList.subscribe(data => {
+      this.studentData = data;
     });
   }
 }
