@@ -19,6 +19,7 @@ import { EditArticleComponent } from '../../edit-article/edit-article.component'
 import { PaymentComponent } from '../../payment/payment.component';
 import { PayComponent } from '../../pay/pay.component';
 import { TransComponent } from '../../trans/trans.component';
+import {PenaltyComponent} from '../../penalty/penalty.component'
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -40,5 +41,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
     { path: 'pay', component: PayComponent, canActivate: [AuthGuard] },
     { path: 'trans', component: TransComponent, canActivate: [AuthGuard] },
+    { path: 'penalty', component: PenaltyComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/dashboard' }
 ];
