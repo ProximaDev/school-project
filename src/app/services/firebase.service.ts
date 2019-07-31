@@ -24,11 +24,14 @@ export class FirebaseService {
     }
   }
 
-  addFirestoreData(colName: string, dataObject: any, emailAsId: boolean) {
+  addFirestoreData(colName: string, dataObject: any, Id: string) {
     let id = '';
-    if (emailAsId) {
+    if (Id=="email") {
       id = dataObject.email
-    } else {
+    }else if (Id=="name") {
+      id = dataObject.name
+    }
+    else {
       id = this.firestore.createId();
       dataObject.id = id;
     }
@@ -38,6 +41,10 @@ export class FirebaseService {
   updateFirestoreData(colName: string, id: string, dataObject: any) {
     this.firestore.doc(`${colName}/${id}`).set(dataObject);
   }
+  updatepay( id: string, amount: any){
+    this.firestore.doc(`paymentList/${id}`).update({amount_paid:amount});
+  }
+ 
 
   deleteFirestoreData(colName: string, id: string) {
     this.firestore.doc(`${colName}/${id}`).delete();

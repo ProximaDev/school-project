@@ -63,7 +63,7 @@ export class HomeworkComponent implements OnInit, AfterViewInit {
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('homeworkList', this.homework.id, this.homework);
     } else {
-      this.firestoreService.addFirestoreData('homeworkList', this.homework, false);
+      this.firestoreService.addFirestoreData('homeworkList', this.homework, "");
     }
     this.isEdit = false;
     this.btnTXT = 'اضافة';

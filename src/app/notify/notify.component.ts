@@ -28,7 +28,7 @@ export class NotifyComponent implements OnInit {
   saveFormData(form) {
     let today = new Date();
     this.notify.date = formatDate(today, 'medium', 'en-US');
-    this.FirebaseService.addFirestoreData('notifyList', this.notify, false);
+    this.FirebaseService.addFirestoreData('notifyList', this.notify, "");
     this.router.navigate(['all-notify']);
   }
 }

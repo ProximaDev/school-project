@@ -24,7 +24,7 @@ export class AddVideoComponent implements OnInit {
   }
 
   saveFormData(form) {
-    this.FirebaseService.addFirestoreData('videosList', this.video, false);
+    this.FirebaseService.addFirestoreData('videosList', this.video, "");
     this.router.navigate(['videos']);
   }
 }

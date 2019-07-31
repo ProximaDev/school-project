@@ -69,7 +69,7 @@ export class DegreeComponent implements OnInit, AfterViewInit {
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('degreeList', this.degree.id, this.degree);
     } else {
-      this.firestoreService.addFirestoreData('degreeList', this.degree, false);
+      this.firestoreService.addFirestoreData('degreeList', this.degree, "");
     }
     this.isEdit = false;
     this.btnTXT = 'اضافة';

@@ -59,7 +59,7 @@ export class StudentComponent implements OnInit, AfterViewInit {
         this.firestoreService.updateStuEmailPassword(this.oldEmail, this.oldPassword, this.student.email, this.student.password);
       }
     } else {
-      this.firestoreService.addFirestoreData('studentList', this.student, true);
+      this.firestoreService.addFirestoreData('studentList', this.student, "email");
       this.firestoreService.setStuEmailPassword(this.student.email, this.student.password);
     }
     this.firestoreService.addRealTimeData('studentList', `${this.student.stage}/${this.student.division}/${this.student.fullName}`, this.student);

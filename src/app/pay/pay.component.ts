@@ -7,89 +7,109 @@ import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
 import { MatDialog } from "@angular/material";
 import { ToastrService } from 'ngx-toastr';
-import { Payment } from '../services/models/payment.model';
+import { Pay } from '../services/models/pay.model';
 import { NgForm } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+
 const STORAGE_KEY = 'local_user';
 
-@Component({
-  selector: 'app-payment',
-  templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
-})
-export class PaymentComponent implements OnInit, AfterViewInit {
 
+@Component({
+  selector: 'app-pay',
+  templateUrl: './pay.component.html',
+  styleUrls: ['./pay.component.scss']
+})
+export class PayComponent implements OnInit {
+  
   CourseList: Observable<any[]>;
   CourseData: any;
-  PaymentList: Observable<any[]>;
-  PaymentData: any;
+  PayList: Observable<any[]>;
+  PayData: any;
+  Pay1List: Observable<any[]>;
+  Pay1Data: any;
   StudentList: Observable<any[]>;
   StudentData: any;
   isEdit: boolean = false;
   btnTXT = 'اضافة'
-
+  paid:number=0;
+  
   constructor(private firestoreService: FirebaseService,
     private router: Router,
     private spinnerService: NgxSpinnerService,
     @Inject(SESSION_STORAGE) private storage: StorageService,
     private toastr: ToastrService,
     private dialog: MatDialog,
-    private payment: Payment) { }
+    private pay: Pay) { }
   ngOnInit() {
     this.spinnerService.show();
     if (this.storage.get(STORAGE_KEY) == null) {
       this.router.navigate(['login']);
     }
-    this.PaymentList = this.firestoreService.getFirestoreData('paymentList');
+    this.PayList = this.firestoreService.getFirestoreData('payList');
   }
 
   ngAfterViewInit() {
     this.spinnerService.hide();
-    this.PaymentList.subscribe(data => {
-      this.PaymentData = data;
+    this.PayList.subscribe(data => {
+      this.PayData = data;
     });
   }
 
   stageSelect() {
-    this.CourseList = this.firestoreService.getRealTimeData('courseList', this.payment.stage);
+    this.CourseList = this.firestoreService.getRealTimeData('courseList', this.pay.stage);
     this.CourseList.subscribe(data => {
       this.CourseData = data;
     });
   }
 
   divSelect() {
-    this.StudentList = this.firestoreService.getRealTimeData('studentList', `${this.payment.stage}/${this.payment.division}`);
+    this.StudentList = this.firestoreService.getRealTimeData('studentList', `${this.pay.stage}/${this.pay.division}`);
     this.StudentList.subscribe(data => {
       this.StudentData = data;
     });
   }
 
-  saveFormData(form: NgForm) {
-    this.payment.amount_paid="0";
-    this.payment.tag = this.payment.stage + '_' + this.payment.division;
+
+  saveFormData(form: NgForm) {   
+    var datePipe = new DatePipe('en-US');
+    this.pay.date = datePipe.transform(new Date(this.pay.date), 'dd/MM/yyyy');
+    this.pay.tag = this.pay.stage + '_' + this.pay.division;
     if (this.isEdit) {
-      this.firestoreService.updateFirestoreData('paymentList', this.payment.id, this.payment);
+      this.firestoreService.updateFirestoreData('payList', this.pay.id, this.pay);
     } else {
-      this.firestoreService.addFirestoreData('paymentList', this.payment, "name");
+      this.firestoreService.addFirestoreData('payList', this.pay, "");
+      this.paid =parseInt(this.Pay1Data[0]['amount_paid']);
+      this.paid+=parseInt(this.pay.amountpaid);
+      this.firestoreService.updatepay(this.pay.name,this.paid.toString());
+     
     }
     this.isEdit = false;
     this.btnTXT = 'اضافة';
     form.resetForm();
   }
 
-  onDelete(payment: Payment) {
+getpayinfo(){
+  this.Pay1List = this.firestoreService.getFirestoreData('paymentList', 'name',this.pay.name);
+  this.Pay1List.subscribe(data => {
+    this.Pay1Data = data;
+  });
+    
+}
+  onDelete(pay: Pay) {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        this.firestoreService.deleteFirestoreData('paymentList', payment.name);
+        this.firestoreService.deleteFirestoreData('payList', pay.id);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
     });
   }
   filterExact(stage: string, division: string) {
     const value = stage + '_' + division;
-    this.PaymentList = this.firestoreService.getFirestoreData('paymentList', 'tag', value);
-    this.PaymentList.subscribe(data => {
-      this.PaymentData = data;
+    this.PayList = this.firestoreService.getFirestoreData('payList', 'tag', value);
+    this.PayList.subscribe(data => {
+      this.PayData = data;
     });
   }
+
 }
