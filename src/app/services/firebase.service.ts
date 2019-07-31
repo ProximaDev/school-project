@@ -11,7 +11,6 @@ export class FirebaseService {
 
   constructor(private db: AngularFireDatabase, private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
-  
   getFirestoreData(colName: string, property?: string, value?: string) {
     if (value == null || property == null) {
       return this.firestore.collection(colName).valueChanges();

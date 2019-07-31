@@ -27,7 +27,6 @@ import { NgxTrumbowygModule } from 'ngx-trumbowyg';
 import {PaymentComponent} from '../../payment/payment.component';
 import {PayComponent} from '../../pay/pay.component';
 
-
 import {
   MatButtonModule,
   MatInputModule,
@@ -96,7 +95,7 @@ import {
     AddArticleComponent,
     EditArticleComponent,
     PaymentComponent,
-    PayComponent,
+    PayComponent
   ],
   entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })
