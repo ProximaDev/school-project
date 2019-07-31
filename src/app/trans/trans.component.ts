@@ -7,21 +7,19 @@ import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
 import { MatDialog } from "@angular/material";
 import { ToastrService } from 'ngx-toastr';
-import { Payment } from '../services/models/payment.model';
+import { Trans } from '../services/models/trans.model';
 import { NgForm } from '@angular/forms';
 const STORAGE_KEY = 'local_user';
 
 @Component({
-  selector: 'app-payment',
-  templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
+  selector: 'app-trans',
+  templateUrl: './trans.component.html',
+  styleUrls: ['./trans.component.scss']
 })
-export class PaymentComponent implements OnInit, AfterViewInit {
+export class TransComponent implements OnInit, AfterViewInit {
 
-  CourseList: Observable<any[]>;
-  CourseData: any;
-  PaymentList: Observable<any[]>;
-  PaymentData: any;
+  TransList: Observable<any[]>;
+  TransData: any;
   StudentList: Observable<any[]>;
   StudentData: any;
   isEdit: boolean = false;
@@ -33,63 +31,62 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     @Inject(SESSION_STORAGE) private storage: StorageService,
     private toastr: ToastrService,
     private dialog: MatDialog,
-    private payment: Payment) { }
+    private trans: Trans) { }
+
   ngOnInit() {
     this.spinnerService.show();
     if (this.storage.get(STORAGE_KEY) == null) {
       this.router.navigate(['login']);
     }
-    this.PaymentList = this.firestoreService.getFirestoreData('paymentList');
+    this.TransList = this.firestoreService.getFirestoreData('transList');
   }
 
   ngAfterViewInit() {
     this.spinnerService.hide();
-    this.PaymentList.subscribe(data => {
-      this.PaymentData = data;
-    });
-  }
-
-  stageSelect() {
-    this.CourseList = this.firestoreService.getRealTimeData('courseList', this.payment.stage);
-    this.CourseList.subscribe(data => {
-      this.CourseData = data;
+    this.TransList.subscribe(data => {
+      this.TransData = data;
     });
   }
 
   divSelect() {
-    this.StudentList = this.firestoreService.getRealTimeData('studentList', `${this.payment.stage}/${this.payment.division}`);
+    this.StudentList = this.firestoreService.getRealTimeData('studentList', `${this.trans.stage}/${this.trans.division}`);
     this.StudentList.subscribe(data => {
       this.StudentData = data;
     });
   }
 
   saveFormData(form: NgForm) {
-    this.payment.amount_paid="0";
-    this.payment.tag = this.payment.stage + '_' + this.payment.division;
     if (this.isEdit) {
-      this.firestoreService.updateFirestoreData('paymentList', this.payment.id, this.payment);
+      this.firestoreService.updateFirestoreData('transList', this.trans.id, this.trans);
     } else {
-      this.firestoreService.addFirestoreData('paymentList', this.payment, "name");
+      this.firestoreService.addFirestoreData('transList', this.trans, "");
     }
     this.isEdit = false;
     this.btnTXT = 'اضافة';
     form.resetForm();
   }
 
-  onDelete(payment: Payment) {
+  onDelete(trans: Trans) {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        this.firestoreService.deleteFirestoreData('paymentList', payment.name);
+        this.firestoreService.deleteFirestoreData('transList', trans.id);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
     });
   }
-  filterExact(stage: string, division: string) {
-    const value = stage + '_' + division;
-    this.PaymentList = this.firestoreService.getFirestoreData('paymentList', 'tag', value);
-    this.PaymentList.subscribe(data => {
-      this.PaymentData = data;
+
+  onEdit(tran: Trans) {
+    this.trans = tran;
+    this.isEdit = true;
+    this.btnTXT = "تحديث";
+    this.divSelect();
+  }
+
+  filterExact(sname: string) {
+    this.TransList = this.firestoreService.getFirestoreData('transList', 'name', sname);
+    this.TransList.subscribe(data => {
+      this.TransData = data;
     });
   }
 }

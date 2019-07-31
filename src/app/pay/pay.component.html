@@ -2,8 +2,10 @@
   <div class="container-fluid">
     <div class="card">
       <div class="card-header card-header-danger">
-        <h4 class="card-title" style="text-align: center">قائمة الغيابات</h4>
-        <p class="card-category" style="text-align: center">قائمة الغيابات الخاصة بلمراحل والاقسام</p>
+        <h4 class="card-title" style="text-align: center">  قائمة دفع الاقساط</h4>
+        <p class="card-category" style="text-align: center">قائمة الاقساط الخاصة بلطلاب</p>
+        <button mat-raised-button class="btn btn-danger btn-round pull-right" routerLink="/payment">
+          <i class="material-icons">arrow_back</i> العودة الى قائمة الاقساط</button>
       </div>
       <div class="card-body">
         <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
@@ -12,7 +14,7 @@
               <h4 style="text-align: right">المرحلة</h4>
               <mat-form-field>
                 <mat-label>اختر المرحلة</mat-label>
-                <mat-select (selectionChange)="stageSelect($event.value)" name="stage" [(ngModel)]="absent.stage">
+                <mat-select (selectionChange)="stageSelect($event.value)" name="stage" [(ngModel)]="pay.stage">
                   <mat-option value="الاولى">الاولى</mat-option>
                   <mat-option value="الثانية">الثانية</mat-option>
                   <mat-option value="الثالثة">الثالثة</mat-option>
@@ -26,7 +28,7 @@
               <h4 style="text-align: right">الشعبة</h4>
               <mat-form-field>
                 <mat-label>اختر الشعبة</mat-label>
-                <mat-select (selectionChange)="divSelect($event.value)" name="division" [(ngModel)]="absent.division">
+                <mat-select (selectionChange)="divSelect($event.value)" name="division" [(ngModel)]="pay.division">
                   <mat-option value="أ">أ</mat-option>
                   <mat-option value="ب">ب</mat-option>
                   <mat-option value="ج">ج</mat-option>
@@ -39,7 +41,7 @@
               <h4 style="text-align: right">اسم الطالب</h4>
               <mat-form-field>
                 <mat-label>اختر الاسم</mat-label>
-                <mat-select name="name" [(ngModel)]="absent.name">
+                <mat-select (selectionChange)="getpayinfo($event.value)" name="name" [(ngModel)]="pay.name">
                   <mat-option *ngFor="let stu of StudentData" [value]="stu.fullName">
                     {{stu.fullName}}
                   </mat-option>
@@ -48,31 +50,32 @@
             </div>
           </div>
           <div class="row" style="direction: rtl">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <mat-form-field>
-                <mat-label>اختر المادة</mat-label>
-                <mat-select name="course" [(ngModel)]="absent.course">
-                  <mat-option *ngFor="let data of CourseData" [value]="data">{{data}}
-                  </mat-option>
-                </mat-select>
+                <input matInput placeholder="مبلغ المدفوع" name="amountpaid" [(ngModel)]="pay.amountpaid">
               </mat-form-field>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <mat-form-field>
-                <input matInput [matDatepicker]="picker" placeholder="تاريخ الغياب" name="date"
-                  [(ngModel)]="absent.date" required>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <input matInput placeholder="رقم القسط" name="number" [(ngModel)]="pay.number">
               </mat-form-field>
             </div>
-          </div>
-          <div class="row" style="margin-right: 25px" style="direction:rtl">
-            <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
-                class="material-icons">check</i> اضافة</button>
-            <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
-                class="material-icons">cancel</i>
-              الغاء</button>
-            <div class="clearfix"></div>
+            <div class="col-md-4">
+              <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="تاريخ الدفع"
+                      name="date" [(ngModel)]="pay.date" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+           </div>
+            <div class="row" style="margin-right: 25px" style="direction:rtl">
+              <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
+                  class="material-icons">check</i> اضافة</button>
+              <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                  class="material-icons">cancel</i>
+                الغاء</button>
+              <div class="clearfix"></div>
+            </div>
           </div>
         </form>
       </div>
@@ -80,14 +83,14 @@
         <div class="col-md-12" style="direction: rtl">
           <div class="card">
             <div class="card-header card-header-danger" style="text-align: center">
-              <h4 class="card-title ">قائمة الغيابات</h4>
-              <p class="card-category">معلومات الغياب</p>
+              <h4 class="card-title ">قائمة الاقساط</h4>
+              <p class="card-category">معلومات الاقساط</p>
               <div class="row" style="direction: rtl">
                 <div class="col-md-4">
                   <h4 style="text-align: right">المرحلة</h4>
                   <mat-form-field>
                     <mat-label>اختر المرحلة</mat-label>
-                    <mat-select name="stage" [(ngModel)]="stage">
+                    <mat-select  name="stage" [(ngModel)]="stage">
                       <mat-option value="الاولى">الاولى</mat-option>
                       <mat-option value="الثانية">الثانية</mat-option>
                       <mat-option value="الثالثة">الثالثة</mat-option>
@@ -101,7 +104,7 @@
                   <h4 style="text-align: right">الشعبة</h4>
                   <mat-form-field>
                     <mat-label>اختر الشعبة</mat-label>
-                    <mat-select name="division" [(ngModel)]="division">
+                    <mat-select  name="division" [(ngModel)]="division">
                       <mat-option value="أ">أ</mat-option>
                       <mat-option value="ب">ب</mat-option>
                       <mat-option value="ج">ج</mat-option>
@@ -110,6 +113,7 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
+                
                 <div class="col-md-4" style="margin-top: 25px">
                   <button mat-raised-button (click)="filterExact(stage, division)" class="btn btn-danger pull-right"><i
                       class="material-icons">check</i>
@@ -124,19 +128,23 @@
                     <th>الاسم</th>
                     <th>المرحلة</th>
                     <th>الشعبة</th>
-                    <th>المادة الغائب بها</th>
-                    <th>تاريخ الغياب</th>
+                    <th>رقم القسط</th>
+                    <th>تاريخ القسط</th>
+                    <th>المبلغ المدفوع</th>
+                    <th></th>
                     <th>الاجرائات</th>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let absent of AbsentData">
-                      <td>{{absent.name}}</td>
-                      <td>{{absent.stage}}</td>
-                      <td>{{absent.division}}</td>
-                      <td>{{absent.course}}</td>
-                      <td>{{absent.date}}</td>
+                    <tr *ngFor="let pay of PayData">
+                      <td>{{pay.name}}</td>
+                      <td>{{pay.stage}}</td>
+                      <td>{{pay.division}}</td>
+                      <td>{{pay.number}}</td>
+                      <td>{{pay.date}}</td>
+                      <td>{{pay.amountpaid}}</td>
+                      <td></td>
                       <td><a style="color:white; background: #ff5e00" class="btn btn-white btn-round btn-just-icon"
-                          (click)="onDelete(absent)">
+                          (click)="onDelete(pay)">
                           <i class="material-icons">delete</i>
                         </a>
                       </td>

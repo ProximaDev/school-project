@@ -72,7 +72,7 @@ export class AbsentComponent implements OnInit, AfterViewInit {
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('absentList', this.absent.id, this.absent);
     } else {
-      this.firestoreService.addFirestoreData('absentList', this.absent, false);
+      this.firestoreService.addFirestoreData('absentList', this.absent, "");
     }
     this.isEdit = false;
     this.btnTXT = 'اضافة';

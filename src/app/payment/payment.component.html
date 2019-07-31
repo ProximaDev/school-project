@@ -4,7 +4,7 @@
       <div class="card-header card-header-danger">
         <h4 class="card-title" style="text-align: center">قائمة الاقساط</h4>
         <p class="card-category" style="text-align: center">قائمة الاقساط الخاصة بلطلاب</p>
-        <button mat-raised-button class="btn btn-danger btn-round pull-right" routerLink="#">
+        <button mat-raised-button class="btn btn-danger btn-round pull-right" routerLink="/pay">
           <i class="material-icons">control_point</i> تسديد الاقساط</button>
       </div>
       <div class="card-body">
@@ -55,14 +55,14 @@
                 <input matInput placeholder="مبلغ السنوي" name="total_amount" [(ngModel)]="payment.total_amount">
               </mat-form-field>
             </div>
-            <div class="row" style="margin-right: 25px" style="direction:rtl">
-              <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
-                  class="material-icons">check</i> اضافة</button>
-              <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
-                  class="material-icons">cancel</i>
-                الغاء</button>
-              <div class="clearfix"></div>
-            </div>
+          </div>
+          <div class="row" style="margin-right: 25px" style="direction:rtl">
+            <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
+                class="material-icons">check</i> اضافة</button>
+            <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                class="material-icons">cancel</i>
+              الغاء</button>
+            <div class="clearfix"></div>
           </div>
         </form>
       </div>
@@ -125,6 +125,9 @@
 
                     <th>القسط الكلي</th>
                     <th></th>
+                    <th>المبلغ المدفوع</th>
+                    <th></th>
+                    <th>المبلغ المتبقي</th>
                     <th></th>
                     <th></th>
                     <th>الاجرائات</th>
@@ -145,6 +148,9 @@
 
                       <td>{{payment.total_amount}}</td>
                       <td></td>
+                      <td>{{payment.amount_paid}}</td>
+                      <td></td>
+                      <td>{{payment.total_amount-payment.amount_paid}}</td>
                       <td></td>
                       <td></td>
                       <td><a style="color:white; background: #ff5e00" class="btn btn-white btn-round btn-just-icon"
