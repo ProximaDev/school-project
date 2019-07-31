@@ -1,0 +1,132 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title" style="text-align: center">قائمة الخطوط</h4>
+            <p class="card-category" style="text-align: center">تسجيل خط جديد للطلاب</p>
+          </div>
+          <div class="card-body">
+            <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
+              <div class="row" style="direction: rtl">
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <input matInput placeholder="اسم السائق" name="name" [(ngModel)]="trans.name" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <input matInput placeholder="رقم السيارة" name="carnum" [(ngModel)]="trans.carnum" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <input matInput placeholder="تلفون السائق" name="mobile" [(ngModel)]="trans.mobile" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row" style="direction: rtl">
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label>اختر المرحلة</mat-label>
+                    <mat-select name="stage" [(ngModel)]="trans.stage">
+                      <mat-option value="الاولى">الاولى</mat-option>
+                      <mat-option value="الثانية">الثانية</mat-option>
+                      <mat-option value="الثالثة">الثالثة</mat-option>
+                      <mat-option value="الرابعة">الرابعة</mat-option>
+                      <mat-option value="الخامسة">الخامسة</mat-option>
+                      <mat-option value="السادسة">السادسة</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label>اختر الشعبة</mat-label>
+                    <mat-select (selectionChange)="divSelect($event.value)" name="division"
+                      [(ngModel)]="trans.division">
+                      <mat-option value="أ">أ</mat-option>
+                      <mat-option value="ب">ب</mat-option>
+                      <mat-option value="ج">ج</mat-option>
+                      <mat-option value="د">د</mat-option>
+                      <mat-option value="ه">ه</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label>اختر الاسم</mat-label>
+                    <mat-select name="student" [(ngModel)]="trans.student">
+                      <mat-option *ngFor="let stu of StudentData" [value]="stu.fullName">
+                        {{stu.fullName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
+                  class="material-icons">check</i>
+                {{btnTXT}}</button>
+              <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                  class="material-icons">cancel</i> الغاء</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-12" style="direction: rtl">
+          <div class="card">
+            <div class="card-header card-header-danger" style="text-align: center">
+              <h4 class="card-title ">المعلومات</h4>
+              <p class="card-category">معلومات الخطوط</p>
+              <div class="row" style="direction: rtl">
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="اسم السائق" name="sname" [(ngModel)]="sname" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6" style="margin-top: 25px">
+                  <button mat-raised-button (click)="filterExact(sname)" class="btn btn-danger pull-right"><i
+                      class="material-icons">check</i>
+                    بحث</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="text-danger">
+                    <th>اسم السائق</th>
+                    <th>رقم السيارة</th>
+                    <th>الهاتف</th>
+                    <th>اسم الطالب</th>
+                    <th>المرحلة</th>
+                    <th>الشعبة</th>
+                    <th>الاجرائات</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let tran of TransData">
+                      <td>{{tran.name}}</td>
+                      <td>{{tran.carnum}}</td>
+                      <td>{{tran.mobile}}</td>
+                      <td>{{tran.student}}</td>
+                      <td>{{tran.stage}}</td>
+                      <td>{{tran.division}}</td>
+                      <td><a style="color:white; background: #ff5e00" class="btn btn-white btn-round btn-just-icon"
+                          (click)="onDelete(tran)">
+                          <i class="material-icons">delete</i>
+                        </a>
+                        <a class="btn btn-white btn-round btn-just-icon" (click)="onEdit(tran)">
+                          <i class="material-icons">edit</i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
