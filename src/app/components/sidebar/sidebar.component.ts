@@ -23,6 +23,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/absent', title: 'الغيابات', icon: 'schedule', class: '' },
   { path: '/degree', title: 'الدرجات', icon: 'assignment', class: '' },
   { path: '/payment', title: 'الاقساط', icon: 'euro_symbol', class: '' },
+  { path: '/penalty', title: ' الغرامات', icon: 'sentiment_very_dissatisfied', class: '' },
   { path: '/trans', title: 'خطوط النقل', icon: 'airport_shuttle', class: '' }
 ];
 
