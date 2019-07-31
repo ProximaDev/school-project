@@ -125,8 +125,9 @@
 
                     <th>القسط الكلي</th>
                     <th></th>
-                    <th></th>
                     <th>المبلغ المدفوع</th>
+                    <th></th>
+                    <th>المبلغ المتبقي</th>
                     <th></th>
                     <th>الاجرائات</th>
                   </thead>
@@ -146,8 +147,9 @@
 
                       <td>{{payment.total_amount}}</td>
                       <td></td>
-                      <td></td>
                       <td>{{payment.amount_paid}}</td>
+                      <td></td>
+                      <td>{{payment.total_amount-payment.amount_paid}}</td>
                       <td></td>
                       <td><a style="color:white; background: #ff5e00" class="btn btn-white btn-round btn-just-icon"
                           (click)="onDelete(payment)">

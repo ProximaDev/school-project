@@ -11,6 +11,7 @@ export class FirebaseService {
 
   constructor(private db: AngularFireDatabase, private firestore: AngularFirestore, private afAuth: AngularFireAuth) { }
 
+  
   getFirestoreData(colName: string, property?: string, value?: string) {
     if (value == null || property == null) {
       return this.firestore.collection(colName).valueChanges();
@@ -24,11 +25,14 @@ export class FirebaseService {
     }
   }
 
-  addFirestoreData(colName: string, dataObject: any, emailAsId: boolean) {
+  addFirestoreData(colName: string, dataObject: any, Id: string) {
     let id = '';
-    if (emailAsId) {
+    if (Id=="email") {
       id = dataObject.email
-    } else {
+    }else if (Id=="name") {
+      id = dataObject.name
+    }
+    else {
       id = this.firestore.createId();
       dataObject.id = id;
     }
@@ -38,6 +42,10 @@ export class FirebaseService {
   updateFirestoreData(colName: string, id: string, dataObject: any) {
     this.firestore.doc(`${colName}/${id}`).set(dataObject);
   }
+  updatepay( id: string, amount: any){
+    this.firestore.doc(`paymentList/${id}`).update({amount_paid:amount});
+  }
+ 
 
   deleteFirestoreData(colName: string, id: string) {
     this.firestore.doc(`${colName}/${id}`).delete();

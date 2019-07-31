@@ -4,7 +4,8 @@
       <div class="card-header card-header-danger">
         <h4 class="card-title" style="text-align: center">  قائمة دفع الاقساط</h4>
         <p class="card-category" style="text-align: center">قائمة الاقساط الخاصة بلطلاب</p>
-        
+        <button mat-raised-button class="btn btn-danger btn-round pull-right" routerLink="/payment">
+          <i class="material-icons">arrow_back</i> العودة الى قائمة الاقساط</button>
       </div>
       <div class="card-body">
         <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
@@ -40,7 +41,7 @@
               <h4 style="text-align: right">اسم الطالب</h4>
               <mat-form-field>
                 <mat-label>اختر الاسم</mat-label>
-                <mat-select name="name" [(ngModel)]="pay.name">
+                <mat-select (selectionChange)="getpayinfo($event.value)" name="name" [(ngModel)]="pay.name">
                   <mat-option *ngFor="let stu of StudentData" [value]="stu.fullName">
                     {{stu.fullName}}
                   </mat-option>

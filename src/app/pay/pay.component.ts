@@ -25,13 +25,14 @@ export class PayComponent implements OnInit {
   CourseData: any;
   PayList: Observable<any[]>;
   PayData: any;
+  Pay1List: Observable<any[]>;
+  Pay1Data: any;
   StudentList: Observable<any[]>;
   StudentData: any;
   isEdit: boolean = false;
   btnTXT = 'اضافة'
-  st:string;
-  div:string;
-
+  paid:number=0;
+  
   constructor(private firestoreService: FirebaseService,
     private router: Router,
     private spinnerService: NgxSpinnerService,
@@ -69,20 +70,31 @@ export class PayComponent implements OnInit {
   }
 
 
-  saveFormData(form: NgForm) {
+  saveFormData(form: NgForm) {   
     var datePipe = new DatePipe('en-US');
     this.pay.date = datePipe.transform(new Date(this.pay.date), 'dd/MM/yyyy');
     this.pay.tag = this.pay.stage + '_' + this.pay.division;
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('payList', this.pay.id, this.pay);
     } else {
-      this.firestoreService.addFirestoreData('payList', this.pay, false);
+      this.firestoreService.addFirestoreData('payList', this.pay, "");
+      this.paid =parseInt(this.Pay1Data[0]['amount_paid']);
+      this.paid+=parseInt(this.pay.amountpaid);
+      this.firestoreService.updatepay(this.pay.name,this.paid.toString());
+     
     }
     this.isEdit = false;
     this.btnTXT = 'اضافة';
     form.resetForm();
   }
 
+getpayinfo(){
+  this.Pay1List = this.firestoreService.getFirestoreData('paymentList', 'name',this.pay.name);
+  this.Pay1List.subscribe(data => {
+    this.Pay1Data = data;
+  });
+    
+}
   onDelete(pay: Pay) {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {

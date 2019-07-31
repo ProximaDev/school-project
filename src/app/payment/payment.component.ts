@@ -69,7 +69,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     if (this.isEdit) {
       this.firestoreService.updateFirestoreData('paymentList', this.payment.id, this.payment);
     } else {
-      this.firestoreService.addFirestoreData('paymentList', this.payment, false);
+      this.firestoreService.addFirestoreData('paymentList', this.payment, "name");
     }
     this.isEdit = false;
     this.btnTXT = 'اضافة';
@@ -80,7 +80,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        this.firestoreService.deleteFirestoreData('paymentList', payment.id);
+        this.firestoreService.deleteFirestoreData('paymentList', payment.name);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
     });
