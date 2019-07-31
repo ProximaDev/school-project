@@ -41,8 +41,12 @@ export class FirebaseService {
   updateFirestoreData(colName: string, id: string, dataObject: any) {
     this.firestore.doc(`${colName}/${id}`).set(dataObject);
   }
-  updatepay( id: string, amount: any){
+  updatepay( id: string,amount: any){
     this.firestore.doc(`paymentList/${id}`).update({amount_paid:amount});
+  }
+
+  updatepen( id: string,amount: any){
+    this.firestore.doc(`paymentList/${id}`).update({total_amount:amount});
   }
  
 
