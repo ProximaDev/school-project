@@ -25,6 +25,7 @@ export const ROUTES: RouteInfo[] = [
 ];
 
 export const ROUTES2: RouteInfo[] = [
+  { path: '/attitude', title: 'سلوك ومستوى الطالب  ', icon: 'accessibility_new', class: '' },
   { path: '/staff', title: 'معلومات الكادر ', icon: 'group', class: '' },
   { path: '/exam', title: 'الامتحانات', icon: 'local_library', class: '' },
   { path: '/holiday', title: 'العطل', icon: 'hotel', class: '' },

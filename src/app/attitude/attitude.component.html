@@ -1,0 +1,153 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-header card-header-danger">
+          <h4 class="card-title" style="text-align: center">قائمة  الطلاب</h4>
+          <p class="card-category" style="text-align: center">قائمة السلوك والمستوى للطلاب </p>
+        </div>
+        <div class="card-body">
+          <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
+            <div class="row" style="direction: rtl">
+              <div class="col-md-4">
+                <h4 style="text-align: right">المرحلة</h4>
+                <mat-form-field>
+                  <mat-label>اختر المرحلة</mat-label>
+                  <mat-select name="stage" [(ngModel)]="attitude.stage">
+                    <mat-option value="الاولى">الاولى</mat-option>
+                    <mat-option value="الثانية">الثانية</mat-option>
+                    <mat-option value="الثالثة">الثالثة</mat-option>
+                    <mat-option value="الرابعة">الرابعة</mat-option>
+                    <mat-option value="الخامسة">الخامسة</mat-option>
+                    <mat-option value="السادسة">السادسة</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <h4 style="text-align: right">الشعبة</h4>
+                <mat-form-field>
+                  <mat-label>اختر الشعبة</mat-label>
+                  <mat-select (selectionChange)="divSelect($event.value)" name="division" [(ngModel)]="attitude.division">
+                    <mat-option value="أ">أ</mat-option>
+                    <mat-option value="ب">ب</mat-option>
+                    <mat-option value="ج">ج</mat-option>
+                    <mat-option value="د">د</mat-option>
+                    <mat-option value="ه">ه</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <h4 style="text-align: right">اسم الطالب</h4>
+                <mat-form-field>
+                  <mat-label>اختر الاسم</mat-label>
+                  <mat-select name="name" [(ngModel)]="attitude.name">
+                    <mat-option *ngFor="let stu of StudentData" [value]="stu.fullName">
+                      {{stu.fullName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row" style="direction: rtl">
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <mat-label>الجنس</mat-label>
+                        <mat-select required name="type" [(ngModel)]="attitude.type">
+                            <mat-option value="سلوك جيد">سلوك جيد</mat-option>
+                            <mat-option value="سلوك غير جيد">سلوك غير جيد</mat-option>
+                            <mat-option value="مستوى جيد">مستوى جيد</mat-option>
+                            <mat-option value="مستوى غير جيد">مستوى غير جيد</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <input autocomplete="off" matInput placeholder="الوصف " name="description"
+                            [(ngModel)]="attitude.description" required>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row" style="margin-right: 25px" style="direction:rtl">
+              <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
+                  class="material-icons">check</i> اضافة</button>
+              <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                  class="material-icons">cancel</i>
+                الغاء</button>
+              <div class="clearfix"></div>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <div class="col-md-12" style="direction: rtl">
+            <div class="card">
+              <div class="card-header card-header-danger" style="text-align: center">
+                <h4 class="card-title ">قائمة الطلاب</h4>
+                <p class="card-category">معلومات السلوك</p>
+                <div class="row" style="direction: rtl">
+                  <div class="col-md-4">
+                    <h4 style="text-align: right">المرحلة</h4>
+                    <mat-form-field>
+                      <mat-label>اختر المرحلة</mat-label>
+                      <mat-select name="stage" [(ngModel)]="stage">
+                        <mat-option value="الاولى">الاولى</mat-option>
+                        <mat-option value="الثانية">الثانية</mat-option>
+                        <mat-option value="الثالثة">الثالثة</mat-option>
+                        <mat-option value="الرابعة">الرابعة</mat-option>
+                        <mat-option value="الخامسة">الخامسة</mat-option>
+                        <mat-option value="السادسة">السادسة</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <h4 style="text-align: right">الشعبة</h4>
+                    <mat-form-field>
+                      <mat-label>اختر الشعبة</mat-label>
+                      <mat-select name="division" [(ngModel)]="division">
+                        <mat-option value="أ">أ</mat-option>
+                        <mat-option value="ب">ب</mat-option>
+                        <mat-option value="ج">ج</mat-option>
+                        <mat-option value="د">د</mat-option>
+                        <mat-option value="ه">ه</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4" style="margin-top: 25px">
+                    <button mat-raised-button (click)="filterExact(stage, division)" class="btn btn-danger pull-right"><i
+                        class="material-icons">check</i>
+                      بحث</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="text-danger">
+                      <th>الاسم</th>
+                      <th>المرحلة</th>
+                      <th>الشعبة</th>
+                      <th> النوع</th>
+                      <th> الوصف</th>
+                      <th>الاجرائات</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let attitude of AttitudeData">
+                        <td>{{attitude.name}}</td>
+                        <td>{{attitude.stage}}</td>
+                        <td>{{attitude.division}}</td>
+                        <td>{{attitude.type}}</td>
+                        <td>{{attitude.description}}</td>
+                        <td><a style="color:white; background: #ff5e00" class="btn btn-white btn-round btn-just-icon"
+                            (click)="onDelete(attitude)">
+                            <i class="material-icons">delete</i>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
