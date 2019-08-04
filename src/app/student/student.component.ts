@@ -82,7 +82,11 @@ export class StudentComponent implements OnInit, AfterViewInit {
       if (result == 'true') {
         this.firestoreService.deleteFirestoreData('studentList', stu.email);
         this.firestoreService.deleteRealTimeData('studentList', `${stu.stage}/${stu.division}/${stu.fullName}`);
-        this.toastr.warning('تم الحذف بنجاح', 'حذف');
+        this.firestoreService.deleteStuEmailPassword(stu.email, stu.password).then(done => {
+          this.toastr.warning('تم الحذف بنجاح', 'حذف');
+        }).catch(err => {
+          this.toastr.warning('حصل خطا اثناء حذف الحساب', 'خطا');
+        });
       }
     });
   }

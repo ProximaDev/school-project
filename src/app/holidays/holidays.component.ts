@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { Observable } from 'rxjs';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
@@ -7,22 +7,20 @@ import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component'
 import { MatDialog } from "@angular/material";
 import { ToastrService } from 'ngx-toastr';
-import { Absent } from '../services/models/absent.model';
+import { PublicHolidays } from '../services/models/public-holidays.model';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 const STORAGE_KEY = 'local_user';
 
 @Component({
-  selector: 'app-absent',
-  templateUrl: './absent.component.html',
-  styleUrls: ['./absent.component.scss']
+  selector: 'app-holidays',
+  templateUrl: './holidays.component.html',
+  styleUrls: ['./holidays.component.scss']
 })
-export class AbsentComponent implements OnInit, AfterViewInit {
+export class HolidaysComponent implements OnInit {
 
-  AbsentList: Observable<any[]>;
-  AbsentData: any;
-  StudentList: Observable<any[]>;
-  StudentData: any;
+  holidayList: Observable<any[]>;
+  holidayData: any;
   isEdit: boolean = false;
   btnTXT = 'اضافة'
 
@@ -32,59 +30,48 @@ export class AbsentComponent implements OnInit, AfterViewInit {
     @Inject(SESSION_STORAGE) private storage: StorageService,
     private toastr: ToastrService,
     private dialog: MatDialog,
-    private absent: Absent) { }
+    private holiday: PublicHolidays) { }
 
   ngOnInit() {
     this.spinnerService.show();
     if (this.storage.get(STORAGE_KEY) == null) {
       this.router.navigate(['login']);
     }
-    this.AbsentList = this.firestoreService.getFirestoreData('absentList');
+    this.holidayList = this.firestoreService.getFirestoreData('holidayList');
   }
 
   ngAfterViewInit() {
     this.spinnerService.hide();
-    this.AbsentList.subscribe(data => {
-      this.AbsentData = data;
+    this.holidayList.subscribe(data => {
+      this.holidayData = data;
     });
   }
 
-  divSelect() {
-    this.StudentList = this.firestoreService.getRealTimeData('studentList', `${this.absent.stage}/${this.absent.division}`);
-    this.StudentList.subscribe(data => {
-      this.StudentData = data;
-    });
-  }
+  
 
   saveFormData(form: NgForm) {
     var datePipe = new DatePipe('en-US');
-    this.absent.date = datePipe.transform(new Date(this.absent.date), 'dd/MM/yyyy');
-    this.absent.tag = this.absent.stage + '_' + this.absent.division;
+    this.holiday.date = datePipe.transform(new Date(this.holiday.date), 'dd/MM/yyyy');
     if (this.isEdit) {
-      this.firestoreService.updateFirestoreData('absentList', this.absent.id, this.absent);
+      this.firestoreService.updateFirestoreData('holidayList', this.holiday.id, this.holiday);
     } else {
-      this.firestoreService.addFirestoreData('absentList', this.absent, "");
+      this.firestoreService.addFirestoreData('holidayList', this.holiday, "");
     }
     this.isEdit = false;
     this.btnTXT = 'اضافة';
     form.resetForm();
   }
 
-  onDelete(absent: Absent) {
+  onDelete(holiday: PublicHolidays) {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
-        this.firestoreService.deleteFirestoreData('absentList', absent.id);
+        this.firestoreService.deleteFirestoreData('holidayList', holiday.id);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
     });
   }
 
-  filterExact(stage: string, division: string) {
-    const value = stage + '_' + division;
-    this.AbsentList = this.firestoreService.getFirestoreData('absentList', 'tag', value);
-    this.AbsentList.subscribe(data => {
-      this.AbsentData = data;
-    });
-  }
+  
+  
 }

@@ -4,11 +4,13 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 
-export class Absent {
+export class Exam {
     id: string;
-    name: string;
-    division: string;
     stage: string;
+    division: string;
+    course: string;
+    subject: string;
+    description: string;
     date: string;
     tag: string;
 }

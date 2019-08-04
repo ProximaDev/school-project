@@ -4,7 +4,7 @@
       <div class="card-header card-header-danger">
         <h4 class="card-title" style="text-align: center"> قائمة الغرامات</h4>
         <p class="card-category" style="text-align: center">قائمة الغرامات الخاصة بلطلاب</p>
-       
+
       </div>
       <div class="card-body">
         <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
@@ -51,22 +51,24 @@
           <div class="row" style="direction: rtl">
             <div class="col-md-4">
               <mat-form-field>
-                <input matInput placeholder="مبلغ الغرامة" name="penalty_amount" [(ngModel)]="penalty.penalty_amount">
+                <input autocomplete="off" matInput placeholder="مبلغ الغرامة" name="penalty_amount"
+                  [(ngModel)]="penalty.penalty_amount">
               </mat-form-field>
             </div>
             <div class="col-md-4">
               <mat-form-field>
-                <input matInput placeholder="نوع الغرامة" name="penalty_type" [(ngModel)]="penalty.penalty_type">
+                <input autocomplete="off" matInput placeholder="نوع الغرامة" name="penalty_type"
+                  [(ngModel)]="penalty.penalty_type">
               </mat-form-field>
             </div>
             <div class="col-md-4">
               <mat-form-field>
-                  <input matInput [matDatepicker]="picker" placeholder="تاريخ الدفع"
-                      name="date" [(ngModel)]="penalty.date" required>
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
+                <input autocomplete="off" matInput [matDatepicker]="picker" placeholder="تاريخ الدفع" name="date"
+                  [(ngModel)]="penalty.date" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
-           </div>
+            </div>
             <div class="row" style="margin-right: 25px" style="direction:rtl">
               <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
                   class="material-icons">check</i> اضافة</button>
@@ -89,7 +91,7 @@
                   <h4 style="text-align: right">المرحلة</h4>
                   <mat-form-field>
                     <mat-label>اختر المرحلة</mat-label>
-                    <mat-select  name="stage" [(ngModel)]="stage">
+                    <mat-select name="stage" [(ngModel)]="stage">
                       <mat-option value="الاولى">الاولى</mat-option>
                       <mat-option value="الثانية">الثانية</mat-option>
                       <mat-option value="الثالثة">الثالثة</mat-option>
@@ -103,7 +105,7 @@
                   <h4 style="text-align: right">الشعبة</h4>
                   <mat-form-field>
                     <mat-label>اختر الشعبة</mat-label>
-                    <mat-select  name="division" [(ngModel)]="division">
+                    <mat-select name="division" [(ngModel)]="division">
                       <mat-option value="أ">أ</mat-option>
                       <mat-option value="ب">ب</mat-option>
                       <mat-option value="ج">ج</mat-option>
@@ -112,7 +114,7 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
-                
+
                 <div class="col-md-4" style="margin-top: 25px">
                   <button mat-raised-button (click)="filterExact(stage, division)" class="btn btn-danger pull-right"><i
                       class="material-icons">check</i>
@@ -154,8 +156,7 @@
             </div>
           </div>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 </div>
-

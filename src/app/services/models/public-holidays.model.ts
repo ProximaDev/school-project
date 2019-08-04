@@ -4,11 +4,8 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 
-export class Absent {
+export class PublicHolidays {
     id: string;
     name: string;
-    division: string;
-    stage: string;
     date: string;
-    tag: string;
 }

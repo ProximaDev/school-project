@@ -14,21 +14,23 @@
                         <p style="font-weight: bold; margin:10px">لا يوجد عناصر</p>
                     </div>
                     <div id="SHOW">
-                        <div class="card-group">
-                            <div class="card" *ngFor="let item of articlesData" style="margin:5px">
-                                <img class="card-img-top" src="{{item.image}}">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{item.title}}</h5>
-                                    <p style="max-width: 250px" class="card-text"
-                                        [innerHTML]="substringText(item.description)"></p>
-                                    <p class="card-text"><small class="text-muted">{{item.date}}</small></p>
-                                    <button class="btn btn-danger btn-round btn-sm" (click)="viewDialog(item)"><i
-                                            style="margin: 0 auto" class="material-icons">visibility</i></button>
-                                    <button class="btn btn-danger btn-round btn-sm" (click)="updateArticle(item)"><i
-                                            style="margin: 0 auto" class="material-icons">edit</i></button>
-                                    <button class="btn btn-danger btn-round btn-sm"
-                                        (click)="openDialog(item.id, item.imgname)"><i style="margin: 0 auto"
-                                            class="material-icons">delete</i></button>
+                        <div class="row">
+                            <div class="col-md-4" *ngFor="let item of articlesData">
+                                <div class="card" style="margin:5px">
+                                    <img class="card-img-top" src="{{item.image}}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{item.title}}</h5>
+                                        <p style="max-width: 250px" class="card-text"
+                                            [innerHTML]="substringText(item.description)"></p>
+                                        <p class="card-text"><small class="text-muted">{{item.date}}</small></p>
+                                        <button class="btn btn-danger btn-round btn-sm" (click)="viewDialog(item)"><i
+                                                style="margin: 0 auto" class="material-icons">visibility</i></button>
+                                        <button class="btn btn-danger btn-round btn-sm" (click)="updateArticle(item)"><i
+                                                style="margin: 0 auto" class="material-icons">edit</i></button>
+                                        <button class="btn btn-danger btn-round btn-sm"
+                                            (click)="openDialog(item.id, item.imgname)"><i style="margin: 0 auto"
+                                                class="material-icons">delete</i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

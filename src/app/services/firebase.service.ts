@@ -26,9 +26,9 @@ export class FirebaseService {
 
   addFirestoreData(colName: string, dataObject: any, Id: string) {
     let id = '';
-    if (Id=="email") {
+    if (Id == "email") {
       id = dataObject.email
-    }else if (Id=="name") {
+    } else if (Id == "name") {
       id = dataObject.name
     }
     else {
@@ -41,14 +41,14 @@ export class FirebaseService {
   updateFirestoreData(colName: string, id: string, dataObject: any) {
     this.firestore.doc(`${colName}/${id}`).set(dataObject);
   }
-  updatepay( id: string,amount: any){
-    this.firestore.doc(`paymentList/${id}`).update({amount_paid:amount});
+  updatepay(id: string, amount: any) {
+    this.firestore.doc(`paymentList/${id}`).update({ amount_paid: amount });
   }
 
-  updatepen( id: string,amount: any){
-    this.firestore.doc(`paymentList/${id}`).update({total_amount:amount});
+  updatepen(id: string, amount: any) {
+    this.firestore.doc(`paymentList/${id}`).update({ total_amount: amount });
   }
- 
+
 
   deleteFirestoreData(colName: string, id: string) {
     this.firestore.doc(`${colName}/${id}`).delete();
@@ -80,6 +80,12 @@ export class FirebaseService {
   }
   async setStuEmailPassword(email: string, password: string) {
     await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  async deleteStuEmailPassword(email: string, password: string) {
+    await this.afAuth.auth.signInWithEmailAndPassword(email, password).then((userCredential) => {
+      userCredential.user.delete();
+    });
   }
 
   async updateStuEmailPassword(email: string, password: string, newEmail: string, newPassword: string) {

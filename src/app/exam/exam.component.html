@@ -4,8 +4,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title" style="text-align: center">الواجبات</h4>
-                        <p class="card-category" style="text-align: center">اضافة واجب جديد</p>
+                        <h4 class="card-title" style="text-align: center">الامتحانات</h4>
+                        <p class="card-category" style="text-align: center">اضافة امتحان جديد</p>
                     </div>
                     <div class="card-body">
                         <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
@@ -14,7 +14,7 @@
                                     <mat-form-field>
                                         <mat-label>اختر المرحلة</mat-label>
                                         <mat-select (selectionChange)="stageSelect($event.value)" name="stage"
-                                            [(ngModel)]="homework.stage">
+                                            [(ngModel)]="exam.stage">
                                             <mat-option value="الاولى">الاولى</mat-option>
                                             <mat-option value="الثانية">الثانية</mat-option>
                                             <mat-option value="الثالثة">الثالثة</mat-option>
@@ -27,7 +27,7 @@
                                 <div class="col-md-6">
                                     <mat-form-field>
                                         <mat-label>اختر الشعبة</mat-label>
-                                        <mat-select name="division" [(ngModel)]="homework.division">
+                                        <mat-select name="division" [(ngModel)]="exam.division">
                                             <mat-option value="أ">أ</mat-option>
                                             <mat-option value="ب">ب</mat-option>
                                             <mat-option value="ج">ج</mat-option>
@@ -41,7 +41,7 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <mat-label>اختر المادة</mat-label>
-                                        <mat-select name="course" [(ngModel)]="homework.course">
+                                        <mat-select name="course" [(ngModel)]="exam.course">
                                             <mat-option *ngFor="let data of CourseData" [value]="data">{{data}}
                                             </mat-option>
                                         </mat-select>
@@ -50,13 +50,13 @@
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input autocomplete="off" matInput placeholder="الموضوع" name="subject"
-                                            [(ngModel)]="homework.subject" required>
+                                            [(ngModel)]="exam.subject" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field>
                                         <input autocomplete="off" matInput [matDatepicker]="picker"
-                                            placeholder="تاريخ الواجب" name="date" [(ngModel)]="homework.date" required>
+                                            placeholder="تاريخ الامتحان" name="date" [(ngModel)]="exam.date" required>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
@@ -66,7 +66,7 @@
                                 <div class="col-md-12">
                                     <mat-form-field>
                                         <textarea autocomplete="off" matInput placeholder="التفاصيل" name="description"
-                                            [(ngModel)]="homework.description" required></textarea>
+                                            [(ngModel)]="exam.description" required></textarea>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -81,8 +81,8 @@
                 <div class="col-md-12" style="direction: rtl">
                     <div class="card">
                         <div class="card-header card-header-danger" style="text-align: center">
-                            <h4 class="card-title ">قائمة الواجبات</h4>
-                            <p class="card-category">معلومات الواجبات</p>
+                            <h4 class="card-title ">قائمة الامتحانات</h4>
+                            <p class="card-category">معلومات الامتحانات</p>
                             <div class="row" style="direction: rtl">
                                 <div class="col-md-4">
                                     <h4 style="text-align: right">المرحلة</h4>
@@ -148,20 +148,20 @@
                                         <th>الاجرائات</th>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let homework of homeworkData">
-                                            <td>{{homework.stage}}</td>
-                                            <td>{{homework.division}}</td>
-                                            <td>{{homework.course}}</td>
-                                            <td>{{homework.subject}}</td>
-                                            <td>{{homework.description}}</td>
-                                            <td>{{homework.date}}</td>
+                                        <tr *ngFor="let exam of examData">
+                                            <td>{{exam.stage}}</td>
+                                            <td>{{exam.division}}</td>
+                                            <td>{{exam.course}}</td>
+                                            <td>{{exam.subject}}</td>
+                                            <td>{{exam.description}}</td>
+                                            <td>{{exam.date}}</td>
                                             <td><a style="color:white; background: #ff5e00"
                                                     class="btn btn-white btn-round btn-just-icon"
-                                                    (click)="onDelete(homework)">
+                                                    (click)="onDelete(exam)">
                                                     <i class="material-icons">delete</i>
                                                 </a>
                                                 <a class="btn btn-white btn-round btn-just-icon"
-                                                    (click)="onEdit(homework)">
+                                                    (click)="onEdit(exam)">
                                                     <i class="material-icons">edit</i>
                                                 </a>
                                             </td>
