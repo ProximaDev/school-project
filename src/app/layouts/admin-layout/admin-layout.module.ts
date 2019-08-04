@@ -28,7 +28,8 @@ import { PaymentComponent } from '../../payment/payment.component';
 import { PayComponent } from '../../pay/pay.component';
 import { TransComponent } from '../../trans/trans.component';
 import { PenaltyComponent } from '../../penalty/penalty.component'
-
+import {HolidaysComponent} from '../../holidays/holidays.component'
+ 
 import {
   MatButtonModule,
   MatInputModule,
@@ -100,6 +101,7 @@ import {
     PayComponent,
     TransComponent,
     PenaltyComponent,
+    HolidaysComponent,
   ],
   entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })
