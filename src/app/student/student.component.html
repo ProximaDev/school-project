@@ -74,13 +74,22 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                      <mat-form-field>
+                                            <mat-label>متميز</mat-label>
+                                            <mat-select required name="diligent" [(ngModel)]="student.diligent">
+                                             <mat-option value="نعم">نعم</mat-option>
+                                             <mat-option value="كلا">كلا</mat-option>
+                                            </mat-select>
+                                            </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="البريد الالكتروني" name="email"
                                             [(ngModel)]="student.email" required>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <mat-form-field>
                                         <input matInput placeholder="كلمة المرور" name="password"
                                             [(ngModel)]="student.password" required>
@@ -147,6 +156,7 @@
                                         <th>تاريخ الميلاد</th>
                                         <th>العنوان</th>
                                         <th>الهاتف</th>
+                                        <th>متميز</th>
                                         <th>البريد الالكتروني</th>
                                         <th>رمز المرور</th>
                                         <th>الاجرائات</th>
@@ -160,6 +170,7 @@
                                             <td>{{student.birthdate}}</td>
                                             <td>{{student.address}}</td>
                                             <td>{{student.mobile}}</td>
+                                            <td>{{student.diligent}}</td>
                                             <td>{{student.email}}</td>
                                             <td>{{student.password}}</td>
                                             <td><a style="color:white; background: #ff5e00"

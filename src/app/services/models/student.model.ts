@@ -16,4 +16,5 @@ export class Student {
     email: string;
     password: string;
     tag: string;
+    diligent: string;
 }
