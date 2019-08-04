@@ -19,8 +19,6 @@ const STORAGE_KEY = 'local_user';
 })
 export class AbsentComponent implements OnInit, AfterViewInit {
 
-  CourseList: Observable<any[]>;
-  CourseData: any;
   AbsentList: Observable<any[]>;
   AbsentData: any;
   StudentList: Observable<any[]>;
@@ -48,13 +46,6 @@ export class AbsentComponent implements OnInit, AfterViewInit {
     this.spinnerService.hide();
     this.AbsentList.subscribe(data => {
       this.AbsentData = data;
-    });
-  }
-
-  stageSelect() {
-    this.CourseList = this.firestoreService.getRealTimeData('courseList', this.absent.stage);
-    this.CourseList.subscribe(data => {
-      this.CourseData = data;
     });
   }
 
@@ -91,9 +82,9 @@ export class AbsentComponent implements OnInit, AfterViewInit {
 
   filterExact(stage: string, division: string) {
     const value = stage + '_' + division;
-    this.CourseList = this.firestoreService.getFirestoreData('absentList', 'tag', value);
-    this.CourseList.subscribe(data => {
-      this.CourseData = data;
+    this.AbsentList = this.firestoreService.getFirestoreData('absentList', 'tag', value);
+    this.AbsentList.subscribe(data => {
+      this.AbsentData = data;
     });
   }
 }
