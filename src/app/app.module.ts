@@ -36,7 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-	AngularFireDatabaseModule,
+    AngularFireDatabaseModule,
     NgxYoutubePlayerModule.forRoot(),
     NgxSpinnerModule,
     ToastrModule.forRoot({

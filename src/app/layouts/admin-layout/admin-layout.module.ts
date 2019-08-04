@@ -27,7 +27,7 @@ import { NgxTrumbowygModule } from 'ngx-trumbowyg';
 import { PaymentComponent } from '../../payment/payment.component';
 import { PayComponent } from '../../pay/pay.component';
 import { TransComponent } from '../../trans/trans.component';
-import {PenaltyComponent} from '../../penalty/penalty.component'
+import { PenaltyComponent } from '../../penalty/penalty.component'
 
 import {
   MatButtonModule,

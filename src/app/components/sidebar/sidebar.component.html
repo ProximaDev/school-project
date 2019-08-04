@@ -4,7 +4,22 @@
             <img style="border-radius: 10px;" src="assets/img/school-logo.png" />
         </div>
         مدرستي
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
     </a>
+    <div>
+        <mat-menu #menu="matMenu">
+            <buatton mat-menu-item (click)="menuselect(1)">
+                <mat-icon>looks_one</mat-icon>
+                <span>القائمة الاولى</span>
+                </button>
+                <button mat-menu-item (click)="menuselect(2)">
+                    <mat-icon>looks_two</mat-icon>
+                    <span>القائمة الثانية</span>
+                </button>
+        </mat-menu>
+    </div>
 </div>
 <div class="sidebar-wrapper">
     <ul class="nav">

@@ -1,8 +1,7 @@
 import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
-
 import { AngularFireAuth } from '@angular/fire/auth';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 const STORAGE_KEY = 'local_user';
@@ -15,7 +14,7 @@ const STORAGE_KEY = 'local_user';
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
     location: Location;
-      mobile_menu_visible: any = 0;
+    mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
 

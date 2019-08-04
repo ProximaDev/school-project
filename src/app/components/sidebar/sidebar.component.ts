@@ -21,9 +21,12 @@ export const ROUTES: RouteInfo[] = [
   { path: '/weekly', title: 'الجدول الاسبوعي', icon: 'today', class: '' },
   { path: '/courses', title: 'المواد', icon: 'book', class: '' },
   { path: '/absent', title: 'الغيابات', icon: 'schedule', class: '' },
-  { path: '/degree', title: 'الدرجات', icon: 'assignment', class: '' },
+  { path: '/degree', title: 'الدرجات', icon: 'assignment', class: '' }
+];
+
+export const ROUTES2: RouteInfo[] = [
   { path: '/payment', title: 'الاقساط', icon: 'euro_symbol', class: '' },
-  { path: '/penalty', title: ' الغرامات', icon: 'sentiment_very_dissatisfied', class: '' },
+  { path: '/penalty', title: 'الغرامات', icon: 'sentiment_very_dissatisfied', class: '' },
   { path: '/trans', title: 'خطوط النقل', icon: 'airport_shuttle', class: '' }
 ];
 
@@ -50,10 +53,11 @@ export class SidebarComponent implements OnInit {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
 
-  isMobileMenu() {
-    if ($(window).width() > 991) {
-      return false;
+  menuselect(num: number) {
+    if (num == 1) {
+      this.menuItems = ROUTES.filter(menuItem => menuItem);
+    } else {
+      this.menuItems = ROUTES2.filter(menuItem => menuItem);
     }
-    return true;
-  };
+  }
 }
