@@ -21,6 +21,7 @@ import { PayComponent } from '../../pay/pay.component';
 import { TransComponent } from '../../trans/trans.component';
 import {PenaltyComponent} from '../../penalty/penalty.component';
 import {HolidaysComponent} from '../../holidays/holidays.component';
+import {ExamComponent} from '../../exam/exam.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -44,5 +45,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'trans', component: TransComponent, canActivate: [AuthGuard] },
     { path: 'penalty', component: PenaltyComponent, canActivate: [AuthGuard] },
     { path: 'holiday', component: HolidaysComponent, canActivate: [AuthGuard] },
+    { path: 'exam', component: ExamComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/dashboard' }
 ];
