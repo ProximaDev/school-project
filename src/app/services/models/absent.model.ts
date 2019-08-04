@@ -9,7 +9,6 @@ export class Absent {
     name: string;
     division: string;
     stage: string;
-    course: string;
     date: string;
     tag: string;
 }
