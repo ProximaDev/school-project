@@ -19,7 +19,13 @@ import { EditArticleComponent } from '../../edit-article/edit-article.component'
 import { PaymentComponent } from '../../payment/payment.component';
 import { PayComponent } from '../../pay/pay.component';
 import { TransComponent } from '../../trans/trans.component';
-import {PenaltyComponent} from '../../penalty/penalty.component'
+import {PenaltyComponent} from '../../penalty/penalty.component';
+import {HolidaysComponent} from '../../holidays/holidays.component';
+import {ExamComponent} from '../../exam/exam.component';
+import {StaffComponent} from '../../staff/staff.component';
+import {AttitudeComponent} from '../../attitude/attitude.component'
+
+
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -42,5 +48,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'pay', component: PayComponent, canActivate: [AuthGuard] },
     { path: 'trans', component: TransComponent, canActivate: [AuthGuard] },
     { path: 'penalty', component: PenaltyComponent, canActivate: [AuthGuard] },
+    { path: 'holiday', component: HolidaysComponent, canActivate: [AuthGuard] },
+    { path: 'exam', component: ExamComponent, canActivate: [AuthGuard] },
+    { path: 'staff', component: StaffComponent, canActivate: [AuthGuard] },
+    { path: 'attitude', component: AttitudeComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/dashboard' }
 ];

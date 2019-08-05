@@ -27,7 +27,11 @@ import { NgxTrumbowygModule } from 'ngx-trumbowyg';
 import { PaymentComponent } from '../../payment/payment.component';
 import { PayComponent } from '../../pay/pay.component';
 import { TransComponent } from '../../trans/trans.component';
-import { PenaltyComponent } from '../../penalty/penalty.component'
+import { PenaltyComponent } from '../../penalty/penalty.component';
+import {HolidaysComponent} from '../../holidays/holidays.component';
+import {ExamComponent} from '../../exam/exam.component';
+import {StaffComponent} from '../../staff/staff.component';
+import {AttitudeComponent} from '../../attitude/attitude.component'
 
 import {
   MatButtonModule,
@@ -100,6 +104,10 @@ import {
     PayComponent,
     TransComponent,
     PenaltyComponent,
+    HolidaysComponent,
+    ExamComponent,
+    StaffComponent,
+    AttitudeComponent,
   ],
   entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })
