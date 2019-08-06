@@ -32,6 +32,7 @@ import {HolidaysComponent} from '../../holidays/holidays.component';
 import {ExamComponent} from '../../exam/exam.component';
 import {StaffComponent} from '../../staff/staff.component';
 import {AttitudeComponent} from '../../attitude/attitude.component'
+import {HistoryComponent} from '../../history/history.component'
 
 import {
   MatButtonModule,
@@ -108,6 +109,7 @@ import {
     ExamComponent,
     StaffComponent,
     AttitudeComponent,
+    HistoryComponent,
   ],
   entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })
