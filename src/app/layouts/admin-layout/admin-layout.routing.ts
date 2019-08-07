@@ -22,6 +22,11 @@ import { TransComponent } from '../../trans/trans.component';
 import {PenaltyComponent} from '../../penalty/penalty.component';
 import {HolidaysComponent} from '../../holidays/holidays.component';
 import {ExamComponent} from '../../exam/exam.component';
+import {StaffComponent} from '../../staff/staff.component';
+import {AttitudeComponent} from '../../attitude/attitude.component';
+import {HistoryComponent} from '../../history/history.component';
+
+
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -46,5 +51,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'penalty', component: PenaltyComponent, canActivate: [AuthGuard] },
     { path: 'holiday', component: HolidaysComponent, canActivate: [AuthGuard] },
     { path: 'exam', component: ExamComponent, canActivate: [AuthGuard] },
+    { path: 'staff', component: StaffComponent, canActivate: [AuthGuard] },
+    { path: 'attitude', component: AttitudeComponent, canActivate: [AuthGuard] },
+    { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/dashboard' }
 ];

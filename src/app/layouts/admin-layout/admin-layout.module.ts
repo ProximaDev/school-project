@@ -30,7 +30,10 @@ import { TransComponent } from '../../trans/trans.component';
 import { PenaltyComponent } from '../../penalty/penalty.component';
 import {HolidaysComponent} from '../../holidays/holidays.component';
 import {ExamComponent} from '../../exam/exam.component';
- 
+import {StaffComponent} from '../../staff/staff.component';
+import {AttitudeComponent} from '../../attitude/attitude.component'
+import {HistoryComponent} from '../../history/history.component'
+
 import {
   MatButtonModule,
   MatInputModule,
@@ -104,6 +107,9 @@ import {
     PenaltyComponent,
     HolidaysComponent,
     ExamComponent,
+    StaffComponent,
+    AttitudeComponent,
+    HistoryComponent,
   ],
   entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })

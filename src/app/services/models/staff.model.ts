@@ -4,18 +4,16 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 
-export class Student {
+export class Staff {
     id: string;
     fullName: string;
     gender: string;
-    stage: string;
-    division: string;
-    birthdate: string;
+    age: string;
     address: string;
     mobile: string;
     email: string;
-    password: string;
-    tag: string;
-    diligent: string;
-    image: string;
+    Role:string;
+    specialization:string;
+    join_date:string;
+    Experience:string;
 }

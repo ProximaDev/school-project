@@ -97,6 +97,17 @@
                                     </mat-form-field>
                                 </div>
                             </div>
+                            <div class="row" style="text-align: center">
+                                <div class="col-md-12">
+                                    <div>
+                                        <p>الصورة الشخصية</p>
+                                        <input type="file" name="file" id="file" class="inputfile"
+                                            (change)="onSelectedFile($event)" accept=".png,.jpg" required />
+                                        <label class="btn btn-danger" for="file"><i style="margin: 0 auto"
+                                                class="material-icons">cloud_upload</i></label>
+                                    </div>
+                                </div>
+                            </div>
                             <button mat-raised-button type="submit" [disabled]="!f.valid"
                                 class="btn btn-danger pull-right"><i class="material-icons">check</i>
                                 {{btnTXT}}</button>
@@ -160,6 +171,7 @@
                                         <th>متميز</th>
                                         <th>البريد الالكتروني</th>
                                         <th>رمز المرور</th>
+                                        <th>الصورة الشخصية</th>
                                         <th>الاجرائات</th>
                                     </thead>
                                     <tbody>
@@ -174,6 +186,8 @@
                                             <td>{{student.diligent}}</td>
                                             <td>{{student.email}}</td>
                                             <td>{{student.password}}</td>
+                                            <td><img style="background-size: auto; width: 50px;height: 50px; border-radius: 100%"
+                                                    src="{{student.image}}"></td>
                                             <td><a style="color:white; background: #ff5e00"
                                                     class="btn btn-white btn-round btn-just-icon"
                                                     (click)="onDelete(student)">

@@ -1,0 +1,153 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title" style="text-align: center">قائمة الكادر</h4>
+                      <p class="card-category" style="text-align: center">اضافة موظف جديد</p>
+                  </div>
+                  <div class="card-body">
+                      <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <mat-form-field>
+                                      <input autocomplete="off" matInput placeholder="الاسم الكامل" name="fullName"
+                                          [(ngModel)]="staff.fullName" required>
+                                  </mat-form-field>
+                              </div>
+                              
+                              <div class="col-md-4">
+                                  <mat-form-field>
+                                      <mat-label>الجنس</mat-label>
+                                      <mat-select required name="gender" [(ngModel)]="staff.gender">
+                                          <mat-option value="ذكر">ذكر</mat-option>
+                                          <mat-option value="انثى">انثى</mat-option>
+                                      </mat-select>
+                                  </mat-form-field>
+                              </div>
+
+                              <div class="col-md-4">
+                                <mat-form-field>
+                                    <input autocomplete="off" matInput placeholder="العمر " name="age"
+                                        [(ngModel)]="staff.age" required>
+                                </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <mat-form-field>
+                                      <input autocomplete="off" matInput placeholder="العنوان" name="address"
+                                          [(ngModel)]="staff.address" required>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field>
+                                      <input autocomplete="off" matInput placeholder="رقم الهاتف" name="mobile"
+                                          [(ngModel)]="staff.mobile" required>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field>
+                                    <input autocomplete="off" matInput placeholder="البريد الالكتروني" name="email"
+                                        [(ngModel)]="staff.email" required>
+                                </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <mat-form-field>
+                                  <input autocomplete="off" matInput placeholder="الوظيفة" name="role"
+                                      [(ngModel)]="staff.role" required>
+                              </mat-form-field>
+                          </div>
+                              <div class="col-md-4">
+                                  <mat-form-field>
+                                      <input autocomplete="off" matInput placeholder="الاختصاص " name="specialization"
+                                          [(ngModel)]="staff.specialization" required>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field>
+                                      <input autocomplete="off" matInput placeholder="الخبرة " name="Experience"
+                                          [(ngModel)]="staff.Experience" required>
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <mat-form-field>
+                                      <input autocomplete="off" matInput [matDatepicker]="picker"
+                                          placeholder="تاريخ الانضمام" name="join_date" [(ngModel)]="staff.join_date"
+                                          required>
+                                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                      <mat-datepicker #picker></mat-datepicker>
+                                  </mat-form-field>
+                              </div>
+
+                          </div>
+                          <button mat-raised-button type="submit" [disabled]="!f.valid"
+                              class="btn btn-danger pull-right"><i class="material-icons">check</i>
+                              {{btnTXT}}</button>
+                          <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                                  class="material-icons">cancel</i> الغاء</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+              <div class="col-md-12" style="direction: rtl">
+                  <div class="card">
+                      <div class="card-header card-header-danger" style="text-align: center">
+                          <h4 class="card-title ">المعلومات</h4>
+                          <p class="card-category">معلومات الكادر</p>
+                      </div>
+                      <div class="card-body">
+                          <div class="table-responsive">
+                              <table class="table">
+                                  <thead class="text-danger">
+                                      <th>الاسم الكامل</th>
+                                      <th>الجنس</th>
+                                      <th>العمر</th>
+                                      <th>العنوان</th>
+                                      <th>الهاتف</th>
+                                      <th>البريد الالكتروني</th>
+                                      <th>الوظيفة</th>                                    
+                                      <th>الاختصاص</th>
+                                      <th>تاريخ الانضمام</th>
+                                      <th>الخبرة </th>
+                                      <th>الاجرائات</th>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let staff of staffData">
+                                          <td>{{staff.fullName}}</td>
+                                          <td>{{staff.gender}}</td>
+                                          <td>{{staff.age}}</td>
+                                          <td>{{staff.address}}</td>
+                                          <td>{{staff.mobile}}</td>
+                                          <td>{{staff.email}}</td>
+                                          <td>{{staff.role}}</td>
+                                          <td>{{staff.specialization}}</td>
+                                          <td>{{staff.join_date}}</td>                                        
+                                          <td>{{staff.Experience}}</td>
+                                          <td><a style="color:white; background: #ff5e00"
+                                                  class="btn btn-white btn-round btn-just-icon"
+                                                  (click)="onDelete(staff)">
+                                                  <i class="material-icons">delete</i>
+                                              </a>
+                                              <a class="btn btn-white btn-round btn-just-icon"
+                                                  (click)="onEdit(staff)">
+                                                  <i class="material-icons">edit</i>
+                                              </a>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>

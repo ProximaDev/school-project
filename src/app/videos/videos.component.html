@@ -15,15 +15,21 @@
                     </div>
                     <div id="SHOW">
                         <div class="row">
-                            <div class="col-md-6" *ngFor="let item of videosData">
-                                <youtube-player style="padding:5px" [videoId]="youtube_parser(item.link)">
-                                </youtube-player>
+                            <div class="col-md-6" *ngFor="let item of videosData" style="text-align: center">
+                                <div>
+                                    <youtube-player style="margin: 10px; text-align: center"
+                                        [videoId]="youtube_parser(item.link)">
+                                    </youtube-player>
+                                </div>
                                 <hr>
-                                <p class="card-category text-gray">{{item.title}}</p>
-                                <button class="btn btn-danger btn-round btn-sm" (click)="updateVideo(item)"><i
-                                        style="margin: 0 auto" class="material-icons">edit</i></button>
-                                <button class="btn btn-danger btn-round btn-sm" (click)="openDialog(item.id)"><i
-                                        style="margin: 0 auto" class="material-icons">delete</i></button>
+                                <div>
+                                    <p class="card-category text-gray">{{item.title}}
+                                    </p>
+                                    <button class="btn btn-danger btn-round btn-sm" (click)="updateVideo(item)"><i
+                                            style="margin: 0 auto" class="material-icons">edit</i></button>
+                                    <button class="btn btn-danger btn-round btn-sm" (click)="openDialog(item.id)"><i
+                                            style="margin: 0 auto" class="material-icons">delete</i></button>
+                                </div>
                             </div>
                         </div>
                     </div>

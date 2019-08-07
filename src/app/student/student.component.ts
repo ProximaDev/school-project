@@ -97,4 +97,24 @@ export class StudentComponent implements OnInit, AfterViewInit {
       this.studentData = data;
     });
   }
+
+  onSelectedFile(evt) {
+    var files = evt.target.files;
+    var file = files[0];
+
+    if (files && file) {
+      var reader = new FileReader();
+
+      reader.onload = this._handleReaderLoaded.bind(this);
+
+      reader.readAsBinaryString(file);
+    }
+  }
+
+
+
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.student.image = "data:image/jpeg;base64," + btoa(binaryString);
+  }
 }
