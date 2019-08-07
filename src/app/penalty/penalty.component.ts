@@ -95,9 +95,16 @@ getpayinfo(){
     
 }
   onDelete(penalty: Penalty) {
+    this.Pay1List = this.firestoreService.getFirestoreData('paymentList', 'name',penalty.name);
+    this.Pay1List.subscribe(data => {
+      this.Pay1Data = data;
+    });
     const dialogRef = this.dialog.open(ConfirmDeleteComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'true') {
+        this.paid =parseInt(this.Pay1Data[0]['total_amount']);
+        this.paid-=parseInt(penalty.penalty_amount);
+        this.firestoreService.updatepen(penalty.name,this.paid.toString());
         this.firestoreService.deleteFirestoreData('penaltyList', penalty.id);
         this.toastr.warning('تم الحذف بنجاح', 'حذف');
       }
