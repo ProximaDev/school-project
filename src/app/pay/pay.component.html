@@ -52,17 +52,17 @@
           <div class="row" style="direction: rtl">
             <div class="col-md-4">
               <mat-form-field>
-                <input matInput placeholder="مبلغ المدفوع" name="amountpaid" [(ngModel)]="pay.amountpaid">
+                <input autocomplete="off" matInput placeholder="مبلغ المدفوع" name="amountpaid" [(ngModel)]="pay.amountpaid">
               </mat-form-field>
             </div>
             <div class="col-md-4">
               <mat-form-field>
-                <input matInput placeholder="رقم القسط" name="number" [(ngModel)]="pay.number">
+                <input autocomplete="off" matInput placeholder="رقم القسط" name="number" [(ngModel)]="pay.number">
               </mat-form-field>
             </div>
             <div class="col-md-4">
               <mat-form-field>
-                  <input matInput [matDatepicker]="picker" placeholder="تاريخ الدفع"
+                  <input autocomplete="off" matInput [matDatepicker]="picker" placeholder="تاريخ الدفع"
                       name="date" [(ngModel)]="pay.date" required>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
