@@ -7,8 +7,8 @@
             </div>
             <div class="card-body">
                 <form role="form" #f="ngForm" (ngSubmit)="signIn(f)">                  
-                    <input class="form-control" placeholder="البريد الالكتروني" type="email" name="email" ngModel required>                    
-                    <input class="form-control" placeholder="كلمة المرور" [type]="show ? 'text' : 'password'"  name="password" ngModel required>
+                    <input autocomplete="off" class="form-control" placeholder="البريد الالكتروني" type="email" name="email" ngModel required>                    
+                    <input autocomplete="off" class="form-control" placeholder="كلمة المرور" [type]="show ? 'text' : 'password'"  name="password" ngModel required>
                     <div class="form-check">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" (click)="password()">
