@@ -2,11 +2,74 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header card-header-danger">
-                <h4 class="card-title" style="text-align: center">TITLE</h4>
-                <p class="card-category" style="text-align: center">CONTENT</p>
+                <h4 class="card-title" style="text-align: center">اسم المدرسة</h4>
+                <p class="card-category" style="text-align: center">الاحصائيات</p>
+                <button mat-raised-button class="btn btn-danger btn-round pull-right" (click)="statistics($event)">
+              الاحصائيات</button>
             </div>
             <div class="card-body">
-                ..................
+                    <div class="row" style="direction: rtl">
+                            <div class="col-md-4">
+                                    <h3> عدد الطلاب</h3>
+                                    <h3> {{studentnumber}}</h3>
+                            </div>
+
+                            <div class="col-md-4">
+                                    <h3> عدد الكادر المدرسي</h3>
+                                    <h3> {{staffnumber}}</h3>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                    <h3> عدد العطل الرسمية</h3>
+                                    <h3> {{holidaynumber}}</h3>
+                            </div>
+
+    
+                    </div>
+
+
+                    <div class="row" style="direction: rtl">
+
+                            <div class="col-md-4">
+                                    <h3> مبلغ الاقساط السنوي</h3>
+                                    <h3> {{paymentcol-penaltycol}}</h3>
+                            </div>
+
+                            <div class="col-md-4">
+                                    <h3> مبلغ الغرامات الكلي</h3>
+                                    <h3> {{penaltycol}}</h3>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                    <h3> مبلغ الاقساط الكلي</h3>
+                                    <h3> {{paymentcol}}</h3>
+                            </div>
+                            
+                    </div>
+
+                    <div class="row" style="direction: rtl">
+                           
+                            <div class="col-md-4">
+                                    <h3> مبلغ الاقساط المستلم</h3>
+                                    <h3> {{payamount}}</h3>
+                            </div>
+
+                            <div class="col-md-4">
+                                    <h3> مبلغ الاقساط المتبقي</h3>
+                                    <h3> {{paymentcol-payamount}}</h3>
+                            </div>
+
+                            <div class="col-md-4">
+                                    <h3>   عدد الغرامات</h3>
+                                    <h3> {{penaltynumber}}</h3>
+                            </div>
+                           
+
+                          
+                    </div>
+                   
             </div>
         </div>
     </div>

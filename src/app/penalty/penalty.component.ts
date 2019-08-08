@@ -20,8 +20,7 @@ const STORAGE_KEY = 'local_user';
 })
 export class PenaltyComponent implements OnInit {
 
-  CourseList: Observable<any[]>;
-  CourseData: any;
+ 
   PenaltyList: Observable<any[]>;
   PenaltyData: any;
   Pay1List: Observable<any[]>;
@@ -54,12 +53,7 @@ export class PenaltyComponent implements OnInit {
     });
   }
 
-  stageSelect() {
-    this.CourseList = this.firestoreService.getRealTimeData('courseList', this.penalty.stage);
-    this.CourseList.subscribe(data => {
-      this.CourseData = data;
-    });
-  }
+  
 
   divSelect() {
     this.StudentList = this.firestoreService.getRealTimeData('studentList', `${this.penalty.stage}/${this.penalty.division}`);
