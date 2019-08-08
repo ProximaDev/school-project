@@ -1,76 +1,168 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header card-header-danger">
-                <h4 class="card-title" style="text-align: center">اسم المدرسة</h4>
-                <p class="card-category" style="text-align: center">الاحصائيات</p>
-                <button mat-raised-button class="btn btn-danger btn-round pull-right" (click)="statistics($event)">
-              الاحصائيات</button>
-            </div>
-            <div class="card-body">
-                    <div class="row" style="direction: rtl">
-                            <div class="col-md-4">
-                                    <h3> عدد الطلاب</h3>
-                                    <h3> {{studentnumber}}</h3>
-                            </div>
+        <div class="container-fluid">
+                <div class="card">
+                        <div class="card-header card-header-danger">
+                                <h4 class="card-title" style="text-align: center">اسم المدرسة</h4>
+                                <p class="card-category" style="text-align: center">الاحصائيات</p>
+                                <button mat-raised-button class="btn btn-danger btn-round pull-right"
+                                        (click)="statistics($event)">
+                                        الاحصائيات</button>
+                        </div>
+                        <div class="card-body">
+                                <div class="row" style="direction: rtl">
 
-                            <div class="col-md-4">
-                                    <h3> عدد الكادر المدرسي</h3>
-                                    <h3> {{staffnumber}}</h3>
-                            </div>
+                                        <div class="col-md-4">
+                                                <div class="card card-stats">
+                                                        <div class="card-header card-header-danger card-header-icon">
+                                                                <div class="card-icon">
+                                                                        <i class="material-icons">account_circle</i>
+                                                                </div>
+                                                                <p class="card-category">عدد الطلاب</p>
+                                                                <h3 class="card-title">{{studentnumber}}</h3>
+                                                        </div>
+                                                        <div class="card-footer"></div>
+                                                </div>
+                                        </div>
 
+                                        <div class="col-md-4">
+                                                <div class="card card-stats">
+                                                        <div class="card-header card-header-danger card-header-icon">
+                                                                <div class="card-icon">
+                                                                        <i class="material-icons">local_library</i>
+                                                                </div>
+                                                                <p class="card-category">عدد الكادر المدرسي</p>
+                                                                <h3 class="card-title">{{staffnumber}}</h3>
+                                                        </div>
+                                                        <div class="card-footer"></div>
+                                                </div>
+                                        </div>
 
-                            <div class="col-md-4">
-                                    <h3> عدد العطل الرسمية</h3>
-                                    <h3> {{holidaynumber}}</h3>
-                            </div>
+                                        <div class="col-md-4">
+                                                <div class="card card-stats">
+                                                        <div class="card-header card-header-danger card-header-icon">
+                                                                <div class="card-icon">
+                                                                        <i class="material-icons">local_hotel</i>
+                                                                </div>
+                                                                <p class="card-category">عدد العطل الرسمية</p>
+                                                                <h3 class="card-title">{{holidaynumber}}</h3>
+                                                        </div>
+                                                        <div class="card-footer"></div>
+                                                </div>
+                                        </div>
+                                </div>
 
-    
-                    </div>
+                                <div class="row" style="direction: rtl">
 
+                                        <div class="col-md-4">
+                                                <div class="card card-stats">
+                                                        <div class="card-header card-header-danger card-header-icon">
+                                                                <div class="card-icon">
+                                                                        <i class="material-icons">monetization_on</i>
+                                                                </div>
+                                                                <p class="card-category">
+                                                                        مبلغ الاقساط السنوي
+                                                                </p>
+                                                                <h3 class="card-title">
+                                                                        {{paymentcol-penaltycol}}
+                                                                </h3>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                        </div>
+                                                </div>
+                                        </div>
 
-                    <div class="row" style="direction: rtl">
+                                        <div class="col-md-4">
+                                                <div class="card card-stats">
+                                                        <div class="card-header card-header-danger card-header-icon">
+                                                                <div class="card-icon">
+                                                                        <i class="material-icons">monetization_on</i>
+                                                                </div>
+                                                                <p class="card-category">مبلغ الغرامات الكلي</p>
+                                                                <h3 class="card-title">{{penaltycol}}</h3>
+                                                        </div>
+                                                        <div class="card-footer"></div>
+                                                </div>
+                                        </div>
 
-                            <div class="col-md-4">
-                                    <h3> مبلغ الاقساط السنوي</h3>
-                                    <h3> {{paymentcol-penaltycol}}</h3>
-                            </div>
+                                        <div class="col-md-4">
+                                                <div class="card card-stats">
+                                                        <div class="card-header card-header-danger card-header-icon">
+                                                                <div class="card-icon">
+                                                                        <i class="material-icons">monetization_on</i>
+                                                                </div>
+                                                                <p class="card-category">
+                                                                        مبلغ الاقساط الكلي
+                                                                </p>
+                                                                <h3 class="card-title">
+                                                                        {{paymentcol}}
+                                                                </h3>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                        </div>
+                                                </div>
+                                        </div>
 
-                            <div class="col-md-4">
-                                    <h3> مبلغ الغرامات الكلي</h3>
-                                    <h3> {{penaltycol}}</h3>
-                            </div>
+                                </div>
 
+                                <div class="row" style="direction: rtl">
 
-                            <div class="col-md-4">
-                                    <h3> مبلغ الاقساط الكلي</h3>
-                                    <h3> {{paymentcol}}</h3>
-                            </div>
-                            
-                    </div>
+                                        <div class="col-md-4">
+                                                <div class="card card-stats">
+                                                        <div class="card-header card-header-danger card-header-icon">
+                                                                <div class="card-icon">
+                                                                        <i class="material-icons">monetization_on</i>
+                                                                </div>
+                                                                <p class="card-category">
+                                                                        مبلغ الاقساط المستلم
+                                                                </p>
+                                                                <h3 class="card-title">
+                                                                        {{payamount}}
+                                                                </h3>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                        </div>
+                                                </div>
+                                        </div>
 
-                    <div class="row" style="direction: rtl">
-                           
-                            <div class="col-md-4">
-                                    <h3> مبلغ الاقساط المستلم</h3>
-                                    <h3> {{payamount}}</h3>
-                            </div>
+                                        <div class="col-md-4">
+                                                <div class="card card-stats">
+                                                        <div class="card-header card-header-danger card-header-icon">
+                                                                <div class="card-icon">
+                                                                        <i class="material-icons">monetization_on</i>
+                                                                </div>
+                                                                <p class="card-category">
+                                                                        مبلغ الاقساط المتبقي
+                                                                </p>
+                                                                <h3 class="card-title">
+                                                                        {{paymentcol-payamount}}
+                                                                </h3>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                        </div>
+                                                </div>
+                                        </div>
 
-                            <div class="col-md-4">
-                                    <h3> مبلغ الاقساط المتبقي</h3>
-                                    <h3> {{paymentcol-payamount}}</h3>
-                            </div>
+                                        <div class="col-md-4">
+                                                <div class="card card-stats">
+                                                        <div class="card-header card-header-danger card-header-icon">
+                                                                <div class="card-icon">
+                                                                        <i class="material-icons">warning</i>
+                                                                </div>
+                                                                <p class="card-category">
+                                                                        عدد الغرامات
+                                                                </p>
+                                                                <h3 class="card-title">
+                                                                        {{penaltynumber}}
+                                                                </h3>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                        </div>
+                                                </div>
+                                        </div>
 
-                            <div class="col-md-4">
-                                    <h3>   عدد الغرامات</h3>
-                                    <h3> {{penaltynumber}}</h3>
-                            </div>
-                           
+                                </div>
 
-                          
-                    </div>
-                   
-            </div>
+                        </div>
+                </div>
         </div>
-    </div>
 </div>
