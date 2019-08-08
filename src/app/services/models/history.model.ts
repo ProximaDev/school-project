@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 
 export class History {
+    id:string;
     name: string;
     establishment_date:string;
     owner_name:string;

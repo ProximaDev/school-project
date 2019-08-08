@@ -46,7 +46,7 @@ export class HistoryComponent implements OnInit {
   saveFormData(form: NgForm) {
     var datePipe = new DatePipe('en-US');
     this.history.establishment_date = datePipe.transform(new Date(this.history.establishment_date), 'dd/MM/yyyy');
-      this.firestoreService.updateFirestoreData('historylist', this.history.name, this.history);
+      this.firestoreService.updateFirestoreData('historylist', this.history.id, this.history);
     form.resetForm();
     this.edit=false;
   }
