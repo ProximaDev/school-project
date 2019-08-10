@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 export class Notify {
     id: string;
-    subject: string;
+    title: string;
     content: string;
     date: string;
 }

@@ -17,7 +17,8 @@ exports.sendToTopic = functions.https.onRequest((req, res) => {
         const payload = {
             notification: {
                 title: mtitle,
-                body: mcontent
+                body: mcontent,
+				sound: 'default'
             }
         };
         console.log(mtitle);
@@ -39,7 +40,8 @@ exports.sendToDevice = functions.https.onRequest((req, res) => {
         const payload = {
             notification: {
                 title: mtitle,
-                body: mcontent
+                body: mcontent,
+				sound: 'default'
             }
         };
 		console.log(mtoken);
