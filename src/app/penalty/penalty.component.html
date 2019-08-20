@@ -2,8 +2,8 @@
   <div class="container-fluid">
     <div class="card">
       <div class="card-header card-header-danger">
-        <h4 class="card-title" style="text-align: center"> قائمة الغرامات</h4>
-        <p class="card-category" style="text-align: center">قائمة الغرامات الخاصة بلطلاب</p>
+        <h4 class="card-title" style="text-align: center"> قائمة المبالغ الاضافية</h4>
+        <p class="card-category" style="text-align: center">قائمة المبالغ الاضافية الخاصة بلطلاب</p>
 
       </div>
       <div class="card-body">
@@ -51,24 +51,30 @@
           <div class="row" style="direction: rtl">
             <div class="col-md-4">
               <mat-form-field>
-                <input autocomplete="off" matInput placeholder="مبلغ الغرامة" name="penalty_amount"
+                <input autocomplete="off" matInput placeholder="المبلغ " name="penalty_amount"
                   [(ngModel)]="penalty.penalty_amount">
               </mat-form-field>
             </div>
             <div class="col-md-4">
               <mat-form-field>
-                <input autocomplete="off" matInput placeholder="نوع الغرامة" name="penalty_type"
+                <input autocomplete="off" matInput placeholder="نوع المبلغ" name="penalty_type"
                   [(ngModel)]="penalty.penalty_type">
               </mat-form-field>
             </div>
             <div class="col-md-4">
               <mat-form-field>
-                <input autocomplete="off" matInput [matDatepicker]="picker" placeholder="تاريخ الغرامة" name="date"
+                <input autocomplete="off" matInput [matDatepicker]="picker" placeholder="التاريخ " name="date"
                   [(ngModel)]="penalty.date" required>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
+            <div class="col-md-12">
+                <mat-form-field>
+                  <input autocomplete="off" matInput placeholder=" الوصف" name="description"
+                    [(ngModel)]="penalty.description">
+                </mat-form-field>
+              </div>
             <div class="row" style="margin-right: 25px" style="direction:rtl">
               <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
                   class="material-icons">check</i> اضافة</button>
@@ -84,8 +90,8 @@
         <div class="col-md-12" style="direction: rtl">
           <div class="card">
             <div class="card-header card-header-danger" style="text-align: center">
-              <h4 class="card-title ">قائمة الاقساط</h4>
-              <p class="card-category">معلومات الاقساط</p>
+              <h4 class="card-title ">قائمة المبالغ الاضافية</h4>
+              <p class="card-category">معلومات المبالغ</p>
               <div class="row" style="direction: rtl">
                 <div class="col-md-4">
                   <h4 style="text-align: right">المرحلة</h4>
@@ -129,10 +135,10 @@
                     <th>الاسم</th>
                     <th>المرحلة</th>
                     <th>الشعبة</th>
-                    <th>نوع الغرامة</th>
-                    <th>تاريخ الغرامة</th>
-                    <th>مبلغ الغرامة</th>
-                    <th></th>
+                    <th>النوع </th>
+                    <th>التاريخ </th>
+                    <th>المبلغ </th>
+                    <th>الوصف</th>
                     <th>الاجرائات</th>
                   </thead>
                   <tbody>
@@ -143,7 +149,7 @@
                       <td>{{penalty.penalty_type}}</td>
                       <td>{{penalty.date}}</td>
                       <td>{{penalty.penalty_amount}}</td>
-                      <td></td>
+                      <td>{{penalty.description}}</td>
                       <td><a style="color:white; background: #ff5e00" class="btn btn-white btn-round btn-just-icon"
                           (click)="onDelete(penalty)">
                           <i class="material-icons">delete</i>
