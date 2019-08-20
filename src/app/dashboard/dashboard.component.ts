@@ -26,6 +26,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   staffData: any;
   holidayList: Observable<any[]>;
   holidayData: any;
+  expenseList: Observable<any[]>;
+  expenseData: any;
 
   paymentcol=0;
   payamount=0;
@@ -34,7 +36,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   penaltycol=0;
   staffnumber=0;
   holidaynumber=0;
-
+  staffsalary=0;
+  expensecol=0;
 
   constructor(private firestoreService: FirebaseService,
     private router: Router,
@@ -51,6 +54,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.PenaltyList = this.firestoreService.getFirestoreData('penaltyList');
     this.staffList = this.firestoreService.getFirestoreData('stafflist');
     this.holidayList = this.firestoreService.getFirestoreData('holidayList');
+    this.expenseList = this.firestoreService.getFirestoreData('expenseList');
 
 
     
@@ -75,6 +79,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.holidayList.subscribe(data => {
       this.holidayData = data;
+    });
+
+    this.expenseList.subscribe(data => {
+      this.expenseData = data;
     });
    
   }
@@ -112,12 +120,26 @@ statistics(){
 
     this.i=0;
 
+    while(this.staffData[this.i] != null){
+      this.staffsalary+=parseInt(this.staffData[this.i]['salary']);
+      this.i+=1;
+      } 
+
+    this.i=0;
+
     while(this.holidayData[this.i] != null){
       this.holidaynumber+=1;
       this.i+=1;
       } 
 
       this.i=0;
+
+      while(this.expenseData[this.i] != null){
+        this.expensecol+=parseInt(this.expenseData[this.i]['amount']);
+        this.i+=1;
+        } 
+  
+        this.i=0;
 
 }
 

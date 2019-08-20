@@ -33,6 +33,8 @@ import {ExamComponent} from '../../exam/exam.component';
 import {StaffComponent} from '../../staff/staff.component';
 import {AttitudeComponent} from '../../attitude/attitude.component'
 import {HistoryComponent} from '../../history/history.component'
+import {ExpensesComponent} from '../../expenses/expenses.component'
+
 
 import {
   MatButtonModule,
@@ -110,6 +112,7 @@ import {
     StaffComponent,
     AttitudeComponent,
     HistoryComponent,
+    ExpensesComponent,
   ],
   entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })

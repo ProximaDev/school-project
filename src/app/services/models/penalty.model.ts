@@ -11,6 +11,7 @@ export class Penalty {
     stage: string;
     penalty_type: string;
     penalty_amount: string;
+    description:string;
     tag: string;
     date:string;
 }

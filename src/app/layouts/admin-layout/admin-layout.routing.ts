@@ -25,7 +25,7 @@ import {ExamComponent} from '../../exam/exam.component';
 import {StaffComponent} from '../../staff/staff.component';
 import {AttitudeComponent} from '../../attitude/attitude.component';
 import {HistoryComponent} from '../../history/history.component';
-
+import {ExpensesComponent} from '../../expenses/expenses.component'
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -54,5 +54,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'staff', component: StaffComponent, canActivate: [AuthGuard] },
     { path: 'attitude', component: AttitudeComponent, canActivate: [AuthGuard] },
     { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
+    { path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/dashboard' }
 ];

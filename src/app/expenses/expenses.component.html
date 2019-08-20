@@ -1,0 +1,101 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title" style="text-align: center">المصاريف المدرسية</h4>
+                        <p class="card-category" style="text-align: center">قائمة المصاريف </p>
+                    </div>
+                    <div class="card-body">
+                        <form #f="ngForm" (ngSubmit)="saveFormData(f)" style="direction:rtl">
+                            <div class="row">
+                               
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input autocomplete="off" matInput placeholder="اسم المادة " name="name"
+                                            [(ngModel)]="expense.name" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input autocomplete="off" matInput placeholder="النوع " name="type"
+                                            [(ngModel)]="expense.type" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input autocomplete="off" matInput placeholder="السعر الكلي" name="amount"
+                                            [(ngModel)]="expense.amount" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-8">
+                                    <mat-form-field>
+                                        <input autocomplete="off" matInput placeholder="التفاصيل" name="description"
+                                            [(ngModel)]="expense.description" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input autocomplete="off" matInput [matDatepicker]="picker"
+                                            placeholder="التاريخ " name="date" [(ngModel)]="expense.date" required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            
+                            <button mat-raised-button type="submit" [disabled]="!f.valid"
+                                class="btn btn-danger pull-right"><i class="material-icons">check</i> اضافة</button>
+                            <button mat-raised-button class="btn btn-danger pull-right" routerLink="/dashboard"><i
+                                    class="material-icons">cancel</i> الغاء</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-12" style="direction: rtl">
+                    <div class="card">
+                        <div class="card-header card-header-danger" style="text-align: center">
+                            <h4 class="card-title ">قائمة المشتريات</h4>
+                            <p class="card-category">معلومات المشتريات</p>
+                        
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="text-danger">
+                                        <th>اسم المادة</th>
+                                        <th>النوع</th>
+                                        <th>السعر الكلي </th>
+                                        <th>التفاصيل</th>
+                                        <th>التاريخ</th>
+                                        <th>الاجرائات</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let e of expenseData">
+                                            <td>{{e.name}}</td>
+                                            <td>{{e.type}}</td>
+                                            <td>{{e.amount}}</td>
+                                            <td>{{e.description}}</td>
+                                            <td>{{e.date}}</td>
+                                            <td><a style="color:white; background: #ff5e00"
+                                                    class="btn btn-white btn-round btn-just-icon"
+                                                    (click)="onDelete(e)">
+                                                    <i class="material-icons">delete</i>
+                                                </a>
+                                                <a class="btn btn-white btn-round btn-just-icon"
+                                                    (click)="onEdit(e)">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
