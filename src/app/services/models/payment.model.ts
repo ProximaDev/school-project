@@ -9,7 +9,13 @@ export class Payment {
     name: string;
     division: string;
     stage: string;
-    total_amount: string;
+    total_amount: number;
     amount_paid: string;
+    payment_date1:string;
+    payment_date2:string;
+    payment_date3:string;
+    payment_amount1:string;
+    payment_amount2:string;
+    payment_amount3:string;
     tag: string;
 }

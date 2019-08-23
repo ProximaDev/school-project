@@ -14,7 +14,7 @@
               <h4 style="text-align: right">المرحلة</h4>
               <mat-form-field>
                 <mat-label>اختر المرحلة</mat-label>
-                <mat-select (selectionChange)="stageSelect($event.value)" name="stage" [(ngModel)]="payment.stage">
+                <mat-select (selectionChange)="stageSelect($event.value)" name="stage" [(ngModel)]="payment.stage" required>
                   <mat-option value="الاولى">الاولى</mat-option>
                   <mat-option value="الثانية">الثانية</mat-option>
                   <mat-option value="الثالثة">الثالثة</mat-option>
@@ -28,7 +28,7 @@
               <h4 style="text-align: right">الشعبة</h4>
               <mat-form-field>
                 <mat-label>اختر الشعبة</mat-label>
-                <mat-select (selectionChange)="divSelect($event.value)" name="division" [(ngModel)]="payment.division">
+                <mat-select (selectionChange)="divSelect($event.value)" name="division" [(ngModel)]="payment.division" required>
                   <mat-option value="أ">أ</mat-option>
                   <mat-option value="ب">ب</mat-option>
                   <mat-option value="ج">ج</mat-option>
@@ -41,7 +41,7 @@
               <h4 style="text-align: right">اسم الطالب</h4>
               <mat-form-field>
                 <mat-label>اختر الاسم</mat-label>
-                <mat-select name="name" [(ngModel)]="payment.name">
+                <mat-select name="name" [(ngModel)]="payment.name" required>
                   <mat-option *ngFor="let stu of StudentData" [value]="stu.fullName">
                     {{stu.fullName}}
                   </mat-option>
@@ -50,12 +50,51 @@
             </div>
           </div>
           <div class="row" style="direction: rtl">
-            <div class="col-md-12">
+            <div class="col-md-4">
               <mat-form-field>
-                <input autocomplete="off" matInput placeholder="مبلغ السنوي" name="total_amount"
-                  [(ngModel)]="payment.total_amount">
+                  <input autocomplete="off" matInput [matDatepicker]="picker" placeholder="تاريخ القسط الاول"
+                      name="payment_date1" [(ngModel)]="payment.payment_date1" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field> 
+            </div>   
+            <div class="col-md-4">
+              <mat-form-field>
+                  <input autocomplete="off" matInput [matDatepicker]="picker2" placeholder="تاريخ القسط الثاني"
+                      name="payment_date2" [(ngModel)]="payment.payment_date2" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field> 
+            </div>  
+            
+            <div class="col-md-4">
+              <mat-form-field>
+                  <input autocomplete="off" matInput [matDatepicker]="picker3" placeholder="تاريخ القسط الثالث"
+                      name="payment_date3" [(ngModel)]="payment.payment_date3" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                  <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field> 
+            </div>         
+          </div>
+          <div class="row" style="direction: rtl">
+            <div class="col-md-4">
+              <mat-form-field>
+                <input autocomplete="off" matInput placeholder="مبلغ القسط الاول" name="payment_amount1"
+                  [(ngModel)]="payment.payment_amount1" required>
               </mat-form-field>
-            </div>
+            </div>     
+            <div class="col-md-4">
+              <mat-form-field>
+                <input autocomplete="off" matInput placeholder="مبلغ القسط الثاني" name="payment_amount2"
+                  [(ngModel)]="payment.payment_amount2" required>
+              </mat-form-field>
+            </div>  
+            <div class="col-md-4">
+              <mat-form-field>
+                <input autocomplete="off" matInput placeholder="مبلغ القسط الثالث" name="payment_amount3"
+                  [(ngModel)]="payment.payment_amount3" required>
+              </mat-form-field>
+            </div>        
           </div>
           <div class="row" style="margin-right: 25px" style="direction:rtl">
             <button mat-raised-button type="submit" [disabled]="!f.valid" class="btn btn-danger pull-right"><i
@@ -113,47 +152,33 @@
                 <table class="table">
                   <thead class="text-danger">
                     <th>الاسم</th>
-                    <th></th>
-                    <th></th>
-
                     <th>المرحلة</th>
-                    <th></th>
-                    <th></th>
-
                     <th>الشعبة</th>
-                    <th></th>
-                    <th></th>
-
                     <th>القسط الكلي</th>
-                    <th></th>
                     <th>المبلغ المدفوع</th>
-                    <th></th>
                     <th>المبلغ المتبقي</th>
-                    <th></th>
-                    <th></th>
+                    <th>تاريخ القسط الاول</th>
+                    <th>مبلغ القسط الاول</th>
+                    <th>تاريخ القسط الثاني</th>
+                    <th>مبلغ القسط الثاني</th>
+                    <th>تاريخ القسط الثالث</th>
+                    <th>مبلغ القسط الثالث</th>
                     <th>الاجرائات</th>
                   </thead>
                   <tbody>
                     <tr *ngFor="let payment of PaymentData">
                       <td>{{payment.name}}</td>
-                      <td></td>
-                      <td></td>
-
                       <td>{{payment.stage}}</td>
-                      <td></td>
-                      <td></td>
-
                       <td>{{payment.division}}</td>
-                      <td></td>
-                      <td></td>
-
                       <td>{{payment.total_amount}}</td>
-                      <td></td>
                       <td>{{payment.amount_paid}}</td>
-                      <td></td>
                       <td>{{payment.total_amount-payment.amount_paid}}</td>
-                      <td></td>
-                      <td></td>
+                      <td>{{payment.payment_date1}}</td>
+                      <td>{{payment.payment_amount1}}</td>
+                      <td>{{payment.payment_date2}}</td>
+                      <td>{{payment.payment_amount2}}</td>
+                      <td>{{payment.payment_date3}}</td>
+                      <td>{{payment.payment_amount3}}</td>
                       <td><a style="color:white; background: #ff5e00" class="btn btn-white btn-round btn-just-icon"
                           (click)="onDelete(payment)">
                           <i class="material-icons">delete</i>
