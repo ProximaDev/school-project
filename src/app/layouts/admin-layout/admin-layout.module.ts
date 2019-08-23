@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxPrintModule } from 'ngx-print';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { StudentComponent } from '../../student/student.component';
@@ -28,12 +29,13 @@ import { PaymentComponent } from '../../payment/payment.component';
 import { PayComponent } from '../../pay/pay.component';
 import { TransComponent } from '../../trans/trans.component';
 import { PenaltyComponent } from '../../penalty/penalty.component';
-import {HolidaysComponent} from '../../holidays/holidays.component';
-import {ExamComponent} from '../../exam/exam.component';
-import {StaffComponent} from '../../staff/staff.component';
-import {AttitudeComponent} from '../../attitude/attitude.component'
-import {HistoryComponent} from '../../history/history.component'
-import {ExpensesComponent} from '../../expenses/expenses.component'
+import { HolidaysComponent } from '../../holidays/holidays.component';
+import { ExamComponent } from '../../exam/exam.component';
+import { StaffComponent } from '../../staff/staff.component';
+import { AttitudeComponent } from '../../attitude/attitude.component'
+import { HistoryComponent } from '../../history/history.component'
+import { ExpensesComponent } from '../../expenses/expenses.component'
+import { ReportComponent } from '../../report/report.component';
 
 
 import {
@@ -64,6 +66,7 @@ import {
     MatDialogModule,
     NgxYoutubePlayerModule.forRoot(),
     NgxSpinnerModule,
+    NgxPrintModule,
     NgxTrumbowygModule.withConfig({
       lang: 'ar',
       svgPath: '/assets/icons.svg',
@@ -113,6 +116,7 @@ import {
     AttitudeComponent,
     HistoryComponent,
     ExpensesComponent,
+    ReportComponent
   ],
   entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })
