@@ -77,7 +77,7 @@
                                                                 <div class="card-icon">
                                                                         <i class="material-icons">monetization_on</i>
                                                                 </div>
-                                                                <p class="card-category">مبلغ الغرامات الكلي</p>
+                                                                <p class="card-category">المبالغ الاضافية </p>
                                                                 <h3 class="card-title">{{penaltycol}}</h3>
                                                         </div>
                                                         <div class="card-footer"></div>
@@ -146,13 +146,13 @@
                                                 <div class="card card-stats">
                                                         <div class="card-header card-header-danger card-header-icon">
                                                                 <div class="card-icon">
-                                                                        <i class="material-icons">warning</i>
+                                                                        <i class="material-icons">monetization_on</i>
                                                                 </div>
                                                                 <p class="card-category">
-                                                                        عدد الغرامات
+                                                                         رواتب الكادر شهرياَ
                                                                 </p>
                                                                 <h3 class="card-title">
-                                                                        {{penaltynumber}}
+                                                                        {{staffsalary}}
                                                                 </h3>
                                                         </div>
                                                         <div class="card-footer">
@@ -160,8 +160,47 @@
                                                 </div>
                                         </div>
 
-                                </div>
 
+                                </div>
+                                <div class="row" style="direction: rtl">
+
+                                                <div class="col-md-4">
+                                                        <div class="card card-stats">
+                                                                <div class="card-header card-header-danger card-header-icon">
+                                                                        <div class="card-icon">
+                                                                                <i class="material-icons">monetization_on</i>
+                                                                        </div>
+                                                                        <p class="card-category">
+                                                                                رواتب الكادر سنويا
+                                                                        </p>
+                                                                        <h3 class="card-title">
+                                                                                {{staffsalary*12}}
+                                                                        </h3>
+                                                                </div>
+                                                                <div class="card-footer">
+                                                                </div>
+                                                        </div>
+                                                </div>
+        
+                                                <div class="col-md-4">
+                                                        <div class="card card-stats">
+                                                                <div class="card-header card-header-danger card-header-icon">
+                                                                        <div class="card-icon">
+                                                                                <i class="material-icons">monetization_on</i>
+                                                                        </div>
+                                                                        <p class="card-category">
+                                                                                المصاريف المدرسية 
+                                                                        </p>
+                                                                        <h3 class="card-title">
+                                                                                {{expensecol}}
+                                                                        </h3>
+                                                                </div>
+                                                                <div class="card-footer">
+                                                                </div>
+                                                        </div>
+                                                </div>
+        
+                                                
                         </div>
                 </div>
         </div>

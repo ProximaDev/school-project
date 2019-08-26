@@ -16,4 +16,5 @@ export class Staff {
     specialization:string;
     join_date:string;
     Experience:string;
+    salary:string;
 }

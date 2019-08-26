@@ -75,7 +75,13 @@
                               </div>
                           </div>
                           <div class="row">
-                              <div class="col-md-12">
+                                <div class="col-md-6">
+                                        <mat-form-field>
+                                            <input autocomplete="off" matInput placeholder="الراتب " name="salary"
+                                                [(ngModel)]="staff.salary" required>
+                                        </mat-form-field>
+                                    </div>
+                              <div class="col-md-6">
                                   <mat-form-field>
                                       <input autocomplete="off" matInput [matDatepicker]="picker"
                                           placeholder="تاريخ الانضمام" name="join_date" [(ngModel)]="staff.join_date"
@@ -115,6 +121,7 @@
                                       <th>الاختصاص</th>
                                       <th>تاريخ الانضمام</th>
                                       <th>الخبرة </th>
+                                      <th>الراتب </th>
                                       <th>الاجرائات</th>
                                   </thead>
                                   <tbody>
@@ -129,6 +136,7 @@
                                           <td>{{staff.specialization}}</td>
                                           <td>{{staff.join_date}}</td>                                        
                                           <td>{{staff.Experience}}</td>
+                                          <td>{{staff.salary}}</td>
                                           <td><a style="color:white; background: #ff5e00"
                                                   class="btn btn-white btn-round btn-just-icon"
                                                   (click)="onDelete(staff)">

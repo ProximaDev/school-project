@@ -8,9 +8,9 @@ import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.compone
 import { MatDialog } from "@angular/material";
 import { ToastrService } from 'ngx-toastr';
 import { Weekly } from '../services/models/weekly.model';
-const STORAGE_KEY = 'local_user';
 import * as $ from 'jquery';
 import * as _ from 'lodash';
+const STORAGE_KEY = 'local_user';
 
 @Component({
   selector: 'app-weekly',
