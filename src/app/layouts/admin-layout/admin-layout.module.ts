@@ -36,6 +36,7 @@ import { AttitudeComponent } from '../../attitude/attitude.component'
 import { HistoryComponent } from '../../history/history.component'
 import { ExpensesComponent } from '../../expenses/expenses.component'
 import { ReportComponent } from '../../report/report.component';
+import { ChatComponent } from 'app/chat/chat.component';
 
 
 import {
@@ -49,6 +50,7 @@ import {
   MatNativeDateModule,
   MatDialogModule
 } from '@angular/material';
+
 
 @NgModule({
   imports: [
@@ -116,7 +118,8 @@ import {
     AttitudeComponent,
     HistoryComponent,
     ExpensesComponent,
-    ReportComponent
+    ReportComponent,
+    ChatComponent,
   ],
   entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })

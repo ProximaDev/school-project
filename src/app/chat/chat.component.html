@@ -1,0 +1,71 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+
+
+          <div class="card-header card-header-danger">
+            <h4 class="card-title" style="text-align: center"> المحادثة</h4>
+            <p class="card-category" style="text-align: center">المحادثات التي تم اجرائها</p>
+          </div>
+
+          <div class="card-body">
+
+            <div style="text-align: center">
+              <select [(ngModel)]="selectedValue" (change)="onChange($event)" class=" option-title">
+                <option *ngFor="let summary of summaries" value={{summary}}>
+                  {{summary}}
+                </option>
+              </select>
+              <label class="chat-title"> اسماء المتصلين</label>
+            </div>
+
+            <div *ngFor="let item of list;let i = index; let first = first; let last = last"   >
+      
+                <div class="message-right" *ngIf="item.sentby != 'admin'" style="text-align: right">
+                
+                  <p class="line-breaker " >{{item.message}}</p>  
+              </div>
+
+              
+                  <div class="message-left" *ngIf="item.sentby == 'admin'" style="text-align: left">
+                
+                    <p class="line-breaker "  >{{item.message}}</p>  
+                </div>
+            
+
+          
+          
+            </div>
+
+      
+
+
+            <div class="row" style="text-align: right">
+              <div class="col-md-12">
+                  <mat-form-field>
+                      <textarea autocomplete="off" matInput placeholder="اكتب هنا"  [(ngModel)]="newmessage" required></textarea>
+                  </mat-form-field>
+                  <button mat-raised-button  (click)="addmessage()"> 
+                      <i class="material-icons"  > check</i> ارسال
+                      </button>
+              </div>
+              
+          </div>
+         
+            
+
+            
+
+
+
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
