@@ -37,6 +37,7 @@ import { HistoryComponent } from '../../history/history.component'
 import { ExpensesComponent } from '../../expenses/expenses.component'
 import { ReportComponent } from '../../report/report.component';
 import { ChatComponent } from 'app/chat/chat.component';
+import { RequestComponent } from 'app/request/request.component';
 
 
 import {
@@ -120,6 +121,7 @@ import {
     ExpensesComponent,
     ReportComponent,
     ChatComponent,
+    RequestComponent
   ],
   entryComponents: [ConfirmDeleteComponent, ArticleViewComponent]
 })

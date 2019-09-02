@@ -18,7 +18,6 @@ export class ChatComponent implements OnInit {
 
   constructor(public db: AngularFireDatabase) { 
 
-
     this.summaries = []
   
   
@@ -47,9 +46,9 @@ export class ChatComponent implements OnInit {
   }
 
 
-  onChange($event) {
+  onChange(select) {
+    this.selectedValue=select;
 
-    console.log(this.selectedValue);
     this.itemList = this.db.list('/friendchats/admin/' + this.selectedValue)
     this.itemList.snapshotChanges().subscribe(actions => {
       this.list = [];
@@ -59,11 +58,7 @@ export class ChatComponent implements OnInit {
         console.log(y);
       });
   
-    //  for (let k = 0; k < this.list.length - 1; k++) {
-        //console.log("y"+ this.list[k].message);
-       //this.allmessages[k] = this.list[k].message;
-      // this.allmessages.push(this.list[k].message);
-     // }
+  
 
 
     });

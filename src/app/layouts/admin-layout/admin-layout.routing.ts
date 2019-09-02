@@ -28,6 +28,7 @@ import { HistoryComponent } from '../../history/history.component';
 import { ExpensesComponent } from '../../expenses/expenses.component';
 import { ReportComponent } from '../../report/report.component';
 import { ChatComponent } from '../../chat/chat.component';
+import { RequestComponent } from 'app/request/request.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -59,5 +60,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard] },
     { path: 'report', component: ReportComponent, canActivate: [AuthGuard] },
     {path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+    {path: 'request', component: RequestComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '/dashboard' }
 ];

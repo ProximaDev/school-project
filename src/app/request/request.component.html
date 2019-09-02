@@ -1,0 +1,36 @@
+<div class="main-content" style="text-align: center">
+    <div class="container-fluid">
+     
+<div class="row">
+    <div class="col-md-12" style="direction: rtl">
+      <div class="card">
+        <div class="card-header card-header-danger" style="text-align: center">
+          <h4 class="card-title ">معلومات الأجازات</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-danger">
+                <th> اسم الطالب</th>
+                <th> نوع الأجازة</th>
+                <th> السبب </th>
+                <th>أيام الأجازة </th>
+                
+              </thead>
+              <tbody>
+                <tr *ngFor="let req of requestData">
+                  <td>{{req.name}}</td>
+                  <td>{{req.type}}</td>
+                  <td>{{req.reason}}</td>
+                  <td>{{req.count}}</td>
+                  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
