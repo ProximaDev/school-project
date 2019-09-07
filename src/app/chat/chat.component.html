@@ -3,89 +3,60 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-
-
           <div class="card-header card-header-danger">
             <h4 class="card-title" style="text-align: center"> المحادثة</h4>
             <p class="card-category" style="text-align: center">المحادثات التي تم اجرائها</p>
           </div>
-
           <div class="card-body">
-
-
-
-            <div class="row">
-
-
-              <div class="col-4"  >
-
-                <ul class="list-group" style="text-align: center">
-                    <p class="card-header card-header-danger" >أسماء المتصلين</p>
-                  <li *ngFor="let summary of summaries" (click)="onChange(summary)" class="list-group-item"> 
-                  <p  class="chat-title" >
-                      {{summary}}
-                  </p>  
-                  </li>
-                </ul>
-
-              </div>
-
-                <div class="col-8">
-
-
-                  <div *ngFor="let item of list;let i = index; let first = first; let last = last">
-
-                    <div class="message-right" *ngIf="item.sentby != 'admin'" style="text-align: right">
-
-                      <p class="line-breaker ">{{item.message}}</p>
+            <div class="container">
+              <div class="messaging">
+                <div class="inbox_msg">
+                  <div class="inbox_people">
+                    <div class="headind_srch">
+                      <div class="recent_heading">
+                        <h4>الاشخاص</h4>
+                      </div>
                     </div>
-
-
-                    <div class="message-left" *ngIf="item.sentby == 'admin'" style="text-align: left">
-
-                      <p class="line-breaker ">{{item.message}}</p>
+                    <div class="inbox_chat">
+                      <div class="chat_list" *ngFor="let summary of summaries" (click)="onChange(summary)">
+                        <div class="chat_people">
+                          <div class="chat_img"> <img src="assets/img/user.png" alt="sunil"> </div>
+                          <div class="chat_ib">
+                            <h5>{{summary}}</h5>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-
-
-
                   </div>
-
-                  <div class="row" style="text-align: right" >
-                    <div class="col-md-12">
-                      <mat-form-field>
-                        <textarea autocomplete="off" matInput placeholder="اكتب هنا" [(ngModel)]="newmessage"
-                          required></textarea>
-                      </mat-form-field>
-                      <button mat-raised-button (click)="addmessage()">
-                        <i class="material-icons"> check</i> ارسال
-                      </button>
+                  <div class="mesgs">
+                    <div class="msg_history">
+                      <div *ngFor="let item of list">
+                        <div style="margin-top:5px" *ngIf="item.sentby != 'admin'" class="incoming_msg">
+                          <div class="incoming_msg_img"> <img src="assets/img/user.png" alt="sunil"> </div>
+                          <div class="received_msg">
+                            <div class="received_withd_msg">
+                              <p>{{item.message}}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div *ngIf="item.sentby == 'admin'" class="outgoing_msg">
+                          <div class="sent_msg">
+                            <p>{{item.message}}</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-
+                    <div class="type_msg">
+                      <div class="input_msg_write">
+                        <input type="text" class="write_msg" [(ngModel)]="newmessage" />
+                        <button (click)="addmessage()" class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
+                            aria-hidden="true"></i></button>
+                      </div>
+                    </div>
                   </div>
-
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+              </div>
             </div>
-
-
-
           </div>
         </div>
       </div>
