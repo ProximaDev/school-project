@@ -57,7 +57,7 @@ export class NotifyComponent implements OnInit {
     this.notify.date = formatDate(today, 'medium', 'en-US');
     this.FirebaseService.addFirestoreData('notifyList', this.notify, "");
 
-    this.http.post('https://us-central1-school-a53e4.cloudfunctions.net/sendToTopic', { 'title': this.notify.title, 'content': this.notify.content }).subscribe(data => {
+    this.http.post('URL_HERE', { 'title': this.notify.title, 'content': this.notify.content }).subscribe(data => {
       console.log(data);
       console.log(data['status']);
       if (data['status'] != undefined && data['status'] == 'Done') {
@@ -77,7 +77,7 @@ export class NotifyComponent implements OnInit {
     this.FirebaseService.addFirestoreData('notifyList', this.notify, "");
 
     if (this.token != null && this.token != undefined) {
-      this.http.post('https://us-central1-school-a53e4.cloudfunctions.net/sendToDevice', { 'token': this.token, 'title': this.notify.title, 'content': this.notify.content }).subscribe(data => {
+      this.http.post('URL_HERE', { 'token': this.token, 'title': this.notify.title, 'content': this.notify.content }).subscribe(data => {
         console.log(data);
         console.log(data['status']);
         if (data['status'] != undefined && data['status'] == 'Done') {
