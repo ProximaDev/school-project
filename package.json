@@ -44,7 +44,7 @@
     "firebase": "6.2.0",
     "googleapis": "40.0.0",
     "hammerjs": "2.0.8",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "moment": "2.24.0",
     "ngx-print": "^1.2.0-beta.2",
     "ngx-spinner": "7.1.4",
